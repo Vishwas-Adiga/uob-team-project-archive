@@ -1,0 +1,26 @@
+@use '@carbon/react/scss/themes' as *;
+@use '@carbon/react';
+
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --transition--short-duration: 0.2s;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include react.theme(react.$g100);
+    //--cds-button-primary: black;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @include react.theme(react.$white);
+  }
+}

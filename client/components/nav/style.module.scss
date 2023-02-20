@@ -1,0 +1,14 @@
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  overflow: hidden;
+  position: sticky;
+}
+
+.search {
+  padding-right: 1rem;
+}
+
+.navItem {
+  white-space: nowrap;
+}

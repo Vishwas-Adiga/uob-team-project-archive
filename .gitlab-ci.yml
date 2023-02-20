@@ -1,0 +1,66 @@
+image: node:latest
+variables:
+  CI_IMG: "\"${CI_REGISTRY_IMAGE}:latest\""     # TODO: Configure uni docker registry variables
+  TP_URL: "${CI_PROJECT_NAMESPACE}.bham.team"
+  TP_CONTACT: "${GITLAB_USER_EMAIL}"
+
+stages:                                         # List of stages for jobs, and their order of execution
+  - fetch_dependencies
+  - check
+  - build
+  - test
+  - package
+  - deploy
+
+npm_install:
+  stage: fetch_dependencies
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR    # Run npm ci and maintain cache for each branch
+    paths:
+      - node_modules/
+  script:
+    - npm clean-install
+  only:
+    changes:
+      - package-lock.json                       # Only re-fetch if dependencies were added/removed since last cache
+
+eslint:
+  stage: check
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+      - node_modules/
+    policy: pull
+  script:
+    - npx eslint --ext .ts,.tsx client/         # Lint the client
+    - npx eslint --ext .ts server/              # Lint the server
+
+tsc:
+  stage: build
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+      - node_modules/
+    policy: pull
+  script:
+    - npx tsc                                   # Build the client using Vite
+    - npx vite build                            # and the server using esbuild
+    - npx esbuild ./server/main.ts --tsconfig=tsconfig.server.json --outfile=dist/server.cjs --bundle --platform=node --minify
+  artifacts:
+    paths:
+      - dist                                    # Upload ./dist to artefacts
+    expire_in: 1 day
+
+docker:
+  stage: package
+  script: echo "Containerising application..."  # TODO: Containerise and deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+deploy-job:
+  stage: deploy
+  environment: production
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - echo "Deploying application..."

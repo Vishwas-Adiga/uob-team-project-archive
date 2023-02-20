@@ -1,0 +1,11 @@
+{
+  "include": ["server", "common"],
+  "compilerOptions": {
+    "composite": true,
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "rootDir": ".",
+    "target": "ESNext"
+  }
+}

@@ -1,0 +1,19 @@
+.content {
+  height: calc(100vh - 3rem);
+  display: grid;
+  padding-top: 1rem;
+  grid-template-rows: repeat(4, auto) 1fr;
+  grid-template-columns: 2fr auto 1fr 2fr;
+  grid-template-areas:
+    ". hero_image . ."
+    ". hero_image hero_text ."
+    ". hero_image . ."
+    "separator separator separator separator"
+    ". main main .";
+}
+
+.separator {
+  grid-area: separator;
+  height: 1px;
+  background: var(--cds-border-subtle-01, #e0e0e0);
+}
