@@ -11,9 +11,6 @@ stages:                                         # List of stages for jobs, and t
   - package
   - deploy
 
-services:
-  - docker:dind
-
 eslint:
   stage: check
   cache:
@@ -47,7 +44,12 @@ tsc:
 
 docker:
   stage: package
-  image: docker:latest
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
   script:
