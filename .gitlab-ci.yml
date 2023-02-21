@@ -55,14 +55,37 @@ tsc:
 
 docker:
   stage: package
-  script: echo "Containerising application..."  # TODO: Containerise and deploy
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: 'tcp://docker:2375'
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - echo "Containerising application..."
+    - docker build -f .cd/Dockerfile .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}:latest
 
 deploy-job:
   stage: deploy
   environment: production
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+  image: alpine:latest
+  before_script: 
+   - chmod og= $SSH_KEY
+   - apk update && apk add openssh-client
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/app.yml  down || true"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
   script:
-    - echo "Deploying application..."
+   - scp -o StrictHostKeyChecking=no -i $SSH_KEY -r . $VM_USER@$VM:~/team-project-deployment 
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/.cd/app.yml"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/app.yml up -d"
+
