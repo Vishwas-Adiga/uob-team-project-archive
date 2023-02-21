@@ -32,6 +32,8 @@ eslint:
       - node_modules/
     policy: pull
   script:
+    - npm i
+    - echo "${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
     - npx eslint --ext .ts,.tsx client/         # Lint the client
     - npx eslint --ext .ts server/              # Lint the server
 
@@ -64,4 +66,3 @@ deploy-job:
     - if: $CI_COMMIT_BRANCH == "main"
   script:
     - echo "Deploying application..."
-    - echo "pushing ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
