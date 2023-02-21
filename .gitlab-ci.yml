@@ -11,6 +11,9 @@ stages:                                         # List of stages for jobs, and t
   - package
   - deploy
 
+services:
+  - docker:dind
+
 eslint:
   stage: check
   cache:
