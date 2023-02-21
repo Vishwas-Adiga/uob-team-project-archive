@@ -5,45 +5,34 @@ variables:
   TP_CONTACT: "${GITLAB_USER_EMAIL}"
 
 stages:                                         # List of stages for jobs, and their order of execution
-  - fetch_dependencies
   - check
   - build
   - test
   - package
   - deploy
 
-npm_install:
-  stage: fetch_dependencies
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR    # Run npm ci and maintain cache for each branch
-    paths:
-      - node_modules/
-  script:
-    - npm clean-install
-  only:
-    changes:
-      - package-lock.json                       # Only re-fetch if dependencies were added/removed since last cache
-
 eslint:
   stage: check
   cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    key: $CI_COMMIT_REF_SLUG                    # Run npm ci and maintain cache for each branch
     paths:
-      - node_modules/
+      - .npm/
     policy: pull
+  before_script:
+    - npm ci --cache .npm --prefer-offline
   script:
-    - npm i
-    - echo "${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
     - npx eslint --ext .ts,.tsx client/         # Lint the client
     - npx eslint --ext .ts server/              # Lint the server
 
 tsc:
   stage: build
   cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    key: $CI_COMMIT_REF_SLUG                    # Run npm ci and maintain cache for each branch
     paths:
-      - node_modules/
+      - .npm/
     policy: pull
+  before_script:
+    - npm ci --cache .npm --prefer-offline
   script:
     - npx tsc                                   # Build the client using Vite
     - npx vite build                            # and the server using esbuild
