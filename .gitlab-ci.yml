@@ -36,7 +36,7 @@ tsc:
   script:
     - npx tsc                                   # Build the client using Vite
     - npx vite build                            # and the server using esbuild
-    - npx esbuild ./server/main.ts --tsconfig=tsconfig.server.json --outfile=dist/server.cjs --bundle --platform=node --minify
+    - npx esbuild ./server/main.ts --external:pg-native --tsconfig=tsconfig.server.json --outfile=dist/server.cjs --bundle --platform=node --minify
   artifacts:
     paths:
       - dist                                    # Upload ./dist to artefacts
