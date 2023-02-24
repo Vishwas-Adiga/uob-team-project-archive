@@ -1,6 +1,6 @@
-image: node:latest
+image: node:18.14.2
 variables:
-  CI_IMG: "\"${CI_REGISTRY_IMAGE}:latest\""     # TODO: Configure uni docker registry variables
+  CI_IMG: "\"${CI_REGISTRY_IMAGE}:latest\""
   TP_URL: "${CI_PROJECT_NAMESPACE}.bham.team"
   TP_CONTACT: "${GITLAB_USER_EMAIL}"
 
