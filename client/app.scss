@@ -1,6 +1,18 @@
 @use '@carbon/react/scss/themes' as *;
 @use '@carbon/react';
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include react.theme(react.$g100);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @include react.theme(react.$white);
+  }
+}
+
 :root {
   color-scheme: light dark;
   font-synthesis: none;
@@ -9,18 +21,30 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
+  --cds-heading-06-font-weight: 400;
   --transition--short-duration: 0.2s;
-}
+  --cds-brand-20: #a7f0ba;
+  --cds-brand-40: #42be65;
+  --cds-brand-60: #198038;
+  --cds-brand-60--hover: #13652c;
+  --cds-brand-70: #0e6027;
+  --cds-brand-80: #044317;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    @include react.theme(react.$g100);
-    //--cds-button-primary: black;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    @include react.theme(react.$white);
-  }
+  --cds-background-brand: var(--cds-brand-60);
+  --cds-border-interactive: var(--cds-brand-60);
+  --cds-link-primary: var(--cds-brand-60);
+  --cds-link-primary-hover: var(--cds-brand-70);
+  --cds-link-secondary: var(--cds-brand-70);
+  --cds-link-inverse: var(--cds-brand-40);
+  --cds-button-primary: var(--cds-brand-60);
+  --cds-button-primary-hover: var(--cds-brand-60--hover);
+  --cds-button-primary-active: var(--cds-brand-80);
+  --cds-button-tertiary: var(--cds-brand-60);
+  --cds-button-tertiary-hover: var(--cds-brand-60--hover);
+  --cds-button-tertiary-active: var(--cds-brand-80);
+  --cds-support-info: var(--cds-brand-70);
+  --cds-support-info-inverse: var(--cds-brand-50);
+  --cds-focus: var(--cds-brand-60);
+  --cds-interactive: var(--cds-brand-60);
+  --cds-highlight: var(--cds-brand-20);
 }

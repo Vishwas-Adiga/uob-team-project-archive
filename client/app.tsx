@@ -1,27 +1,35 @@
-import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Routes } from "./routes";
-import { Auth } from "./routes/auth";
-import "./app.scss";
+import React, { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Routes as Index } from "./routes";
 import { Nav } from "./components/nav";
+import { Auth } from "./routes/auth";
+import { SignUp } from "./routes/auth/sign-up";
+import { SignIn } from "./routes/auth/sign-in";
+import "./app.scss";
+import { RecoilRoot } from "recoil";
+import { Portfolio } from "./routes/portfolio";
+import { Admin } from "./routes/admin";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <div>Hello world!</div>,
-    },
-    {
-      path: Routes.AUTH(),
-      element: <Auth />,
-    },
-  ]);
-
   return (
-    <>
-      <Nav anonymous={false} />
-      <RouterProvider router={router} />
-    </>
+    <RecoilRoot>
+      {/* TODO: Replace with loading UI*/}
+      <Suspense fallback={"Loading"}>
+        <Nav />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Portfolio />} />
+            <Route path={Index.ADMIN()} element={<Admin />} />
+            <Route path={Index.AUTH()} element={<Auth />}>
+              <Route path={Index.AUTH_SIGN_UP()} element={<SignUp />} />
+              <Route path={Index.AUTH_SIGN_IN()} element={<SignIn />} />
+              <Route path={Index.AUTH()} element={<SignUp />} />
+            </Route>
+            <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
+          </Routes>
+        </BrowserRouter>
+      </Suspense>
+    </RecoilRoot>
   );
 }
 
