@@ -1,8 +1,12 @@
 import { Router } from "express";
+import { signIn, signUp } from "../controllers/auth.controller.js";
+import { ensurePayload } from "../middleware/ensure-payload.middleware.js";
 
 export const authRouter = Router();
-authRouter.get("/sign-up", (req, res) => {
-  // I'm a teapot
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418
-  res.status(418).send();
-});
+
+authRouter.post(
+  "/sign-up",
+  [ensurePayload(["email", "password1", "password2"])],
+  signUp
+);
+authRouter.post("/sign-in", [ensurePayload(["email", "password"])], signIn);

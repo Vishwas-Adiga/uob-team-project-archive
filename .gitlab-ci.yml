@@ -36,7 +36,7 @@ tsc:
   script:
     - npx tsc                                   # Build the client using Vite
     - npx vite build                            # and the server using esbuild
-    - npx esbuild ./server/main.ts --external:pg-native --tsconfig=tsconfig.server.json --outfile=dist/server.cjs --bundle --platform=node --minify
+    - npx esbuild ./server/main.ts --tsconfig=tsconfig.server.json --outfile=dist/server.cjs --bundle --platform=node --minify --external:pg-native --external:pg-hstore
   artifacts:
     paths:
       - dist                                    # Upload ./dist to artefacts
@@ -67,7 +67,7 @@ deploy-job:
   before_script: 
    - chmod og= $SSH_KEY
    - apk update && apk add openssh-client
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/app.yml down || true"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml down || true"
    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
@@ -75,6 +75,5 @@ deploy-job:
    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
   script:
    - scp -o StrictHostKeyChecking=no -i $SSH_KEY -r . $VM_USER@$VM:~/team-project-deployment 
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "sed -i '4s|teamproject|$CI_IMG|' ~/team-project-deployment/.cd/app.yml"
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/app.yml up -d"
-
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "sed -i '4s|teamproject|$CI_IMG|' ~/team-project-deployment/.cd/docker-compose.yml"
+   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml up -d"

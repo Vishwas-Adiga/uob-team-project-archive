@@ -1,19 +1,29 @@
+import bodyParser from "body-parser";
+import cors from "cors";
 import express from "express";
 import { authRouter } from "./routes/auth.route.js";
+import { userRouter } from "./routes/user.route.js";
 import { Config } from "./configs/config.js";
 import { serveHTML, serveStatic } from "./middleware/vite.middleware.js";
-import { getHealth } from "./services/user.service.js";
+import { sequelize } from "./models/index.js";
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/api/v1", async (_req, res) => {
+  // I'm a teapot
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418
+  res.status(418).send();
+});
 
 app.use("/api/v1/auth", authRouter);
-app.get("/api/v1", async (_req, res) => {
-  const health = await getHealth();
-  res.status(200).json({ message: health });
-});
+app.use("/api/v1/users", userRouter);
 
 app.listen(Config.PORT, async () => {
   await serveStatic(app);
   await serveHTML(app);
+  await sequelize.sync();
   console.log(`App running in port ${Config.PORT}`);
 });
