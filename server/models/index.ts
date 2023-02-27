@@ -1,3 +1,4 @@
+import pg from "pg";
 import { Sequelize } from "sequelize";
 import { init } from "./user.model.js";
 import { DbConfig } from "../configs/db.config.js";
@@ -10,6 +11,7 @@ export const sequelize = new Sequelize(
     host: DbConfig.host,
     port: DbConfig.port,
     dialect: "postgres",
+    dialectModule: pg,
   }
 );
 
