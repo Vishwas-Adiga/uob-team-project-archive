@@ -75,5 +75,4 @@ deploy-job:
    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
   script:
    - scp -o StrictHostKeyChecking=no -i $SSH_KEY -r . $VM_USER@$VM:~/team-project-deployment 
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "sed -i '4s|teamproject|$CI_IMG|' ~/team-project-deployment/.cd/docker-compose.yml"
    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml up -d"
