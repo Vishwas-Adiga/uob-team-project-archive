@@ -16,6 +16,8 @@ export const signUp = async (req: Request, res: Response) => {
     await User.create({
       email: req.body.email.replaceAll("+admin", ""),
       password: hash,
+      // TODO require name on sign up
+      name: "Placeholder",
     });
     return res.status(200).send();
   } catch (e) {
@@ -51,12 +53,12 @@ export const signIn = async (req: Request, res: Response) => {
   }
 
   // If authenticated, issue a JWT token
-  const token = jwt.sign({ id: user.id, admin }, AuthConfig.JWT_SECRET, {
+  const token = jwt.sign({ id: user.userId, admin }, AuthConfig.JWT_SECRET, {
     expiresIn: AuthConfig.JWT_EXPIRY,
   });
 
   return res.status(200).send({
-    id: user.id,
+    id: user.userId,
     token,
   });
 };

@@ -9,7 +9,7 @@ export const getUser = async (req: AuthenticatedRequest, res: Response) => {
     return res.status(403).send();
   }
 
-  const user = await User.findByPk(userId, { attributes: ["id", "email"] });
+  const user = await User.findByPk(userId, { attributes: ["userId", "email"] });
   if (!user) {
     return res.status(404).send();
   }
@@ -37,6 +37,6 @@ export const getUsers = async (req: AuthenticatedRequest, res: Response) => {
     return res.status(403).send();
   }
 
-  const users = await User.findAll({ attributes: ["id", "email"] });
+  const users = await User.findAll({ attributes: ["userId", "email"] });
   return res.status(200).send(users);
 };

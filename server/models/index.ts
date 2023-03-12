@@ -1,7 +1,11 @@
 import pg from "pg";
 import { Sequelize } from "sequelize";
-import { init } from "./user.model.js";
 import { DbConfig } from "../configs/db.config.js";
+import { init as initUser } from "./user.model.js";
+import { init as initAccommodation } from "./accommodation.model.js";
+import { init as initCourse } from "./course.model.js";
+import { init as initLocation } from "./location.model.js";
+import { init as initRichtext } from "./richtext.model.js";
 
 let db: Sequelize;
 if (process.env.NODE_ENV === "production") {
@@ -25,4 +29,36 @@ if (process.env.NODE_ENV === "production") {
 
 export const sequelize = db;
 
-export const User = init(sequelize);
+export const User = initUser(sequelize);
+export const Accommodation = initAccommodation(sequelize);
+export const Course = initCourse(sequelize);
+export const RichText = initRichtext(sequelize);
+export const Location = initLocation(sequelize);
+
+Accommodation.hasMany(User, {
+  foreignKey: "accommodation",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+User.belongsTo(Accommodation, { foreignKey: "accommodation" });
+
+Course.hasMany(User, {
+  foreignKey: "course",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+User.belongsTo(Course, { foreignKey: "course" });
+
+User.hasMany(RichText, {
+  foreignKey: "user",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+RichText.belongsTo(User, { foreignKey: "user" });
+
+User.hasMany(Location, {
+  foreignKey: "user",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+Location.belongsTo(User, { foreignKey: "user" });
