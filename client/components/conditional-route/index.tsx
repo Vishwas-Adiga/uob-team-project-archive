@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { userState } from "../../state/userState";
+import { userState } from "../../state/user-state";
 import { Routes } from "../../routes";
 
 export const AuthenticatedRoute = ({ children }: { children: JSX.Element }) => {

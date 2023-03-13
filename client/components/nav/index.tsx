@@ -12,11 +12,13 @@ import {
 import { QrCode, UserAvatar } from "@carbon/icons-react";
 import { Config } from "../../config";
 import styles from "./style.module.scss";
-import { useRecoilState } from "recoil";
-import { userState } from "../../state/userState";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userState } from "../../state/user-state";
+import { scannerState } from "../../state/scanner-state";
 
 export const Nav = () => {
   const [user, setUser] = useRecoilState(userState);
+  const setScanner = useSetRecoilState(scannerState);
   const signOut = () => {
     localStorage.clear();
     setUser(null);
@@ -48,7 +50,12 @@ export const Nav = () => {
       )}
       {user && (
         <HeaderGlobalBar>
-          <Button renderIcon={QrCode}>Scan ID</Button>
+          <Button
+            renderIcon={QrCode}
+            onClick={setScanner.bind(null, { open: true })}
+          >
+            Connect
+          </Button>
           <HeaderGlobalAction aria-label="Search" onClick={signOut}>
             <UserAvatar size={20} />
           </HeaderGlobalAction>
