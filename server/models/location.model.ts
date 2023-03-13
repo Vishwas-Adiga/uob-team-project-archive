@@ -15,8 +15,10 @@ export class Location extends Model<
   declare widgetId: CreationOptional<number>;
   // User who owns the widget
   declare user: User;
-  // Latitude longitude pair
-  declare latlon: DataTypes.GeographyDataType;
+  // Latitude (decimal degrees)
+  declare latitude: number;
+  // Longitude (decimal degrees)
+  declare longitude: number;
   // Title
   declare title: string;
   // Description
@@ -35,8 +37,12 @@ export const init = sequelize =>
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      latlon: {
-        type: DataTypes.GEOGRAPHY("POINT"),
+      latitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+      },
+      longitude: {
+        type: DataTypes.DOUBLE,
         allowNull: false,
       },
       title: {
