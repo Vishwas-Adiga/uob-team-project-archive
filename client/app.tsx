@@ -9,6 +9,7 @@ import "./app.scss";
 import { RecoilRoot } from "recoil";
 import { Portfolio } from "./routes/portfolio";
 import { Admin } from "./routes/admin";
+import { IdScanner } from "./components/id-scanner";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       {/* TODO: Replace with loading UI*/}
       <Suspense fallback={"Loading"}>
         <Nav />
+        <IdScanner />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Portfolio />} />

@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import { Config } from "../../config";
 import { get, post } from "../../utils/fetch";
 import { Routes } from "../index";
-import { userState } from "../../state/userState";
+import { userState } from "../../state/user-state";
 import styles from "./style.module.scss";
 
 export const SignIn = () => {

@@ -1,0 +1,103 @@
+.nfcModal :global(.cds--modal-container),
+.scanner :global(.cds--modal-container) {
+  max-height: 100vh;
+}
+
+.scanner {
+  h2,
+  h3 {
+    margin: 10px 0 20px 0;
+  }
+}
+
+.qrScanner {
+  :global(#video) {
+    grid-area: 1 / 2 / 1 / 2;
+    height: 300px !important;
+    width: 300px !important;
+    object-fit: cover;
+    position: relative !important;
+    border: 5px solid var(--cds-background-inverse);
+  }
+
+  svg {
+    grid-area: 1 / 2 / 1 / 2;
+    z-index: 2;
+    height: 150px;
+    width: 150px;
+    align-self: center;
+    justify-self: center;
+    opacity: 0.3;
+  }
+}
+
+.nfcPictogram {
+  display: flex;
+  justify-content: center;
+
+  svg {
+    height: 150px;
+    width: 150px;
+    align-self: center;
+    justify-self: center;
+    margin: calc(150px / 2);
+  }
+}
+
+.directions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 10px;
+  align-items: center;
+
+  span {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: var(--cds-background-inverse);
+    border-radius: 100%;
+    line-height: 30px;
+    color: var(--cds-text-inverse);
+    font-weight: bold;
+  }
+}
+
+.nfcModal {
+  :global(.cds--modal-content) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+    svg {
+      height: 200px;
+      width: 200px;
+    }
+  }
+}
+
+.nfcModal.nfcErrorModal:global(.is-visible) :global(.cds--modal-content) svg {
+  animation: shake 0.2s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
