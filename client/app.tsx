@@ -10,6 +10,7 @@ import { RecoilRoot } from "recoil";
 import { Portfolio } from "./routes/portfolio";
 import { Admin } from "./routes/admin";
 import { IdScanner } from "./components/id-scanner";
+import { PrivacyPolicy } from "./routes/privacy-policy";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path={Index.AUTH()} element={<SignUp />} />
             </Route>
             <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
+            <Route path={Index.PRIVACY_POLICY()} element={<PrivacyPolicy />} />
           </Routes>
         </BrowserRouter>
       </Suspense>

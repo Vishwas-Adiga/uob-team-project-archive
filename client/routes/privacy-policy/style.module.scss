@@ -1,0 +1,153 @@
+.container {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr min(900px, 100%) 1fr;
+  grid-template-areas:
+    "hero hero hero"
+    ".    menu ."
+    ".    main .";
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+
+.hero {
+  grid-area: hero;
+  display: grid;
+  border-bottom: 1px solid var(--cds-border-subtle);
+  grid-template-columns: 1fr min(900px, 100%) 1fr;
+  grid-template-areas: ". content .";
+
+  h1 {
+    grid-area: content;
+    margin: 150px 0 20px 0;
+    --cds-heading-06-font-size: 4rem;
+  }
+
+  .heroImage {
+    grid-area: content;
+    justify-self: flex-end;
+    align-self: flex-end;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+}
+
+.tabs {
+  grid-area: menu;
+  width: min(900px, 100%);
+  background: var(--cds-background);
+  --cds-layer-accent: var(--cds-background);
+  --cds-border-strong: var(--cds-background);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  :global(.cds--tabs__nav-item) {
+    max-width: unset;
+  }
+}
+
+.main {
+  grid-area: main;
+
+  h1 {
+    margin: 3rem 0 20px 0;
+  }
+
+  p {
+    margin: 5px 0 10px 0;
+  }
+}
+
+.atAGlance {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.summaryItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto repeat(3, auto);
+  grid-template-areas:
+    "icon title"
+    "text text"
+    "d    d"
+    "desc desc"
+    "bttn bttn";
+  grid-gap: 10px;
+
+  svg {
+    grid-area: icon;
+    height: 30px;
+    width: 30px;
+    align-self: flex-start;
+  }
+
+  .summaryItemTitle {
+    grid-area: title;
+    align-self: flex-start;
+  }
+
+  .summaryItemText {
+    grid-area: text;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 3.1rem;
+    margin-bottom: 10px;
+  }
+
+  .summaryItemDesc {
+    grid-area: desc;
+    margin: 5px 0;
+  }
+
+  .summaryItemDivider {
+    grid-area: d;
+    height: 1px;
+    background-color: var(--cds-border-subtle);
+  }
+
+  .summaryItemButton {
+    grid-area: bttn;
+    width: auto;
+    max-width: unset;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .hero,
+  .main {
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .heroImage {
+    display: none;
+  }
+
+  .atAGlance {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .hero {
+    h1 {
+      margin: 20px 0;
+    }
+  }
+
+  .atAGlance {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pSize {
+  font-size: 20px;
+}
+.bulletPointSize{
+  font-size: 18px;
+}
