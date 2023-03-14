@@ -22,7 +22,7 @@ export const IdScanner = () => {
   const [nfcGranted, setNfcGranted] = useState(
     localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted"
   );
-  const switchMode = useCallback(({ name }) => {
+  const switchMode = useCallback(async ({ name }) => {
     setMode(name);
     // @ts-ignore
     const status = await navigator.permissions.query({ name: "nfc" });
