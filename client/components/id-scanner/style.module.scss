@@ -62,6 +62,12 @@
   }
 }
 
+.requestNfcButton {
+  max-width: unset;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .nfcModal {
   :global(.cds--modal-content) {
     display: flex;

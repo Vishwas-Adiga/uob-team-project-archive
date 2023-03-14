@@ -5,14 +5,14 @@ import {
   QrCode,
   WarningHex,
 } from "@carbon/icons-react";
-import { ContentSwitcher, Modal, Switch } from "@carbon/react";
+import { Button, ContentSwitcher, Modal, Switch } from "@carbon/react";
 import { QrReader } from "react-qr-reader";
 import { useRecoilState } from "recoil";
 import { scannerState } from "../../state/scanner-state";
 import styles from "./style.module.scss";
 import { Config } from "../../config";
 
-const NFC_SUPPORTED = "NDEFReader" in window;
+const NFC_SUPPORTED = g"NDEFReader" in window;
 export const IdScanner = () => {
   const [scanner, setScanner] = useRecoilState(scannerState);
   const [mode, setMode] = useState<"qr" | "nfc">("qr");
@@ -22,8 +22,9 @@ export const IdScanner = () => {
   const [nfcGranted, setNfcGranted] = useState(
     localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted"
   );
-  const switchMode = useCallback(async ({ name }) => {
-    setMode(name);
+  const switchMode = useCallback(({ name }) => setMode(name), []);
+
+  const requestNfcPermissions = useCallback(async () => {
     // @ts-ignore
     const status = await navigator.permissions.query({ name: "nfc" });
     localStorage.setItem(Config.STORAGE.NFC_PERM, status.state);
@@ -141,6 +142,14 @@ export const IdScanner = () => {
           )}
           {mode === "nfc" && <p>You now have a new connection!</p>}
         </section>
+        {mode === "nfc" && !nfcGranted && (
+          <Button
+            onClick={requestNfcPermissions}
+            className={styles.requestNfcButton}
+          >
+            Allow {Config.APP.NAME} to read student IDs
+          </Button>
+        )}
       </Modal>
     </>
   );
