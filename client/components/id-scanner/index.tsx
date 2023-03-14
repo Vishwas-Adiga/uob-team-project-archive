@@ -19,14 +19,23 @@ export const IdScanner = () => {
   const [nfcErrorModalOpen, setNfcErrorModalOpen] = useState(false);
   const [connectionSuccessfulModalOpen, setConnectionSuccessfulModalOpen] =
     useState(false);
-  const switchMode = useCallback(({ name }) => setMode(name), []);
+  const [nfcGranted, setNfcGranted] = useState(
+    localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted"
+  );
+  const switchMode = useCallback(({ name }) => {
+    setMode(name);
+    // @ts-ignore
+    const status = await navigator.permissions.query({ name: "nfc" });
+    localStorage.setItem(Config.STORAGE.NFC_PERM, status.state);
+    setNfcGranted(status.state === "granted");
+  }, []);
 
   useEffect(() => {
     if (!NFC_SUPPORTED) return;
+    if (!nfcGranted) return;
+
     const ndef = new NDEFReader();
     const setupNfc = async () => {
-      // @ts-ignore
-      await navigator.permissions.query({ name: "nfc" });
       await ndef.scan();
       ndef.addEventListener("readingerror", () => {
         setScanner({ open: false });
@@ -42,7 +51,7 @@ export const IdScanner = () => {
     };
 
     setupNfc();
-  }, [NFC_SUPPORTED]);
+  }, [NFC_SUPPORTED, nfcGranted]);
 
   return (
     <>

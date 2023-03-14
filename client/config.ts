@@ -11,5 +11,6 @@ export const Config = {
   STORAGE: {
     USER_ID_KEY: "USER_ID",
     JWT_TOKEN_KEY: "TOKEN",
+    NFC_PERM: "NFC_PERMISSIONS_STATE",
   },
 };
