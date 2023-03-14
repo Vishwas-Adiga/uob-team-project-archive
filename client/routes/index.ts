@@ -4,4 +4,5 @@ export const Routes = {
   AUTH_SIGN_UP: () => `${Routes.AUTH()}/sign-up`,
   AUTH_SIGN_IN: () => `${Routes.AUTH()}/sign-in`,
   PORTFOLIO: () => `/portfolio`,
+  PRIVACY_POLICY: () => `/privacy-policy`,
 };

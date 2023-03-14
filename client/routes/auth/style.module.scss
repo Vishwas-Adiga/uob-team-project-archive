@@ -39,10 +39,10 @@
     grid-template-columns: 1fr auto 1fr;
     grid-template-areas:
     ". main .";
-  }
 
-  h1 {
-    max-width: 300px;
+    h1 {
+      max-width: 300px;
+    }
   }
 }
 
