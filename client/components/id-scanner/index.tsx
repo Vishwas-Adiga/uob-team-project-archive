@@ -39,7 +39,7 @@ export const IdScanner = () => {
       });
     };
 
-    setupNfc();
+    setTimeout(setupNfc, 2000);
   }, [NFC_SUPPORTED]);
 
   return (
