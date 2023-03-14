@@ -25,6 +25,8 @@ export const IdScanner = () => {
     if (!NFC_SUPPORTED) return;
     const ndef = new NDEFReader();
     const setupNfc = async () => {
+      // @ts-ignore
+      await navigator.permissions.query({ name: "nfc" });
       await ndef.scan();
       ndef.addEventListener("readingerror", () => {
         setScanner({ open: false });
@@ -39,7 +41,7 @@ export const IdScanner = () => {
       });
     };
 
-    setTimeout(setupNfc, 2000);
+    setupNfc();
   }, [NFC_SUPPORTED]);
 
   return (
