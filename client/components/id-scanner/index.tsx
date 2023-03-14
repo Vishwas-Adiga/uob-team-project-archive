@@ -12,7 +12,7 @@ import { scannerState } from "../../state/scanner-state";
 import styles from "./style.module.scss";
 import { Config } from "../../config";
 
-const NFC_SUPPORTED = g"NDEFReader" in window;
+const NFC_SUPPORTED = "NDEFReader" in window;
 export const IdScanner = () => {
   const [scanner, setScanner] = useRecoilState(scannerState);
   const [mode, setMode] = useState<"qr" | "nfc">("qr");
