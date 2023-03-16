@@ -3,7 +3,7 @@ import { Config } from "../config";
 import { get } from "../utils/fetch";
 
 export interface User {
-  id: number;
+  userId: number;
   email: string;
   admin: boolean;
 }

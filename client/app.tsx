@@ -11,6 +11,7 @@ import { Portfolio } from "./routes/portfolio";
 import { Admin } from "./routes/admin";
 import { IdScanner } from "./components/id-scanner";
 import { PrivacyPolicy } from "./routes/privacy-policy";
+import { NotFound } from "./routes/not-found";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
             </Route>
             <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
             <Route path={Index.PRIVACY_POLICY()} element={<PrivacyPolicy />} />
+            <Route path={Index.NOT_FOUND()} element={<NotFound />} />
+            <Route path={"*"} element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </Suspense>

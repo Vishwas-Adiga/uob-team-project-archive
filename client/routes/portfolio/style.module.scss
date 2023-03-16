@@ -1,0 +1,140 @@
+.loadingContainer {
+  height: calc(100vh - 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr min(900px, calc(100% - 40px)) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "hero hero hero"
+    ".    main .";
+}
+
+.hero {
+  --height: 50vh;
+  grid-area: hero;
+  height: var(--height);
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: "content";
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+
+  img {
+    grid-area: content;
+    height: var(--height);
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    mask: radial-gradient(118.78% 124.46% at 50% -15.22%, #000000 50%, transparent 94%);
+    -webkit-mask: radial-gradient(118.78% 124.46% at 50% -15.22%, #000000 50%, transparent 94%);
+  }
+
+  p {
+    grid-area: content;
+    z-index: 3;
+    font-size: var(--height);
+    white-space: nowrap;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: calc(var(--height) / -10);
+    opacity: 0.4;
+    --ty: calc(var(--height) / 8);
+    --tx: calc(var(--height) / -13);
+    transform: translateY(var(--ty)) translateX(var(--tx));
+    mask: radial-gradient(108.78% 124.46% at 50% -15.22%, #000000 50%, transparent 90%);
+    -webkit-mask: radial-gradient(108.78% 124.46% at 50% -15.22%, #000000 50%, transparent 90%);
+    width: calc(100% - var(--tx));
+    overflow: hidden;
+
+  }
+
+  .scrim,
+  .textScrim {
+    grid-area: content;
+    width: 100%;
+    height: var(--height);
+    backdrop-filter: blur(10px);
+    mask: linear-gradient(transparent, black 50%);
+    -webkit-mask: linear-gradient(transparent, black 50%);
+    z-index: 2;
+  }
+
+  .textScrim {
+    mask: linear-gradient(transparent 80%, black);
+    -webkit-mask: linear-gradient(transparent 80%, black);
+    z-index: 3;
+  }
+
+}
+
+.main {
+  grid-area: main;
+  transform: translateY(-20vh);
+  z-index: 4;
+  margin-bottom: -20vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 20px;
+  align-items: flex-start;
+
+  .leftTrack,
+  .rightTrack {
+    grid-area: 2 / 1 / 3 / 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-gap: 20px;
+  }
+
+  .rightTrack {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+}
+
+.portfolioInfo {
+  grid-area: 1 / 1 / 2 / 3;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 220px 1fr auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "img name action"
+    "img desc ."
+    "btn desc .";
+  max-height: 330px;
+
+  .profilePhoto {
+    grid-area: img;
+    height: 220px;
+    width: 220px;
+  }
+
+  .connectButton {
+    grid-area: btn;
+    max-width: unset;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  h1 {
+    font-weight: 600;
+  }
+
+  .portfolioDescription {
+    grid-area: desc;
+  }
+
+  .portfolioAction {
+    grid-area: action;
+  }
+}
