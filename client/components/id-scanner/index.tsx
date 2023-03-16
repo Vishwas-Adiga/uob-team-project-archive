@@ -25,6 +25,8 @@ export const IdScanner = () => {
   const switchMode = useCallback(({ name }) => setMode(name), []);
 
   const requestNfcPermissions = useCallback(async () => {
+    const ndef = new NDEFReader();
+    await ndef.scan();
     // @ts-ignore
     const status = await navigator.permissions.query({ name: "nfc" });
     localStorage.setItem(Config.STORAGE.NFC_PERM, status.state);
