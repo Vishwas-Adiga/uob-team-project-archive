@@ -3,7 +3,7 @@ import { UnorderedList, ListItem } from "@carbon/react";
 import styles from "./style.module.scss";
 
 export const Overview = () => (
-  <section id="overview">
+  <section id="overview" className={styles.overview}>
     <h1>Overview</h1>
     <p className={styles.txt}>
       This privacy policy will explain how {Config.APP.NAME} uses the personal

@@ -14,7 +14,7 @@ export const getUser = async (req: AuthenticatedRequest, res: Response) => {
     return res.status(404).send();
   }
 
-  return res.status(200).send({ ...user, admin: req.admin });
+  return res.status(200).send({ ...user.dataValues, admin: req.admin });
 };
 
 export const deleteUser = async (req: AuthenticatedRequest, res: Response) => {

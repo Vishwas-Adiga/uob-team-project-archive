@@ -10,10 +10,19 @@ export const AuthenticatedRoute = ({ children }: { children: JSX.Element }) => {
 
 export const AnonymousRoute = ({ children }: { children: JSX.Element }) => {
   const user = useRecoilValue(userState);
-  return user ? <Navigate to={Routes.PORTFOLIO()} replace /> : children;
+  return user ? (
+    <Navigate to={Routes.PORTFOLIO(user.userId.toString())} replace />
+  ) : (
+    children
+  );
 };
 
 export const AdminRoute = ({ children }: { children: JSX.Element }) => {
   const user = useRecoilValue(userState);
-  return user?.admin ? children : <Navigate to={Routes.PORTFOLIO()} replace />;
+  if (!user) return <Navigate to={Routes.AUTH_SIGN_IN()} replace />;
+  return user.admin ? (
+    children
+  ) : (
+    <Navigate to={Routes.PORTFOLIO(user.userId.toString())} replace />
+  );
 };

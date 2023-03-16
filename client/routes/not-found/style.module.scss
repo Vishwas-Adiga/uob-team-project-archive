@@ -1,0 +1,17 @@
+.container {
+  height: calc(100vh - 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    font-size: 30vh;
+    font-weight: bold;
+    font-family: monospace;
+  }
+
+  h2 {
+    font-family: monospace;
+  }
+}
