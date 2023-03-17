@@ -1,0 +1,15 @@
+:global(.leaflet-container) {
+  width: 100%;
+  height: 100vh;
+}
+
+.container{
+  width: 100%;
+  height: 400px;
+}
+
+.map{
+  width: calc(100% + 2rem);
+  height: 300px;
+  transform: translate(-1rem, -1rem);
+}
