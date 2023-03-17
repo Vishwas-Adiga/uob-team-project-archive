@@ -22,12 +22,14 @@ function App() {
         <IdScanner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Portfolio />} />
+            <Route path="/" element={<Auth />}>
+              <Route path="/" element={<SignIn />} />
+            </Route>
             <Route path={Index.ADMIN()} element={<Admin />} />
             <Route path={Index.AUTH()} element={<Auth />}>
               <Route path={Index.AUTH_SIGN_UP()} element={<SignUp />} />
               <Route path={Index.AUTH_SIGN_IN()} element={<SignIn />} />
-              <Route path={Index.AUTH()} element={<SignUp />} />
+              <Route path={Index.AUTH()} element={<SignIn />} />
             </Route>
             <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
             <Route path={Index.PRIVACY_POLICY()} element={<PrivacyPolicy />} />
