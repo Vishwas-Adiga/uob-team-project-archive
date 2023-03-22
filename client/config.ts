@@ -1,6 +1,6 @@
 export const Config = {
   APP: {
-    NAME: "Uni Portfolio",
+    NAME: "PortfoliU",
     LOGO: "",
   },
   ORG: {
