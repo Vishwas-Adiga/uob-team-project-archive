@@ -30,5 +30,5 @@ export const init = sequelize =>
         unique: true,
       },
     },
-    { sequelize }
+    { modelName: "Course", freezeTableName: true, sequelize }
   );
