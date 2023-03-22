@@ -89,5 +89,5 @@ export const init = sequelize =>
         defaultValue: null,
       },
     },
-    { sequelize }
+    { modelName: "User", freezeTableName: true, sequelize }
   );

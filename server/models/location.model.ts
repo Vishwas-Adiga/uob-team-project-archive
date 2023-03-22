@@ -53,5 +53,5 @@ export const init = sequelize =>
         type: DataTypes.TEXT,
       },
     },
-    { sequelize }
+    { modelName: "Location", freezeTableName: true, sequelize }
   );

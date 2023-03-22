@@ -42,5 +42,5 @@ export const init = sequelize =>
         allowNull: false,
       },
     },
-    { sequelize }
+    { modelName: "RichText", freezeTableName: true, sequelize }
   );
