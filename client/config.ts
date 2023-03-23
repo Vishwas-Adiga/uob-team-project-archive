@@ -13,4 +13,7 @@ export const Config = {
     JWT_TOKEN_KEY: "TOKEN",
     NFC_PERM: "NFC_PERMISSIONS_STATE",
   },
+  GRAPH: {
+    NAME: "StudentVerse",
+  },
 };
