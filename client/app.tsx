@@ -10,6 +10,7 @@ import { RecoilRoot } from "recoil";
 import { Portfolio } from "./routes/portfolio";
 import { Admin } from "./routes/admin";
 import { IdScanner } from "./components/id-scanner";
+import { Disclaimer } from "./components/disclaimer";
 import { PrivacyPolicy } from "./routes/privacy-policy";
 import { NotFound } from "./routes/not-found";
 import { Graph } from "./routes/graph";
@@ -39,6 +40,7 @@ function App() {
             <Route path={"*"} element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <Disclaimer />
       </Suspense>
     </RecoilRoot>
   );
