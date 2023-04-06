@@ -16,8 +16,7 @@ export const signUp = async (req: Request, res: Response) => {
     await User.create({
       email: req.body.email.replaceAll("+admin", ""),
       password: hash,
-      // TODO require name on sign up
-      name: "Placeholder",
+      name: req.body.name,
     });
     return res.status(200).send();
   } catch (e) {
