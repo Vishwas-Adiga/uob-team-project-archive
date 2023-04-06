@@ -57,6 +57,14 @@ export const SignUp = () => {
       </p>
       <form className={styles.form} onSubmit={submit} ref={form}>
         <TextInput
+          id="sign-up__name"
+          type="text"
+          labelText="Full name"
+          placeholder="First Last"
+          name="name"
+          required
+        />
+        <TextInput
           id="sign-up__email"
           type="text"
           pattern={Config.ORG.EMAIL_REGEX.source}
