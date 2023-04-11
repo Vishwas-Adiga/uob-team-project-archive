@@ -6,5 +6,6 @@ export const Routes = {
   NOT_FOUND: () => `/404`,
   PORTFOLIO: (pid?: string) => `/portfolio/${pid ?? ":pid"}`,
   PRIVACY_POLICY: () => `/privacy-policy`,
+  CONNECTIONS: () => `/connections`,
   GRAPH: () => `/graph`,
 };
