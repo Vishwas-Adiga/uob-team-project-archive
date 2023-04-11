@@ -13,6 +13,7 @@ import { IdScanner } from "./components/id-scanner";
 import { Disclaimer } from "./components/disclaimer";
 import { PrivacyPolicy } from "./routes/privacy-policy";
 import { NotFound } from "./routes/not-found";
+import { Connections } from "./routes/connections";
 import { Graph } from "./routes/graph";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
             <Route path={Index.PRIVACY_POLICY()} element={<PrivacyPolicy />} />
             <Route path={Index.NOT_FOUND()} element={<NotFound />} />
+            <Route path={Index.CONNECTIONS()} element={<Connections />} />
             <Route path={Index.GRAPH()} element={<Graph />} />
             <Route path={"*"} element={<NotFound />} />
           </Routes>
