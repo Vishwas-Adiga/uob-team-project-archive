@@ -6,6 +6,7 @@ import { init as initAccommodation } from "./accommodation.model.js";
 import { init as initCourse } from "./course.model.js";
 import { init as initLocation } from "./location.model.js";
 import { init as initRichtext } from "./richtext.model.js";
+import { init as initUserConnection } from "./user-connection.model.js";
 
 let db: Sequelize;
 if (process.env.NODE_ENV === "production") {
@@ -34,6 +35,7 @@ export const Accommodation = initAccommodation(sequelize);
 export const Course = initCourse(sequelize);
 export const RichText = initRichtext(sequelize);
 export const Location = initLocation(sequelize);
+export const UserConnection = initUserConnection(sequelize);
 
 Accommodation.hasMany(User, {
   foreignKey: "accommodation",
@@ -62,3 +64,15 @@ User.hasMany(Location, {
   onUpdate: "CASCADE",
 });
 Location.belongsTo(User, { foreignKey: "user" });
+User.hasMany(UserConnection, {
+  foreignKey: "srcUserId",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+UserConnection.belongsTo(User, { foreignKey: "srcUserId" });
+User.hasMany(UserConnection, {
+  foreignKey: "dstUserId",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+UserConnection.belongsTo(User, { foreignKey: "dstUserId" });
