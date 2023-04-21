@@ -3,9 +3,17 @@ import {
   getPortfolio,
   postPortfolio,
 } from "../controllers/portfolio.controller.js";
-import { verifyToken } from "../middleware/jwt.middleware.js";
+import { authControl } from "../middleware/jwt.middleware.js";
 
 export const portfolioRouter = Router();
 
-portfolioRouter.get("/:pid", getPortfolio);
-portfolioRouter.post("/:pid", [verifyToken], postPortfolio);
+portfolioRouter.get(
+  "/:uid",
+  [authControl("resource-read", "uid")],
+  getPortfolio
+);
+portfolioRouter.post(
+  "/:uid",
+  [authControl("resource-write", "uid")],
+  postPortfolio
+);
