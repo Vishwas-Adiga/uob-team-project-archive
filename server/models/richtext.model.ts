@@ -1,10 +1,18 @@
-import { DataTypes, InferAttributes, InferCreationAttributes } from "sequelize";
+import {
+  DataTypes,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
 import { Widget } from "./widget.model.js";
 
-export class RichText extends Widget<
+export class RichText extends Model<
   InferAttributes<RichText>,
   InferCreationAttributes<RichText>
 > {
+  // Foreign key that identifies this widget among all widgets of all types
+  declare widgetId: ForeignKey<Widget["widgetId"]>;
   // Title
   declare title: string;
   // Content
@@ -16,12 +24,7 @@ export const init = sequelize =>
     {
       widgetId: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
-      },
-      user: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       title: {
         type: DataTypes.TEXT,
