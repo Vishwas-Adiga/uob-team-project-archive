@@ -55,24 +55,28 @@ User.hasMany(RichText, {
   foreignKey: "user",
   onDelete: "NO ACTION",
   onUpdate: "CASCADE",
+  as: "richTextWidgets",
 });
-RichText.belongsTo(User, { foreignKey: "user" });
+RichText.belongsTo(User, { foreignKey: "user", as: "owner" });
 
 User.hasMany(Location, {
   foreignKey: "user",
   onDelete: "NO ACTION",
   onUpdate: "CASCADE",
+  as: "locationWidgets",
 });
-Location.belongsTo(User, { foreignKey: "user" });
+Location.belongsTo(User, { foreignKey: "user", as: "owner" });
+
 User.hasMany(UserConnection, {
   foreignKey: "srcUserId",
   onDelete: "NO ACTION",
   onUpdate: "CASCADE",
 });
-UserConnection.belongsTo(User, { foreignKey: "srcUserId" });
+UserConnection.belongsTo(User, { foreignKey: "srcUserId", as: "initiator" });
+
 User.hasMany(UserConnection, {
   foreignKey: "dstUserId",
   onDelete: "NO ACTION",
   onUpdate: "CASCADE",
 });
-UserConnection.belongsTo(User, { foreignKey: "dstUserId" });
+UserConnection.belongsTo(User, { foreignKey: "dstUserId", as: "acceptor" });

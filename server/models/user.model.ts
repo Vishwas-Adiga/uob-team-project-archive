@@ -1,6 +1,11 @@
 import {
+  BelongsToCreateAssociationMixin,
+  BelongsToGetAssociationMixin,
+  BelongsToSetAssociationMixin,
   CreationOptional,
   DataTypes,
+  ForeignKey,
+  HasManyGetAssociationsMixin,
   InferAttributes,
   InferCreationAttributes,
   Model,
@@ -8,6 +13,8 @@ import {
 import { Config } from "../configs/config.js";
 import { Accommodation } from "./accommodation.model.js";
 import { Course } from "./course.model.js";
+import { Location } from "./location.model.js";
+import { RichText } from "./richtext.model.js";
 
 export class User extends Model<
   InferAttributes<User>,
@@ -31,9 +38,20 @@ export class User extends Model<
   // Profile banner
   declare profileBanner: CreationOptional<string>;
   // Accommodation
-  declare accommodation: CreationOptional<Accommodation>;
+  declare accommodation: ForeignKey<Accommodation["accommId"]>;
   // Course
-  declare course: CreationOptional<Course>;
+  declare course: ForeignKey<Course["courseId"]>;
+
+  // Association mixin declarations
+  declare getAccommodation: BelongsToGetAssociationMixin<Accommodation>;
+  declare setAccommodation: BelongsToSetAssociationMixin<Accommodation, number>;
+  declare createAccommodation: BelongsToCreateAssociationMixin<Accommodation>;
+
+  declare getCourse: BelongsToGetAssociationMixin<Course>;
+  declare setCourse: BelongsToSetAssociationMixin<Course, number>;
+  declare createCourse: BelongsToCreateAssociationMixin<Course>;
+  declare getLocationWidgets: HasManyGetAssociationsMixin<Location>;
+  declare getRichTextWidgets: HasManyGetAssociationsMixin<RichText>;
 }
 
 export const init = sequelize =>

@@ -14,6 +14,10 @@ export class Accommodation extends Model<
   declare accommId: CreationOptional<number>;
   // Accommodation name
   declare name: string;
+
+  // Latitude/longitude (roughly) locating the accommodation (in decimal degrees)
+  declare latitude: number;
+  declare longitude: number;
 }
 
 export const init = sequelize =>
@@ -28,6 +32,14 @@ export const init = sequelize =>
         type: DataTypes.TEXT,
         allowNull: false,
         unique: true,
+      },
+      latitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+      },
+      longitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
       },
     },
     { modelName: "Accommodation", freezeTableName: true, sequelize }
