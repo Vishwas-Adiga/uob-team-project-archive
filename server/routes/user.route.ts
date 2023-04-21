@@ -4,10 +4,10 @@ import {
   getUser,
   getUsers,
 } from "../controllers/user.controller.js";
-import { verifyToken } from "../middleware/jwt.middleware.js";
+import { authControl } from "../middleware/jwt.middleware.js";
 
 export const userRouter = Router();
 
-userRouter.get("/:uid", [verifyToken], getUser);
-userRouter.delete("/:uid", [verifyToken], deleteUser);
-userRouter.get("/", [verifyToken], getUsers);
+userRouter.get("/:uid", [authControl("resource-write", "uid")], getUser);
+userRouter.delete("/:uid", [authControl("resource-write", "uid")], deleteUser);
+userRouter.get("/", [authControl("admin")], getUsers);

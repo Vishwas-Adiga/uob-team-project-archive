@@ -1,10 +1,7 @@
 import { Router } from "express";
-import { getBioWidget } from "../controllers/widgets.controller.js";
-import { getLocationWidgets } from "../controllers/widgets.controller.js";
-
-//TODO Verify token for widgets when database is done:
+import { authControl } from "../middleware/jwt.middleware.js";
+import { getWidget } from "../controllers/widgets.controller.js";
 
 export const widgetsRouter = Router();
 
-widgetsRouter.get("/rich-text", getBioWidget);
-widgetsRouter.get("/location", getLocationWidgets);
+widgetsRouter.get("/:wid", [authControl("resource-read", "wid")], getWidget);
