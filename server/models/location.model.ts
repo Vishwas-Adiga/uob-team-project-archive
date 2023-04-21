@@ -1,10 +1,18 @@
-import { DataTypes, InferAttributes, InferCreationAttributes } from "sequelize";
+import {
+  DataTypes,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
 import { Widget } from "./widget.model.js";
 
-export class Location extends Widget<
+export class Location extends Model<
   InferAttributes<Location>,
   InferCreationAttributes<Location>
 > {
+  // Foreign key that identifies this widget among all widgets of all types
+  declare readonly widgetId: ForeignKey<Widget["widgetId"]>;
   // Latitude (decimal degrees)
   declare latitude: number;
   // Longitude (decimal degrees)
@@ -20,12 +28,7 @@ export const init = sequelize =>
     {
       widgetId: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
-      },
-      user: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       latitude: {
         type: DataTypes.DOUBLE,

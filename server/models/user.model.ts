@@ -13,8 +13,7 @@ import {
 import { Config } from "../configs/config.js";
 import { Accommodation } from "./accommodation.model.js";
 import { Course } from "./course.model.js";
-import { Location } from "./location.model.js";
-import { RichText } from "./richtext.model.js";
+import { Widget } from "./widget.model.js";
 
 export class User extends Model<
   InferAttributes<User>,
@@ -50,8 +49,7 @@ export class User extends Model<
   declare getCourse: BelongsToGetAssociationMixin<Course>;
   declare setCourse: BelongsToSetAssociationMixin<Course, number>;
   declare createCourse: BelongsToCreateAssociationMixin<Course>;
-  declare getLocationWidgets: HasManyGetAssociationsMixin<Location>;
-  declare getRichTextWidgets: HasManyGetAssociationsMixin<RichText>;
+  declare getWidgets: HasManyGetAssociationsMixin<Widget>;
 }
 
 export const init = sequelize =>

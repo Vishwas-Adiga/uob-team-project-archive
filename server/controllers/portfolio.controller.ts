@@ -50,25 +50,5 @@ export const postPortfolio = async (
   user.profilePicture = req.body.user?.profilePicture ?? user.profilePicture;
   await user.save();
 
-  for (const widget of req.body.widgets ?? []) {
-    switch (widget.type) {
-      case "rt":
-        await RichText.create({
-          user: portfolioId,
-          title: widget.title,
-          content: widget.content,
-        });
-        break;
-      case "l":
-        await Location.create({
-          user: portfolioId,
-          title: widget.title,
-          longitude: widget.longitude,
-          latitude: widget.latitude,
-          description: "",
-        });
-    }
-  }
-
   res.status(200).send();
 };
