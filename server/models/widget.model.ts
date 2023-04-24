@@ -9,13 +9,21 @@ import {
   InferCreationAttributes,
   Model,
 } from "sequelize";
+import { Announcement } from "./announcement.model.js";
+import { Link } from "./link.model.js";
 import { Location } from "./location.model.js";
 import { Module } from "./module.model.js";
 import { RichText } from "./richtext.model.js";
 import { User } from "./user.model.js";
 
-export type WidgetPayload = Location | RichText;
-const WidgetTypes = ["Location", "Module", "RichText"] as const;
+type WidgetPayload = Announcement | Link | Location | RichText;
+const WidgetTypes = [
+  "Announcement",
+  "Link",
+  "Location",
+  "Module",
+  "RichText",
+] as const;
 
 export class Widget extends Model<
   InferAttributes<Widget>,
