@@ -49,5 +49,5 @@ export const init = sequelize =>
         allowNull: true,
       },
     },
-    { sequelize }
+    { modelName: "UserConnection", freezeTableName: true, sequelize }
   );
