@@ -1,5 +1,4 @@
 import {
-  Attributes,
   BelongsToGetAssociationMixin,
   BelongsToSetAssociationMixin,
   CreationAttributes,
@@ -15,7 +14,7 @@ import { Module } from "./module.model.js";
 import { RichText } from "./richtext.model.js";
 import { User } from "./user.model.js";
 
-type WidgetPayload = Location | RichText;
+export type WidgetPayload = Location | RichText;
 const WidgetTypes = ["Location", "Module", "RichText"] as const;
 
 export class Widget extends Model<
@@ -34,7 +33,6 @@ export class Widget extends Model<
     payload: CreationAttributes<WidgetPayload> | Array<Module["moduleId"]>,
     options?
   ) {
-    if (!this.widgetType) return Promise.resolve(null);
     switch (this.widgetType) {
       case "Module":
         const moduleIds = payload as Array<Module["moduleId"]>;
@@ -53,12 +51,28 @@ export class Widget extends Model<
     }
   }
 
-  getPayload(options?): Promise<WidgetPayload | Array<Module> | null> {
-    if (!this.widgetType) return Promise.resolve(null);
-    const mixinMethodName = `get${this.widgetType}${
-      this.widgetType === "Module" ? "s" : ""
-    }`;
-    return this[mixinMethodName](options);
+  async getPayload(
+    options?
+  ): Promise<
+    | WidgetPayload
+    | { widgetId: number; modules: Array<Module>; index: number }
+    | null
+  > {
+    options = {
+      ...options,
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    };
+    if (this.widgetType === "Module") {
+      const res = await this["getModules"]({
+        ...options,
+        joinTableAttributes: [],
+      });
+      return { modules: res, widgetId: this.widgetId, index: this.index };
+    }
+
+    const res = (await this[`get${this.widgetType}`](options)).toJSON();
+    res["index"] = this.index;
+    return res;
   }
 
   // Association mixins
