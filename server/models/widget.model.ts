@@ -11,11 +11,12 @@ import {
   Model,
 } from "sequelize";
 import { Location } from "./location.model.js";
+import { Module } from "./module.model.js";
 import { RichText } from "./richtext.model.js";
 import { User } from "./user.model.js";
 
 type WidgetPayload = Location | RichText;
-const WidgetTypes = ["Location", "RichText"] as const;
+const WidgetTypes = ["Location", "Module", "RichText"] as const;
 
 export class Widget extends Model<
   InferAttributes<Widget>,
@@ -26,27 +27,37 @@ export class Widget extends Model<
   // User who owns the widget
   declare user: ForeignKey<User["userId"]>;
 
-  declare readonly widgetType: typeof WidgetTypes;
+  declare readonly widgetType: (typeof WidgetTypes)[number];
   declare index: number;
 
-  createPayload(payload: CreationAttributes<WidgetPayload>, options?) {
+  createPayload(
+    payload: CreationAttributes<WidgetPayload> | Array<Module["moduleId"]>,
+    options?
+  ) {
     if (!this.widgetType) return Promise.resolve(null);
-    const mixinMethodName = `create${this.widgetType}`;
-    return this[mixinMethodName](
-      { ...payload, widgetId: this.widgetId },
-      options
-    );
+    switch (this.widgetType) {
+      case "Module":
+        const moduleIds = payload as Array<Module["moduleId"]>;
+        return this["setModules"](
+          moduleIds.map(id =>
+            Module.build({ moduleId: id, name: "", description: "" })
+          ),
+          options
+        );
+      default:
+        const mixinMethodName = `create${this.widgetType}`;
+        return this[mixinMethodName](
+          { ...payload, widgetId: this.widgetId },
+          options
+        );
+    }
   }
 
-  setPayload(payload: Attributes<WidgetPayload>, options?) {
+  getPayload(options?): Promise<WidgetPayload | Array<Module> | null> {
     if (!this.widgetType) return Promise.resolve(null);
-    const mixinMethodName = `set${this.widgetType}`;
-    return this[mixinMethodName](payload, options);
-  }
-
-  getPayload(options?): Promise<WidgetPayload | null> {
-    if (!this.widgetType) return Promise.resolve(null);
-    const mixinMethodName = `get${this.widgetType}`;
+    const mixinMethodName = `get${this.widgetType}${
+      this.widgetType === "Module" ? "s" : ""
+    }`;
     return this[mixinMethodName](options);
   }
 

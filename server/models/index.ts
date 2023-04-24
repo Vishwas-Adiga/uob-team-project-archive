@@ -7,7 +7,9 @@ import { init as initCourse } from "./course.model.js";
 import { init as initLocation } from "./location.model.js";
 import { init as initRichtext } from "./richtext.model.js";
 import { init as initUserConnection } from "./user-connection.model.js";
-import { init as initWidget, Widget as WidgetModel } from "./widget.model.js";
+import { init as initWidget } from "./widget.model.js";
+import { init as initModule } from "./module.model.js";
+import { init as initModuleInWidget } from "./module-in-widget.model.js";
 
 let db: Sequelize;
 if (process.env.NODE_ENV === "production") {
@@ -38,6 +40,8 @@ export const Widget = initWidget(sequelize);
 export const RichText = initRichtext(sequelize);
 export const Location = initLocation(sequelize);
 export const UserConnection = initUserConnection(sequelize);
+export const Module = initModule(sequelize);
+export const ModuleInWidget = initModuleInWidget(sequelize);
 
 Accommodation.hasMany(User, {
   foreignKey: "accommodation",
@@ -86,3 +90,12 @@ User.hasMany(UserConnection, {
   onUpdate: "CASCADE",
 });
 UserConnection.belongsTo(User, { foreignKey: "dstUserId", as: "acceptor" });
+
+Widget.belongsToMany(Module, {
+  through: ModuleInWidget,
+  foreignKey: "widgetId",
+});
+Module.belongsToMany(Widget, {
+  through: ModuleInWidget,
+  foreignKey: "moduleId",
+});
