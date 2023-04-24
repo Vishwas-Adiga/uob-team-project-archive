@@ -5,6 +5,7 @@ import MODULE_DATA from "./module-data.json" assert { type: "json" };
 
 export const seed = async () => {
   await sequelize.drop();
+  await sequelize.sync({ force: true });
   await Promise.all([
     Accommodation.bulkCreate(ACCOMMODATION_DATA),
     Course.bulkCreate(COURSE_DATA),
