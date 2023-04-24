@@ -5,9 +5,10 @@ import { authRouter } from "./routes/auth.route.js";
 import { userRouter } from "./routes/user.route.js";
 import { Config } from "./configs/config.js";
 import { serveHTML, serveStatic } from "./middleware/vite.middleware.js";
-import { Module, sequelize } from "./models/index.js";
+import { Accommodation, Course, Module, sequelize } from "./models/index.js";
 import { widgetsRouter } from "./routes/widgets.route.js";
 import { portfolioRouter } from "./routes/portfolio.route.js";
+import { getCommonModel } from "./controllers/common-models.controller.js";
 import { seed } from "./seeders/index.js";
 
 const app = express();
@@ -25,6 +26,10 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/widgets", widgetsRouter);
 app.use("/api/v1/portfolios", portfolioRouter);
+
+app.get("/api/v1/courses", getCommonModel(Course));
+app.get("/api/v1/accommodations", getCommonModel(Accommodation));
+app.get("/api/v1/modules", getCommonModel(Module));
 
 app.listen(Config.PORT, async () => {
   await serveStatic(app);
