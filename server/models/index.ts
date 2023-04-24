@@ -4,6 +4,7 @@ import { DbConfig } from "../configs/db.config.js";
 import { init as initUser } from "./user.model.js";
 import { init as initAccommodation } from "./accommodation.model.js";
 import { init as initCourse } from "./course.model.js";
+import { init as initAnnouncement } from "./announcement.model.js";
 import { init as initLocation } from "./location.model.js";
 import { init as initRichtext } from "./richtext.model.js";
 import { init as initUserConnection } from "./user-connection.model.js";
@@ -37,6 +38,7 @@ export const User = initUser(sequelize);
 export const Accommodation = initAccommodation(sequelize);
 export const Course = initCourse(sequelize);
 export const Widget = initWidget(sequelize);
+export const Announcement = initAnnouncement(sequelize);
 export const RichText = initRichtext(sequelize);
 export const Location = initLocation(sequelize);
 export const UserConnection = initUserConnection(sequelize);
@@ -76,6 +78,12 @@ Widget.hasOne(RichText, {
   onDelete: "CASCADE",
 });
 RichText.belongsTo(Widget, { foreignKey: "widgetId" });
+
+Widget.hasOne(Announcement, {
+  foreignKey: "widgetId",
+  onDelete: "CASCADE",
+});
+Announcement.belongsTo(Widget, { foreignKey: "widgetId" });
 
 User.hasMany(UserConnection, {
   foreignKey: "srcUserId",
