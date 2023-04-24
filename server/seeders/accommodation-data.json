@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Aitken",
+    "latitude": 52.462109995574636,
+    "longitude": -1.92146887369577
+  },
+  {
+    "name": "Ashcroft",
+    "latitude": 52.45673009104892,
+    "longitude": -1.9383989890401103
+  },
+  {
+    "name": "Bournbrook",
+    "latitude": 52.44754409763313,
+    "longitude": -1.9342764718443595
+  },
+  {
+    "name": "Chamberlain",
+    "latitude": 52.46334637038546,
+    "longitude": -1.9227646178758213
+  },
+  {
+    "name": "Elgar Court",
+    "latitude": 52.46379823241453,
+    "longitude": -1.9231110313677295
+  },
+  {
+    "name": "Jarratt Hall",
+    "latitude": 52.4464867286981,
+    "longitude": -1.9364132197288646
+  },
+  {
+    "name": "Maple Bank",
+    "latitude": 52.4639505586633,
+    "longitude": -1.9244092620558921
+  },
+  {
+    "name": "Mason",
+    "latitude": 52.459505567927785,
+    "longitude": -1.9259682596771863
+  },
+  {
+    "name": "Oak Brook Park",
+    "latitude": 52.44678359943911,
+    "longitude": -1.933544443008362
+  },
+  {
+    "name": "Pritchatts House",
+    "latitude": 52.456751488988594,
+    "longitude": -1.9365223313681046
+  },
+  {
+    "name": "Selly Oak Court",
+    "latitude": 52.43866654894971,
+    "longitude": -1.9342047596332355
+  },
+  {
+    "name": "Tennis Court",
+    "latitude": 52.4573233282813,
+    "longitude": -1.9259289431476383
+  },
+  {
+    "name": "The Metalworks",
+    "latitude": 52.44756613222058,
+    "longitude": -1.9351610755486566
+  }
+]

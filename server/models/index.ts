@@ -25,11 +25,13 @@ if (process.env.NODE_ENV === "production") {
     port: DbConfig.port,
     dialect: "postgres",
     dialectModule: pg,
+    logging: false,
   });
 } else {
   db = new Sequelize({
     dialect: "sqlite",
     storage: "dev.db",
+    logging: false,
   });
 }
 
