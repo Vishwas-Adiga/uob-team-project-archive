@@ -1,0 +1,1400 @@
+[
+  {
+    "name": "CertHE English Law Full-time"
+  },
+  {
+    "name": "LL.B. International Law and Globalisation Full-time"
+  },
+  {
+    "name": "LL.B. Law Full-time"
+  },
+  {
+    "name": "LL.B. Law with Business Studies Full-time"
+  },
+  {
+    "name": "LL.B. Law with Business with Year in Computer Science Full-time"
+  },
+  {
+    "name": "LL.B. Law with Criminology Full-time"
+  },
+  {
+    "name": "LL.B. Law with Foundation Year Full-time"
+  },
+  {
+    "name": "LL.B. Law with French Law Full-time"
+  },
+  {
+    "name": "LL.B. Law with German Law Full-time"
+  },
+  {
+    "name": "LL.B. Law with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Drama and English Full-time"
+  },
+  {
+    "name": "B.A. Drama and English with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Drama and English with Year in Civic Leadership Full-time"
+  },
+  {
+    "name": "B.A. Drama and Theatre Arts Full-time"
+  },
+  {
+    "name": "B.A. Drama and Theatre Arts with Semester Abroad Full-time"
+  },
+  {
+    "name": "B.A. Drama and Theatre Arts with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Drama and Theatre Arts with Year in Civic Leadership Full-time"
+  },
+  {
+    "name": "B.A. English Language Full-time"
+  },
+  {
+    "name": "B.A. English Language and Linguistics with Semester Abroad Full-time"
+  },
+  {
+    "name": "B.A. English Language and Literature Full-time"
+  },
+  {
+    "name": "B.A. English Language and Literature with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English Language with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and History Full-time"
+  },
+  {
+    "name": "B.A. American and Canadian Studies with Semester Abroad Full-time"
+  },
+  {
+    "name": "B.A. English Full-time"
+  },
+  {
+    "name": "B.A. English and History of Art with a Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. English and History with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and History with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. English with Semester Abroad Full-time"
+  },
+  {
+    "name": "B.A. English with Shakespeare Studies Full-time"
+  },
+  {
+    "name": "B.A. English with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and Creative Writing Full-time"
+  },
+  {
+    "name": "B.A. English and Creative Writing with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and Creative Writing with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. English and Film Full-time"
+  },
+  {
+    "name": "B.A. English and Film with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and Film with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Professional Dance and Musical Theatre Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and African Studies Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and African Studies with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and Classical Literature and Civilisation Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and History Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and History with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and Political Science Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and Political Science with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and Politics Full-time"
+  },
+  {
+    "name": "B.A. Anthropology and Politics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Ancient History Full-time"
+  },
+  {
+    "name": "B.A. Ancient History and Archaeology Full-time"
+  },
+  {
+    "name": "B.A. Ancient History and Archaeology and History Full-time"
+  },
+  {
+    "name": "B.A. Ancient History and Archaeology with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Ancient History with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Archaeology and Anthropology Full-time"
+  },
+  {
+    "name": "B.A. Archaeology and Anthropology with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Classical Literature and Civilisation Full-time"
+  },
+  {
+    "name": "B.A. Classical Literature and Civilisation and Philosophy Full-time"
+  },
+  {
+    "name": "B.A. Classical Literature and Civilisation with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Classics Full-time"
+  },
+  {
+    "name": "B.A. English and Classical Literature and Civilisation Full-time"
+  },
+  {
+    "name": "B.A. English and Classical Literature and Civilisation with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Ancient and Medieval History Full-time"
+  },
+  {
+    "name": "B.A. Ancient and Medieval History with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Ancient and Medieval with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. History Full-time"
+  },
+  {
+    "name": "B.A. History and Philosophy Full-time"
+  },
+  {
+    "name": "B.A. History and Philosophy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. History and Political Science with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. History and Politics Full-time"
+  },
+  {
+    "name": "B.A. History and Politics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. History with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and History of Art Full-time"
+  },
+  {
+    "name": "B.A. English and History of Art with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English with History of Art Full-time"
+  },
+  {
+    "name": "B.A. History and History of Art with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. History of Art Full-time"
+  },
+  {
+    "name": "B.A. History of Art with Semester Abroad Full-time"
+  },
+  {
+    "name": "B.A. History of Art with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages (English as a Modern Foreign Language) Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages and English Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages and History of Art Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages and Music Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages with Business Management Full-time"
+  },
+  {
+    "name": "B.A. Modern Languages with Music Full-time"
+  },
+  {
+    "name": "B.A. Russian Studies and International Relations Full-time"
+  },
+  {
+    "name": "UG Aff EMFL (English as a Modern Foreign Language) Full-time"
+  },
+  {
+    "name": "B.A. Mathematics and Music Full-time"
+  },
+  {
+    "name": "B.A. Music and Mathematics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Mus. Music Full-time"
+  },
+  {
+    "name": "B.Mus. with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. English and Philosophy Full-time"
+  },
+  {
+    "name": "B.A. English and Philosophy with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Mathematics and Philosophy Full-time"
+  },
+  {
+    "name": "B.A. Mathematics and Philosophy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Mathematics and Philosophy with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Philosophy Full-time"
+  },
+  {
+    "name": "B.A. Philosophy and Sociology Full-time"
+  },
+  {
+    "name": "B.A. Philosophy and Sociology with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Philosophy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Philosophy with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Fundamental Catholic Theology Full-time"
+  },
+  {
+    "name": "B.A. History and Theology Full-time"
+  },
+  {
+    "name": "B.A. History and Theology with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Philosophy, Religion and Ethics (Dual location) Full-time"
+  },
+  {
+    "name": "B.A. Philosophy, Religion and Ethics Full-time"
+  },
+  {
+    "name": "B.A. Philosophy, Religion and Ethics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Politics, Religion and Philosophy Full-time"
+  },
+  {
+    "name": "B.A. Politics, Religion and Philosophy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Theology and Religion Full-time"
+  },
+  {
+    "name": "B.A. Theology and Religion with Semester Abroad Full-time"
+  },
+  {
+    "name": "B.A. Theology and Religion with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Eng. Chemical Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Chemical Engineering Technology Full-time"
+  },
+  {
+    "name": "B.Eng. Chemical Engineering Technology with Foundation Year Full-time"
+  },
+  {
+    "name": "B.Eng. Chemical Engineering with Foundation Year Full-time"
+  },
+  {
+    "name": "CertHE Food Safety and Food Legislation Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering (with International Study) Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering (with International and Industrial Study) Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering Technology (with International Study) Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering Technology (with International and Industrial Study) Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering Technology Full-time"
+  },
+  {
+    "name": "M.Eng. Chemical Engineering with Industrial Study Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry with Business Management Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry with Medicinal Chemistry and Drug Discovery Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry with a Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry with a Modern Language Full-time"
+  },
+  {
+    "name": "B.Sc. Chemistry with a Modern Language with Year in Computer Science Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry with Business Management Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry with Industrial Experience Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry with Industrial Experience with Year in Computer Science Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry with Medicinal Chemistry and Drug Discovery Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry with Study Abroad Full-time"
+  },
+  {
+    "name": "M.Sci. Chemistry with a Modern Language Full-time"
+  },
+  {
+    "name": "B.Sc. Artificial Intelligence and Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Artificial Intelligence and Computer Science with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Artificial Intelligence and Computer Science with a Year in Mechanical Engineering Full-time"
+  },
+  {
+    "name": "B.Sc. Artificial Intelligence/Computer Science with an Industrial Year Full-time"
+  },
+  {
+    "name": "B.Sc. Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Computer Science with Study Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Computer Science with a Year in Mechanical Engineering Full-time"
+  },
+  {
+    "name": "B.Sc. Computer Science with an Industrial Year Full-time"
+  },
+  {
+    "name": "DA B.Sc. Computer Science with Digital Technology Partnership Full-time"
+  },
+  {
+    "name": "M.Eng. Computer Science and Software Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Computer Science and Software Engineering with a Year in Mechanical Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Computer Science/Software Engineering with an Industrial Year Full-time"
+  },
+  {
+    "name": "M.Sci. Computer Science Full-time"
+  },
+  {
+    "name": "M.Sci. Computer Science with Study Abroad Full-time"
+  },
+  {
+    "name": "M.Sci. Computer Science with an Industrial Year Full-time"
+  },
+  {
+    "name": "B.Eng. Engineering Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. EPS Futures Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. Physical Sciences Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Economics Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Economics with Study Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Information Computing Science Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Information Computing Science with Study Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Mathematics Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Mathematics with Study Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Statistics Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Mathematics with Statistics with Study Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics and Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics and Computer Science with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics with Business Management Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics with Study in Continental Europe Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematics with a Year in Industry Full-time"
+  },
+  {
+    "name": "M.Sci. Mathematics Full-time"
+  },
+  {
+    "name": "M.Sci. Mathematics and Computer Science Full-time"
+  },
+  {
+    "name": "M.Sci. Mathematics and Computer Science with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Sci. Mathematics with Business Management Full-time"
+  },
+  {
+    "name": "M.Sci. Mathematics with Study in Continental Europe Full-time"
+  },
+  {
+    "name": "B.Eng. Aerospace Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Aerospace Engineering with Industrial Experience Full-time"
+  },
+  {
+    "name": "B.Eng. Aerospace Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Eng. Materials Science and Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Materials Science and Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Eng. Mechanical and Materials Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Mechanical and Materials Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Nuclear Science and Materials Full-time"
+  },
+  {
+    "name": "B.Sc. Nuclear Science and Materials with Year Abroad Full-time"
+  },
+  {
+    "name": "M.Eng. Aerospace Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Aerospace Engineering with Industrial Experience Full-time"
+  },
+  {
+    "name": "M.Eng. Aerospace Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "M.Eng. Materials Science and Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Materials Science and Engineering with Industrial Experience Full-time"
+  },
+  {
+    "name": "M.Eng. Materials Science and Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical and Materials Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical and Materials Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "M.Eng. Nuclear Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Nuclear Engineering with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Physics (with International Study) Full-time"
+  },
+  {
+    "name": "B.Sc. Physics Full-time"
+  },
+  {
+    "name": "B.Sc. Physics and Astrophysics (International Study) Full-time"
+  },
+  {
+    "name": "B.Sc. Physics and Astrophysics Full-time"
+  },
+  {
+    "name": "B.Sc. Physics with Particle Physics and Cosmology Full-time"
+  },
+  {
+    "name": "B.Sc. Physics with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Theoretical Physics Full-time"
+  },
+  {
+    "name": "B.Sc. Theoretical Physics and Applied Mathematics Full-time"
+  },
+  {
+    "name": "M.Sci. Physics (International Study) Full-time"
+  },
+  {
+    "name": "M.Sci. Physics Full-time"
+  },
+  {
+    "name": "M.Sci. Physics and Astrophysics Full-time"
+  },
+  {
+    "name": "M.Sci. Physics with Particle Physics and Cosmology Full-time"
+  },
+  {
+    "name": "M.Sci. Theoretical Physics Full-time"
+  },
+  {
+    "name": "M.Sci. Theoretical Physics and Applied Mathematics Full-time"
+  },
+  {
+    "name": "B.Eng. Civil Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Civil Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Eng. Civil and Railway Engineering Full-time"
+  },
+  {
+    "name": "FdSc Civil Engineering Full-time"
+  },
+  {
+    "name": "FdSc Civil Engineering Part-time."
+  },
+  {
+    "name": "FdSc Civil and Railway Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Civil Engineering (International Study) Full-time"
+  },
+  {
+    "name": "M.Eng. Civil Engineering (International Study) with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Eng. Civil Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Civil Engineering with Industrial Experience Full-time"
+  },
+  {
+    "name": "M.Eng. Civil Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Eng. Civil and Railway Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Electrical and Railway Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Electronic and Electrical Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Electronic and Electrical Engineering with Foundation Year Full-time"
+  },
+  {
+    "name": "B.Eng. Electronic and Electrical Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Eng. Electronic and Electrical Engineering with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Eng. Mechatronic and Robotic Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Mechatronic and Robotic Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Sc. Electrical and Railway Engineering Full-time"
+  },
+  {
+    "name": "B.Sc. Electrical and Railway Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Sc. Electronic and Electrical Engineering Full-time"
+  },
+  {
+    "name": "B.Sc. Electronic and Electrical Engineering with Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. Electronic and Electrical Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Sc. Electronic and Electrical Engineering with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Mechatronics and Robotics with Industrial Year Full-time"
+  },
+  {
+    "name": "DA B.Eng. Electrical and Railway Engineering Full-time"
+  },
+  {
+    "name": "FdSc Electrical and Electronic Engineering Full-time"
+  },
+  {
+    "name": "FdSc Electrical and Railway Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Electrical and Railway Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Electrical and Railway Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Eng. Electronic and Electrical Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Electronic and Electrical Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Eng. Mechatronic and Robotic Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Mechatronic and Robotic Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Sci. Electrical and Railway Engineering Full-time"
+  },
+  {
+    "name": "M.Sci. Electrical and Railway Engineering with an Industrial Year Full-time"
+  },
+  {
+    "name": "M.Sci. Electronic and Electrical Engineering Full-time"
+  },
+  {
+    "name": "M.Sci. Electronic and Electrical Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Sci. Mechatronics and Robotics with Industrial Year Full-time"
+  },
+  {
+    "name": "B.Eng. Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Mechanical Engineering (Automotive) Full-time"
+  },
+  {
+    "name": "B.Eng. Mechanical Engineering Full-time"
+  },
+  {
+    "name": "B.Eng. Mechanical Engineering with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Eng. Mechanical Engineering with an Industrial Year Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical Engineering (Automotive) Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical Engineering Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical Engineering with Industrial Year Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical Engineering with Year in Computer Science Full-time"
+  },
+  {
+    "name": "M.Eng. Mechanical Engineering with a Year Abroad Full-time"
+  },
+  {
+    "name": "Undergraduate Diploma Mechanical Engineering Full-time"
+  },
+  {
+    "name": "B.Sc. Biochemistry (Genetics) Full-time"
+  },
+  {
+    "name": "B.Sc. Biochemistry Full-time"
+  },
+  {
+    "name": "B.Sc. Biochemistry with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Biochemistry with Study in Continental Europe Full-time"
+  },
+  {
+    "name": "B.Sc. Biological Sciences (Genetics) Full-time"
+  },
+  {
+    "name": "B.Sc. Biological Sciences (Zoology) Full-time"
+  },
+  {
+    "name": "B.Sc. Biological Sciences Full-time"
+  },
+  {
+    "name": "B.Sc. Biological Sciences with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Biological Sciences with Study in Continental Europe Full-time"
+  },
+  {
+    "name": "B.Sc. Human Biology Full-time"
+  },
+  {
+    "name": "B.Sc. Human Biology with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Human Sciences Full-time"
+  },
+  {
+    "name": "B.Sc. Medical Biochemistry Full-time"
+  },
+  {
+    "name": "M.Sci. Biochemistry Full-time"
+  },
+  {
+    "name": "M.Sci. Biochemistry with Professional Placement Full-time"
+  },
+  {
+    "name": "M.Sci. Biochemistry with Year in Computer Science Full-time"
+  },
+  {
+    "name": "M.Sci. Biological Sciences Full-time"
+  },
+  {
+    "name": "M.Sci. Biological Sciences with Professional Placement Full-time"
+  },
+  {
+    "name": "M.Sci. Human Biology Full-time"
+  },
+  {
+    "name": "M.Sci. Human Biology with Professional Placement Full-time"
+  },
+  {
+    "name": "M.Sci. Human Sciences Full-time"
+  },
+  {
+    "name": "B.Sc. Environmental Science Full-time"
+  },
+  {
+    "name": "B.Sc. Environmental Science with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Environmental Science with Professional Placement Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Environmental Science with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Environmental Sciences Full-time"
+  },
+  {
+    "name": "B.Sc. Geology Full-time"
+  },
+  {
+    "name": "B.Sc. Geology and Physical Geography Full-time"
+  },
+  {
+    "name": "B.Sc. Geology and Physical Geography with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Geology with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Global Environmental Change and Sustainability Full-time"
+  },
+  {
+    "name": "B.Sc. Global Environmental Change and Sustainability with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Palaeontology and Geology Full-time"
+  },
+  {
+    "name": "B.Sc. Palaeontology and Geology with Placement Year Full-time"
+  },
+  {
+    "name": "M.Sci. Environmental Science Full-time"
+  },
+  {
+    "name": "M.Sci. Geology Full-time"
+  },
+  {
+    "name": "M.Sci. Geology and Physical Geography Full-time"
+  },
+  {
+    "name": "M.Sci. Geology and Physical Geography with Placement Year Full-time"
+  },
+  {
+    "name": "M.Sci. Geology and Physical Geography with an International Year Full-time"
+  },
+  {
+    "name": "M.Sci. Geology with Placement Year Full-time"
+  },
+  {
+    "name": "M.Sci. Geology with an International Year Full-time"
+  },
+  {
+    "name": "M.Sci. Global Environmental Change and Sustainability Full-time"
+  },
+  {
+    "name": "M.Sci. Palaeontology and Geology Full-time"
+  },
+  {
+    "name": "M.Sci. Palaeontology and Geology with Placement Year Full-time"
+  },
+  {
+    "name": "M.Sci. Palaeontology and Geology with an International Year Full-time"
+  },
+  {
+    "name": "B.A. Geography Full-time"
+  },
+  {
+    "name": "B.A. Geography with Placement Year Full-time"
+  },
+  {
+    "name": "B.A. Geography with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Geography with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Geography Full-time"
+  },
+  {
+    "name": "B.Sc. Geography and Urban and Regional Planning Full-time"
+  },
+  {
+    "name": "B.Sc. Geography and Urban and Regional Planning with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Geography and Urban and Regional Planning with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Geography with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Geography with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Geography with Year Abroad and Year in Computer Science Full-time"
+  },
+  {
+    "name": "M.Sci. Geography Full-time"
+  },
+  {
+    "name": "M.Sci. Geography with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Human Neuroscience Full-time"
+  },
+  {
+    "name": "B.Sc. Human Neuroscience with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology with Business Management Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology with Business Management with Integrated Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology with Integrated Foundation Year Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology with Year Abroad Full-time"
+  },
+  {
+    "name": "Intercalated BSc Human Neuroscience Full-time"
+  },
+  {
+    "name": "M.Sci. Psychology and Psychological Practice Full-time"
+  },
+  {
+    "name": "FdSc Professional Golf Studies Part-time."
+  },
+  {
+    "name": "M.Sci. Physiotherapy Full-time"
+  },
+  {
+    "name": "M.Sci. Physiotherapy with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Golf Management Studies Full-time"
+  },
+  {
+    "name": "B.Sc. Applied Golf Management Studies with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Sport, Exercise and Health Science with International Year Full-time"
+  },
+  {
+    "name": "B.Sc. Sport, Exercise and Health Sciences Full-time"
+  },
+  {
+    "name": "B.Sc. Sport, Exercise and Health Sciences With Year in International Business Full-time"
+  },
+  {
+    "name": "B.Sc. Sport, Physical Education and Coaching Science Full-time"
+  },
+  {
+    "name": "Intercalated BSc Sport, Exercise and Health Sciences Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Exercise and Health Sciences (with Leadership) Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Exercise and Health Sciences Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Exercise and Health Sciences with International Year (with Leadership) Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Exercise and Health Sciences with International Year Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Physical Education and Coaching Science (With Leadership) Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Physical Education and Coaching Science Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Physical Education and Coaching Science with International Year (with Leadership) Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Physical Education and Coaching Science with International Year Full-time"
+  },
+  {
+    "name": "M.Sci. Sport, Physical Education and Coaching Science with International Year Inverted Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Immunotherapy) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Cancer Sciences) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Cardiovascular Sciences) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Clinical Geroscience) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Endocrinology and Metabolism) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Microbiology and Infectious Diseases) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences (Reproduction and Women's Health) Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Clinical Sciences Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Health Care Ethics and Law Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Health Management and Leadership Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc History of Medicine Full-time"
+  },
+  {
+    "name": "Intercalated BMedSc Public Health and Population Sciences Full-time"
+  },
+  {
+    "name": "M.B.Ch.B. (graduate entry) Clinical Full-time"
+  },
+  {
+    "name": "M.B.Ch.B. (graduate entry) Preclinical Full-time"
+  },
+  {
+    "name": "M.B.Ch.B. (standard entry) Clinical Full-time"
+  },
+  {
+    "name": "M.B.Ch.B. (standard entry) Preclinical Full-time"
+  },
+  {
+    "name": "B.Sc. Dental Hygiene and Therapy Full-time"
+  },
+  {
+    "name": "B.D.S. Dentistry Full-time"
+  },
+  {
+    "name": "B.D.S. Preclinical Dentistry Full-time"
+  },
+  {
+    "name": "B.Med.Sc. Biomedical Materials Science Full-time"
+  },
+  {
+    "name": "M.Sci. Novel Emerging Medical Technology Evaluation and Development Full-time"
+  },
+  {
+    "name": "B.Nurs. (Adult) Full-time"
+  },
+  {
+    "name": "B.Nurs. (Child) Full-time"
+  },
+  {
+    "name": "B.Nurs. (Mental Health) Full-time"
+  },
+  {
+    "name": "M.Nurs (Adult and Mental Health Nursing) Full-time"
+  },
+  {
+    "name": "M.Nurs (Adult) Full-time"
+  },
+  {
+    "name": "M.Nurs (Child) Full-time"
+  },
+  {
+    "name": "M.Nurs (Children's and Mental Health Nursing) Full-time"
+  },
+  {
+    "name": "M.Nurs (Mental Health) Full-time"
+  },
+  {
+    "name": "MPharm (4 year) FT"
+  },
+  {
+    "name": "B.Sc. Accounting and Finance Full-time"
+  },
+  {
+    "name": "B.Sc. Accounting and Finance with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Accounting and Finance with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Economics Full-time"
+  },
+  {
+    "name": "B.Sc. Economics and Politics Full-time"
+  },
+  {
+    "name": "B.Sc. Economics and Politics with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Economics and Politics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Economics and Politics with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.Sc. Economics with German Full-time"
+  },
+  {
+    "name": "B.Sc. Economics with Spanish Full-time"
+  },
+  {
+    "name": "B.Sc. Economics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematical Economics and Statistics Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematical Economics and Statistics with Placement Year Full-time"
+  },
+  {
+    "name": "B.Sc. Mathematical Economics and Statistics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Money, Banking and Finance Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management (with Year in Industry) Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Communications Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Communications and Year in Industry Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Communications with Year in Civic Leadership Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Economics Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Finance Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Industrial Placement Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Marketing Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Marketing and a Year in Industry Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Psychology Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Year in Civic Leadership Full-time"
+  },
+  {
+    "name": "B.Sc. Business Management with Year in Industry Full-time"
+  },
+  {
+    "name": "B.Sc. International Business Full-time"
+  },
+  {
+    "name": "B.Sc. International Business with Communications Full-time"
+  },
+  {
+    "name": "B.Sc. International Business with Language Full-time"
+  },
+  {
+    "name": "B.Sc. International Business with Marketing Full-time"
+  },
+  {
+    "name": "B.A. International Development and Politics Full-time"
+  },
+  {
+    "name": "B.A. International Development and Politics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. International Relations and Development Full-time"
+  },
+  {
+    "name": "B.A. International Relations and Development with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. International Relations Full-time"
+  },
+  {
+    "name": "B.A. International Relations with Economics Full-time"
+  },
+  {
+    "name": "B.A. International Relations with Economics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. International Relations with French Full-time"
+  },
+  {
+    "name": "B.A. International Relations with German Full-time"
+  },
+  {
+    "name": "B.A. International Relations with Spanish Full-time"
+  },
+  {
+    "name": "B.A. International Relations with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Political Economy Full-time"
+  },
+  {
+    "name": "B.A. Political Economy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Political Science and International Relations with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Political Science and International Relations with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Political Science and Philosophy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Political Science with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Politics Full-time"
+  },
+  {
+    "name": "B.A. Politics and International Relations Full-time"
+  },
+  {
+    "name": "B.A. Politics and International Relations with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Politics and Philosophy Full-time"
+  },
+  {
+    "name": "B.A. Politics and Philosophy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Politics and Philosophy with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Politics and Social Policy Full-time"
+  },
+  {
+    "name": "B.A. Politics and Social Policy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Politics and Sociology Full-time"
+  },
+  {
+    "name": "B.A. Politics and Sociology with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Politics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Phil. Social, Emotional and Behavioural Difficulties Part-time."
+  },
+  {
+    "name": "B.A. Education Full-time"
+  },
+  {
+    "name": "B.A. Education and Sociology Full-time"
+  },
+  {
+    "name": "B.A. Education and Sociology with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Education with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology in Education Full-time"
+  },
+  {
+    "name": "B.Sc. Psychology in Education with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Criminology Full-time"
+  },
+  {
+    "name": "B.A. Policy, Politics and Economics Full-time"
+  },
+  {
+    "name": "B.A. Policy, Politics and Economics with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Social Policy Full-time"
+  },
+  {
+    "name": "B.A. Social Policy and Criminology Full-time"
+  },
+  {
+    "name": "B.A. Social Policy with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Sociology Full-time"
+  },
+  {
+    "name": "B.A. Sociology and Criminology Full-time"
+  },
+  {
+    "name": "B.A. Sociology and Criminology with Year Abroad Full-time"
+  },
+  {
+    "name": "B.A. Sociology and Social Policy Full-time"
+  },
+  {
+    "name": "B.A. Sociology and Social Policy with Year in Computer Science Full-time"
+  },
+  {
+    "name": "B.A. Sociology with Year Abroad Full-time"
+  },
+  {
+    "name": "Advanced Certificate Practice Education Part-time."
+  },
+  {
+    "name": "B.A. Social Work Full-time"
+  },
+  {
+    "name": "B.A. Social Work with Year Abroad Full-time"
+  },
+  {
+    "name": "B.Phil. Specialist Social Work with Adults Part-time."
+  },
+  {
+    "name": "B.Sc. Bachelor's Degree with Integrated Foundation Year (Engineering and Physical Sciences Pathway) Full-time"
+  },
+  {
+    "name": "B.Sc. Bachelor's Degree with Integrated Foundation Year (Medical, Life and Geo Sciences Pathway) Full-time"
+  },
+  {
+    "name": "CEFRLB2 English for Academic Purposes Presessional Course Full-time"
+  },
+  {
+    "name": "Foundation Certificate Foundation Pathways in Engineering and Physical Sciences Other full-time."
+  },
+  {
+    "name": "Foundation Certificate Foundation Pathways in Medical, Life and Geosciences Other full-time."
+  },
+  {
+    "name": "B.A. Medical Humanities Full-time"
+  },
+  {
+    "name": "B.A./B.Sc. Liberal Arts and Sciences Full-time"
+  }
+]

@@ -5,9 +5,10 @@ import { authRouter } from "./routes/auth.route.js";
 import { userRouter } from "./routes/user.route.js";
 import { Config } from "./configs/config.js";
 import { serveHTML, serveStatic } from "./middleware/vite.middleware.js";
-import { sequelize } from "./models/index.js";
+import { Module, sequelize } from "./models/index.js";
 import { widgetsRouter } from "./routes/widgets.route.js";
 import { portfolioRouter } from "./routes/portfolio.route.js";
+import { seed } from "./seeders/index.js";
 
 const app = express();
 app.use(cors());
@@ -29,5 +30,7 @@ app.listen(Config.PORT, async () => {
   await serveStatic(app);
   await serveHTML(app);
   await sequelize.sync();
+  const seeded = (await Module.count()) !== 0;
+  if (!seeded) await seed();
   console.log(`App running in port ${Config.PORT}`);
 });
