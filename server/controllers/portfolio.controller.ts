@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Response, Request } from "express";
 import { User } from "../models/index.js";
 import { ValidatedRequest } from "../middleware/jwt.middleware.js";
 
@@ -14,6 +14,22 @@ export const getPortfolio = async (req: ValidatedRequest, res: Response) => {
   };
 
   return res.status(200).send(portfolio);
+};
+
+export const getPortfolioHeader = async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.uid, 10);
+  if (!userId) {
+    return res.status(400).send();
+  }
+  const user = await User.findByPk(userId);
+  if (!user) {
+    return res.status(404).send();
+  }
+  return res.status(200).send({
+    name: user.name,
+    profilePicture: user.profilePicture,
+    profileBanner: user.profileBanner,
+  });
 };
 
 export const postPortfolio = async (req: ValidatedRequest, res: Response) => {
