@@ -9,6 +9,7 @@ import { Routes } from "../index";
 import { PortfolioInfo } from "./portfolio-info";
 import placeholderBanner from "../../assets/placeholders/profile_banner.jpg";
 import styles from "./style.module.scss";
+import { NewWidgetToolbar } from "./new-widget-toolbar";
 
 export const Portfolio = () => {
   const [portfolio, setPortfolio] = useState<PortfolioState | null>(null);
@@ -42,6 +43,7 @@ export const Portfolio = () => {
             </div>
             <main className={styles.main}>
               <PortfolioInfo {...portfolio} />
+              <NewWidgetToolbar />
               <div className={styles.leftTrack}>
                 <Tile style={{ height: 200 }} />
                 <Tile style={{ height: 200 }} />
