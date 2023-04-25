@@ -83,13 +83,13 @@
   margin-bottom: -20vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto;
   grid-gap: 20px;
   align-items: flex-start;
 
   .leftTrack,
   .rightTrack {
-    grid-area: 2 / 1 / 3 / 2;
+    grid-area: 3 / 1 / 4 / 2;
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
@@ -97,7 +97,7 @@
   }
 
   .rightTrack {
-    grid-area: 2 / 2 / 3 / 3;
+    grid-area: 3 / 2 / 4 / 3;
   }
 }
 
@@ -136,5 +136,67 @@
 
   .portfolioAction {
     grid-area: action;
+  }
+}
+
+.newWidgetToolbar {
+  grid-area: 2 / 1 / 3 / 3;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 10px;
+
+  .quickActions {
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+
+    mask: linear-gradient(to right, black calc(100% - 50px), transparent);
+    -webkit-mask: linear-gradient(to right, black calc(100% - 50px), transparent);
+
+    button {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  
+  button svg {
+    transform: scale(1.2);
+  }
+}
+
+.widgetInfoGrid > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+
+  :global(.cds--tile) {
+    border: 1px solid var(--cds-border-tile);
+  }
+}
+
+.widgetInfoTile :global(.cds--tile-content) {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: 10px;
+
+  svg, h4 {
+    align-items: center;
+  }
+
+  p {
+    grid-area: 2 / 1 / 3 / 3;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .widgetInfoGrid > div {
+    grid-template-columns: 1fr;
   }
 }
