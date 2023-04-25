@@ -1,0 +1,22 @@
+.widget {
+  h4 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+}
+
+.moduleWidget {
+  :global(.cds--accordion__content) {
+    padding-right: 0 !important;
+  }
+
+  .moduleWidgetAddControls {
+    z-index: 2;
+    position: relative;
+    display: flex;
+  }
+
+  :global(.cds--contained-list) {
+    margin-top: calc(-3rem + 20px);
+  }
+}

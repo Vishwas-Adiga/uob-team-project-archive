@@ -9,3 +9,4 @@ export const WIDGET_TYPES = [
 ] as const;
 
 export type WidgetType = (typeof WIDGET_TYPES)[number];
+export type WidgetEditState = "view" | "editable" | "edit";

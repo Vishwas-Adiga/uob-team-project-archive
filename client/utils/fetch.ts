@@ -3,10 +3,16 @@ import { Config } from "../config";
 type ApiVersion = "v1";
 
 export const post = (url: string, body?: any, apiVersion?: ApiVersion) =>
-  req("post", url, body, apiVersion);
+  req("POST", url, body, apiVersion);
 
 export const get = (url: string, body?: any, apiVersion?: ApiVersion) =>
-  req("get", url, body, apiVersion);
+  req("GET", url, body, apiVersion);
+
+export const patch = (url: string, body?: any, apiVersion?: ApiVersion) =>
+  req("PATCH", url, body, apiVersion);
+
+export const del = (url: string, body?: any, apiVersion?: ApiVersion) =>
+  req("DELETE", url, body, apiVersion);
 
 const req = async (
   method: string,
