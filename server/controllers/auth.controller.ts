@@ -14,7 +14,7 @@ export const signUp = async (req: Request, res: Response) => {
 
   try {
     await User.create({
-      email: req.body.email.replaceAll("+admin", ""),
+      email: req.body.email,
       password: hash,
       name: req.body.name,
     });
@@ -32,14 +32,9 @@ export const signUp = async (req: Request, res: Response) => {
   }
 };
 export const signIn = async (req: Request, res: Response) => {
-  // Any user who signs in with their regular email with "+admin" appended to
-  // their username (part preceding @) is granted admin rights
-  // TODO: Restrict admins to specific email addresses
-  const admin = req.body.email.includes("+admin");
-  const email = req.body.email.replaceAll("+admin", "");
   const user = await User.findOne({
     where: {
-      email,
+      email: req.body.email,
     },
   });
 
@@ -52,9 +47,13 @@ export const signIn = async (req: Request, res: Response) => {
   }
 
   // If authenticated, issue a JWT token
-  const token = jwt.sign({ id: user.userId, admin }, AuthConfig.JWT_SECRET, {
-    expiresIn: AuthConfig.JWT_EXPIRY,
-  });
+  const token = jwt.sign(
+    { id: user.userId, admin: user.admin },
+    AuthConfig.JWT_SECRET,
+    {
+      expiresIn: AuthConfig.JWT_EXPIRY,
+    }
+  );
 
   return res.status(200).send({
     id: user.userId,

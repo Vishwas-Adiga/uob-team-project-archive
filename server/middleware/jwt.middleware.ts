@@ -84,17 +84,14 @@ export const authControl =
       }
       req.resourceRequesterId = payload.id;
       req.admin = payload.admin;
-
+      if (mode === "self") {
+        return next();
+      }
       if (mode === "admin") {
-        if (!req.admin) {
-          return res.status(403).send();
-        } else {
+        if (req.admin) {
           return next();
         }
-      }
-
-      if (mode === "self" || req.admin) {
-        return next();
+        return res.status(403).send();
       }
       if (uidMode === undefined) {
         throw new Error("Cannot request resource auth with no extractor");
@@ -103,6 +100,9 @@ export const authControl =
         req.resourceOwnerId = await extractUid(req, uidMode);
       } catch (error) {
         return res.status(400).send(error);
+      }
+      if (req.admin) {
+        return next();
       }
       if (req.resourceRequesterId === req.resourceOwnerId) {
         return next();

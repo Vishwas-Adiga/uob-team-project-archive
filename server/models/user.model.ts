@@ -28,6 +28,8 @@ export class User extends Model<
   declare password: string;
   // Name
   declare name: string;
+  // Admin
+  declare admin: CreationOptional<boolean>;
   // Privacy mode
   declare privacy: CreationOptional<"Public" | "Local" | "Private">;
   // NFC tag
@@ -91,6 +93,11 @@ export const init = sequelize =>
       name: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       nfcTag: {
         type: DataTypes.TEXT,
