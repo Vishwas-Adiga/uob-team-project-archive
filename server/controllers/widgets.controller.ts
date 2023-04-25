@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { ValidatedRequest } from "../middleware/jwt.middleware.js";
-import { Widget, sequelize } from "../models/index.js";
+import { Widget, User, sequelize } from "../models/index.js";
 
 export const getWidget = async (req: ValidatedRequest, res: Response) => {
   const widget = await Widget.findByPk(parseInt(req.params.wid, 10));
@@ -12,6 +12,25 @@ export const getWidget = async (req: ValidatedRequest, res: Response) => {
     return res.status(500).send();
   }
   return res.status(200).send(payload);
+};
+
+export const getAllWidgets = async (req: ValidatedRequest, res: Response) => {
+  const user = await User.findByPk(req.resourceRequesterId);
+  if (!user) {
+    return res.status(500).send();
+  }
+  // lazy loading as eager loading causes ts issues
+  const payloads = await Promise.all(
+    (
+      await user.getWidgets()
+    ).map(w => {
+      return w.getPayload();
+    })
+  );
+  if (payloads.some(p => !p)) {
+    return res.status(500).send();
+  }
+  return res.status(200).send(payloads);
 };
 
 export const createWidget = async (req: ValidatedRequest, res: Response) => {
