@@ -65,19 +65,30 @@ export const updateWidget = async (req: ValidatedRequest, res: Response) => {
     if (!payload) {
       return res.status(500).send();
     }
+    if ("index" in req.body) {
+      widget.index = req.body.index;
+      await widget.save();
+    }
     if (widget.widgetType === "Module") {
-      await sequelize.transaction(async t => {
-        // @ts-ignore
-        await widget.setModules([], { transaction: t });
-        await widget.createPayload(req.body.modules, { transaction: t });
-      });
+      if ("modules" in req.body) {
+        await sequelize.transaction(async t => {
+          // @ts-ignore
+          await widget.setModules([], { transaction: t });
+          await widget.createPayload(req.body.modules, { transaction: t });
+        });
+      }
     } else {
       for (const key in req.body) {
         if (key === "widgetId") continue;
         payload[key] = req.body[key];
       }
-      // @ts-ignore
-      await payload.save();
+      await sequelize.transaction(async t => {
+        await (
+          await widget[`get${widget.widgetType}`]({ transaction: t })
+        ).destroy({ transaction: t });
+        // @ts-ignore
+        await widget.createPayload(payload, { transaction: t });
+      });
     }
     return res.status(200).send();
   } catch (error) {
