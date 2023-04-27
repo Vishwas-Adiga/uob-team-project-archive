@@ -24,7 +24,7 @@ export const getAllWidgets = async (req: ValidatedRequest, res: Response) => {
   // lazy loading as eager loading causes ts issues
   const payloads = await Promise.all(
     (
-      await user.getWidgets()
+      await user.getWidgets({ order: [["index", "ASC"]] })
     ).map(w => {
       return w.getPayload();
     })
@@ -48,7 +48,7 @@ export const createWidget = async (req: ValidatedRequest, res: Response) => {
         },
         { transaction: t }
       );
-      await widget?.createPayload(req.body.data, { transaction: t });
+      await widget?.createPayload(req.body.payload, { transaction: t });
       return widget;
     });
     return res.status(200).send(await widget.getPayload());
@@ -71,11 +71,11 @@ export const updateWidget = async (req: ValidatedRequest, res: Response) => {
       await moveWidget(widget, req.body.index - widget.index);
     }
     if (widget.widgetType === "Module") {
-      if ("modules" in req.body) {
+      if ("payload" in req.body) {
         await sequelize.transaction(async t => {
           // @ts-ignore
           await widget.setModules([], { transaction: t });
-          await widget.createPayload(req.body.modules, { transaction: t });
+          await widget.createPayload(req.body.payload, { transaction: t });
         });
       }
     } else {

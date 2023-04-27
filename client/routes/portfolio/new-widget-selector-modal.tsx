@@ -78,10 +78,6 @@ const WIDGET_INFOS: Array<WidgetInfo> = [
 
 export const NewWidgetSelectorModal = (props: NewWidgetSelectorModalProps) => {
   const [selectedType, setSelectedType] = useState<WidgetType>("Announcement");
-  const selectType = useCallback(
-    ([type]) => setSelectedType(type),
-    [setSelectedType]
-  );
   const submitType = useCallback(
     () => props.onRequestCreate(selectedType),
     [selectedType, props.onRequestCreate]
@@ -102,7 +98,7 @@ export const NewWidgetSelectorModal = (props: NewWidgetSelectorModalProps) => {
         legend=""
         name="widget type group"
         className={styles.widgetInfoGrid}
-        onChange={selectType}
+        onChange={setSelectedType}
       >
         {WIDGET_INFOS.map(widgetType => (
           <RadioTile

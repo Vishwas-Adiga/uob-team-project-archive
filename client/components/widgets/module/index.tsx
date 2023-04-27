@@ -12,49 +12,51 @@ import { useData } from "../../../utils/use-data";
 import { WidgetProps } from "../index";
 import styles from "./../style.module.scss";
 import { Add, TrashCan } from "@carbon/icons-react";
-import { useCallback, useRef, useState } from "react";
-import { patch } from "../../../utils/fetch";
 import { WidgetHeader } from "../../widget-header";
+import { useCallback, useRef, useState } from "react";
+import { Module as ModuleT, ModulesPayload } from "../../../state/widget-state";
 
-interface Module {
-  moduleId: number;
-  name: string;
-  description: string;
-}
+export const Module = (props: WidgetProps<ModulesPayload>) => {
+  const [allModules] = useData<Array<ModuleT>>("modules");
+  const upstreamPayload = props.payload ?? [];
 
-interface ModulesWidgetData {
-  modules: Array<Module>;
-}
-
-export const Module = (props: WidgetProps) => {
-  const [data, invalidateData] = useData<ModulesWidgetData>(
-    `widgets/${props.widgetId}`
-  );
-
-  const [allModules] = useData<Array<Module>>("modules");
-  const modules = data?.modules ?? [];
+  const [moduleIds, setModuleIds] = useState(upstreamPayload);
   const selectRef = useRef<HTMLSelectElement>(null);
+
+  const modules = allModules?.filter(w => moduleIds.includes(w.moduleId)) ?? [];
 
   const deleteModule = useCallback(
     async (id: number) => {
-      await patch(`widgets/${props.widgetId}`, {
-        modules: modules
-          .map(m => m.moduleId)
-          .filter(moduleId => moduleId !== id),
-      });
-      invalidateData();
+      const newModules = moduleIds.filter(moduleId => moduleId !== id);
+      setModuleIds(newModules);
     },
-    [modules]
+    [moduleIds]
   );
 
   const addModule = useCallback(async () => {
     if (!selectRef.current?.value) return;
-    console.log(selectRef.current.value);
-    await patch(`widgets/${props.widgetId}`, {
-      modules: [...modules.map(m => m.moduleId), selectRef.current.value],
-    });
-    invalidateData();
-  }, [modules]);
+    const newModules = [...moduleIds, parseInt(selectRef.current.value, 10)];
+    selectRef.current.value = "placeholder-item";
+    setModuleIds(newModules);
+  }, [moduleIds]);
+
+  const onSave = useCallback(() => {
+    props.requestUpdate(
+      props.widgetId,
+      moduleIds,
+      props.index,
+      props.widgetType
+    );
+  }, [moduleIds]);
+
+  const onDiscard = useCallback(() => {
+    if (props.widgetId < 0) {
+      props.requestDelete(props.widgetId);
+    } else {
+      setModuleIds(upstreamPayload);
+      props.requestEdit(props.widgetId, false);
+    }
+  }, [upstreamPayload]);
 
   return (
     <div>
@@ -62,15 +64,15 @@ export const Module = (props: WidgetProps) => {
         <WidgetHeader
           widgetType="Module"
           editState={props.editState}
-          onRequestDiscard={() => null}
-          onRequestSave={() => null}
-          onRequestEdit={() => null}
-          onRequestDelete={() => null}
+          onRequestEdit={props.requestEdit.bind(null, props.widgetId, true)}
+          onRequestDelete={props.requestDelete.bind(null, props.widgetId)}
+          onRequestDiscard={onDiscard}
+          onRequestSave={onSave}
         />
       )}
       <Tile className={`${styles.widget} ${styles.moduleWidget}`}>
         <h4>Modules I'm taking this semester</h4>
-        {props.editState === "view" && (
+        {["view", "editable"].includes(props.editState) && (
           <Accordion size="lg">
             {modules.map(m => (
               <AccordionItem title={m.name} key={m.moduleId}>
@@ -86,6 +88,7 @@ export const Module = (props: WidgetProps) => {
         {props.editState === "edit" && (
           <div className={styles.moduleWidgetAddControls}>
             <Select
+              id={`module-list-${props.widgetId}`}
               size="sm"
               hideLabel
               defaultValue="placeholder-item"
@@ -98,16 +101,16 @@ export const Module = (props: WidgetProps) => {
                 text="Choose a module to add"
               />
               {allModules?.map(m => (
-                <SelectItem value={m.moduleId} text={m.name} />
+                <SelectItem key={m.moduleId} value={m.moduleId} text={m.name} />
               ))}
             </Select>
-            <IconButton size="sm" onClick={addModule}>
+            <IconButton size="sm" onClick={addModule} label="Add module">
               <Add size={16} />
             </IconButton>
           </div>
         )}
         {props.editState === "edit" && (
-          <ContainedList kind="disclosed">
+          <ContainedList kind="disclosed" label="List of modules">
             {modules.map(m => (
               <ContainedListItem
                 key={m.moduleId}
