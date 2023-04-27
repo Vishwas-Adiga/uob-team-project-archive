@@ -14,6 +14,7 @@ import styles from "./../style.module.scss";
 import { Add, TrashCan } from "@carbon/icons-react";
 import { useCallback, useRef, useState } from "react";
 import { patch } from "../../../utils/fetch";
+import { WidgetHeader } from "../../widget-header";
 
 interface Module {
   moduleId: number;
@@ -56,64 +57,74 @@ export const Module = (props: WidgetProps) => {
   }, [modules]);
 
   return (
-    <Tile className={`${styles.widget} ${styles.moduleWidget}`}>
-      <h4>Modules I'm taking this semester</h4>
-      {props.editState === "view" && (
-        <Accordion size="lg">
-          {modules.map(m => (
-            <AccordionItem title={m.name} key={m.moduleId}>
-              <p>
-                {!m.description && "No description available for this module"}
-                {m.description.substring(0, 550)}
-                {m.description.length > 550 && "..."}
-              </p>
-            </AccordionItem>
-          ))}
-        </Accordion>
+    <div>
+      {props.editState !== "view" && (
+        <WidgetHeader
+          widgetType="Module"
+          editState={props.editState}
+          onRequestDiscard={() => null}
+          onRequestSave={() => null}
+        />
       )}
-      {props.editState === "edit" && (
-        <div className={styles.moduleWidgetAddControls}>
-          <Select
-            size="sm"
-            hideLabel
-            defaultValue="placeholder-item"
-            ref={selectRef}
-          >
-            <SelectItem
-              disabled
-              hidden
-              value="placeholder-item"
-              text="Choose a module to add"
-            />
-            {allModules?.map(m => (
-              <SelectItem value={m.moduleId} text={m.name} />
+      <Tile className={`${styles.widget} ${styles.moduleWidget}`}>
+        <h4>Modules I'm taking this semester</h4>
+        {props.editState === "view" && (
+          <Accordion size="lg">
+            {modules.map(m => (
+              <AccordionItem title={m.name} key={m.moduleId}>
+                <p>
+                  {!m.description && "No description available for this module"}
+                  {m.description.substring(0, 550)}
+                  {m.description.length > 550 && "..."}
+                </p>
+              </AccordionItem>
             ))}
-          </Select>
-          <IconButton size="sm" onClick={addModule}>
-            <Add size={16} />
-          </IconButton>
-        </div>
-      )}
-      {props.editState === "edit" && (
-        <ContainedList kind="disclosed">
-          {modules.map(m => (
-            <ContainedListItem
-              key={m.moduleId}
-              action={
-                <IconButton
-                  kind="ghost"
-                  label="Delete module"
-                  onClick={deleteModule.bind(null, m.moduleId)}
-                >
-                  <TrashCan size={16} />
-                </IconButton>
-              }
+          </Accordion>
+        )}
+        {props.editState === "edit" && (
+          <div className={styles.moduleWidgetAddControls}>
+            <Select
+              size="sm"
+              hideLabel
+              defaultValue="placeholder-item"
+              ref={selectRef}
             >
-              {m.name}
-            </ContainedListItem>
-          ))}
-        </ContainedList>
-      )}
-    </Tile>
+              <SelectItem
+                disabled
+                hidden
+                value="placeholder-item"
+                text="Choose a module to add"
+              />
+              {allModules?.map(m => (
+                <SelectItem value={m.moduleId} text={m.name} />
+              ))}
+            </Select>
+            <IconButton size="sm" onClick={addModule}>
+              <Add size={16} />
+            </IconButton>
+          </div>
+        )}
+        {props.editState === "edit" && (
+          <ContainedList kind="disclosed">
+            {modules.map(m => (
+              <ContainedListItem
+                key={m.moduleId}
+                action={
+                  <IconButton
+                    kind="ghost"
+                    label="Delete module"
+                    onClick={deleteModule.bind(null, m.moduleId)}
+                  >
+                    <TrashCan size={16} />
+                  </IconButton>
+                }
+              >
+                {m.name}
+              </ContainedListItem>
+            ))}
+          </ContainedList>
+        )}
+      </Tile>
+    </div>
   );
 };

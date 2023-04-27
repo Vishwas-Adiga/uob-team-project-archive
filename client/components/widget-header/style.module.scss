@@ -1,0 +1,7 @@
+.container {
+  background-color: var(--cds-layer);
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  padding: 0 0 0 0.5rem;
+  align-items: center;
+}
