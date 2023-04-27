@@ -6,6 +6,8 @@ import { Checkmark, CloseOutline, Edit, TrashCan } from "@carbon/icons-react";
 export interface WidgetHeaderProps {
   editState: WidgetEditState;
   widgetType: WidgetType;
+  onRequestEdit: () => void;
+  onRequestDelete: () => void;
   onRequestSave: () => void;
   onRequestDiscard: () => void;
 }
@@ -23,22 +25,30 @@ export const WidgetHeader = (props: WidgetHeaderProps) => {
       </Tag>
       <span />
       {props.editState === "editable" && (
-        <IconButton kind="secondary" label="Edit">
+        <IconButton kind="secondary" label="Edit" onClick={props.onRequestEdit}>
           <Edit />
         </IconButton>
       )}
       {props.editState === "editable" && (
-        <IconButton kind="danger--tertiary" label="Delete">
+        <IconButton
+          kind="danger--tertiary"
+          label="Delete"
+          onClick={props.onRequestDelete}
+        >
           <TrashCan />
         </IconButton>
       )}
       {props.editState === "edit" && (
-        <IconButton label="Save changes">
+        <IconButton label="Save changes" onClick={props.onRequestSave}>
           <Checkmark />
         </IconButton>
       )}
       {props.editState === "edit" && (
-        <IconButton kind="secondary" label="Discard changes">
+        <IconButton
+          kind="secondary"
+          label="Discard changes"
+          onClick={props.onRequestDiscard}
+        >
           <CloseOutline />
         </IconButton>
       )}

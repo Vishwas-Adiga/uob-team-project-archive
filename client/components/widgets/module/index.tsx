@@ -64,6 +64,8 @@ export const Module = (props: WidgetProps) => {
           editState={props.editState}
           onRequestDiscard={() => null}
           onRequestSave={() => null}
+          onRequestEdit={() => null}
+          onRequestDelete={() => null}
         />
       )}
       <Tile className={`${styles.widget} ${styles.moduleWidget}`}>
