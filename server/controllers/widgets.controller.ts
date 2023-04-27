@@ -1,6 +1,8 @@
 import { Response } from "express";
 import { ValidatedRequest } from "../middleware/jwt.middleware.js";
 import { Widget, User, sequelize } from "../models/index.js";
+import { Widget as WidgetT } from "../models/widget.model.js";
+import { Op } from "sequelize";
 
 export const getWidget = async (req: ValidatedRequest, res: Response) => {
   const widget = await Widget.findByPk(parseInt(req.params.wid, 10));
@@ -66,8 +68,7 @@ export const updateWidget = async (req: ValidatedRequest, res: Response) => {
       return res.status(500).send();
     }
     if ("index" in req.body) {
-      widget.index = req.body.index;
-      await widget.save();
+      await moveWidget(widget, req.body.index - widget.index);
     }
     if (widget.widgetType === "Module") {
       if ("modules" in req.body) {
@@ -101,6 +102,61 @@ export const deleteWidget = async (req: ValidatedRequest, res: Response) => {
   if (!widget) {
     return res.status(500).send();
   }
-  await widget.destroy();
+  const index = widget.index;
+  await sequelize.transaction(async t => {
+    await widget.destroy({ transaction: t });
+    await Widget.decrement(
+      {
+        index: 1,
+      },
+      {
+        where: { index: { [Op.gt]: index } },
+        transaction: t,
+      }
+    );
+  });
   return res.status(200).send();
+};
+
+const moveWidget = async (widget: WidgetT, delta: number) => {
+  if (delta === 0) return;
+  const oldIndex = widget.index;
+  const newIndex = oldIndex + delta;
+  if (isNaN(oldIndex) || isNaN(newIndex))
+    throw new Error("Bad arguments to delta: Expected number, got ???");
+
+  await sequelize.transaction(async t => {
+    // Move widget out of the way
+    widget.index = -1;
+    await widget.save({ transaction: t });
+    // Move all widgets up by 1
+    if (delta > 0) {
+      await Widget.decrement(
+        {
+          index: 1,
+        },
+        {
+          where: { index: { [Op.between]: [oldIndex, newIndex] } },
+          transaction: t,
+        }
+      );
+    } else {
+      // Moving widgets down by 1 isn't as trivial unfortunately
+      // It's not possible to shift by 1 in a single query without violating
+      // constraints. Instead, we start from the bottom where we assuredly have
+      // a hole available and move upwards
+      const widgets = await Widget.findAll({
+        where: { index: { [Op.between]: [newIndex, oldIndex] } },
+        transaction: t,
+      });
+      const reversedWidgets = widgets.reverse();
+      for (const w of reversedWidgets) {
+        w.index++;
+        await w.save({ transaction: t });
+      }
+    }
+    // Restore widget
+    widget.index = oldIndex + delta;
+    await widget.save({ transaction: t });
+  });
 };
