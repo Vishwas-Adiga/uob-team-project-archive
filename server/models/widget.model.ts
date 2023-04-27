@@ -24,6 +24,7 @@ const WidgetTypes = [
   "Module",
   "RichText",
 ] as const;
+type WidgetType = (typeof WidgetTypes)[number];
 
 export class Widget extends Model<
   InferAttributes<Widget>,
@@ -34,7 +35,7 @@ export class Widget extends Model<
   // User who owns the widget
   declare user: ForeignKey<User["userId"]>;
 
-  declare readonly widgetType: (typeof WidgetTypes)[number];
+  declare readonly widgetType: WidgetType;
   declare index: number;
 
   createPayload(
@@ -59,28 +60,40 @@ export class Widget extends Model<
     }
   }
 
-  async getPayload(
-    options?
-  ): Promise<
+  async getPayload(options?): Promise<
     | WidgetPayload
-    | { widgetId: number; modules: Array<Module>; index: number }
+    | {
+        widgetId: number;
+        payload: Array<Module>;
+        index: number;
+        widgetType: WidgetType;
+      }
     | null
   > {
     options = {
       ...options,
-      attributes: { exclude: ["createdAt", "updatedAt"] },
+      attributes: { exclude: ["createdAt", "updatedAt", "widgetId"] },
     };
     if (this.widgetType === "Module") {
       const res = await this["getModules"]({
         ...options,
+        attributes: { include: ["moduleId"] },
         joinTableAttributes: [],
       });
-      return { modules: res, widgetId: this.widgetId, index: this.index };
+      return {
+        payload: res.map(w => w.moduleId),
+        widgetId: this.widgetId,
+        index: this.index,
+        widgetType: this.widgetType,
+      };
     }
 
-    const res = (await this[`get${this.widgetType}`](options)).toJSON();
-    res["index"] = this.index;
-    return res;
+    return {
+      payload: await this[`get${this.widgetType}`](options),
+      widgetId: this.widgetId,
+      index: this.index,
+      widgetType: this.widgetType,
+    };
   }
 
   // Association mixins
