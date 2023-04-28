@@ -94,14 +94,12 @@ Widget.hasOne(Link, {
   onDelete: "CASCADE",
 });
 Link.belongsTo(Widget, { foreignKey: "widgetId" });
-
 User.hasMany(UserConnection, {
   foreignKey: "srcUserId",
   onDelete: "NO ACTION",
   onUpdate: "CASCADE",
 });
 UserConnection.belongsTo(User, { foreignKey: "srcUserId", as: "initiator" });
-
 User.hasMany(UserConnection, {
   foreignKey: "dstUserId",
   onDelete: "NO ACTION",

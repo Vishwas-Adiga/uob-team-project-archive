@@ -13,9 +13,9 @@ import { IdScanner } from "./components/id-scanner";
 import { Disclaimer } from "./components/disclaimer";
 import { PrivacyPolicy } from "./routes/privacy-policy";
 import { NotFound } from "./routes/not-found";
-import { Connections } from "./routes/connections";
 import { Graph } from "./routes/graph";
-
+import { AllConnections } from "./routes/connections";
+import { Requests } from "./routes/requests";
 function App() {
   return (
     <RecoilRoot>
@@ -37,8 +37,9 @@ function App() {
             <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
             <Route path={Index.PRIVACY_POLICY()} element={<PrivacyPolicy />} />
             <Route path={Index.NOT_FOUND()} element={<NotFound />} />
-            <Route path={Index.CONNECTIONS()} element={<Connections />} />
             <Route path={Index.GRAPH()} element={<Graph />} />
+            <Route path={Index.CONNECTIONS()} element={<AllConnections />} />
+            <Route path={Index.REQUESTS()} element={<Requests />} />
             <Route path={"*"} element={<NotFound />} />
           </Routes>
         </BrowserRouter>

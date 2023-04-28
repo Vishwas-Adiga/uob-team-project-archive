@@ -1,6 +1,5 @@
 import {
   BelongsToGetAssociationMixin,
-  BelongsToSetAssociationMixin,
   DataTypes,
   ForeignKey,
   InferAttributes,
