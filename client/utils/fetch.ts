@@ -25,8 +25,8 @@ const req = async (
     "Content-Type": "application/json",
   };
   if (token) {
-    headers["Authorization"] =`Bearer ${token}`
-  };
+    headers["Authorization"] = `Bearer ${token}`;
+  }
   return await fetch(`/api/${apiVersion ?? "v1"}/${url}`, {
     method,
     headers,

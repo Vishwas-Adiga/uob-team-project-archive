@@ -14,6 +14,7 @@ import { recommendationsRouter } from "./routes/recommendations.route.js";
 import { getCommonModel } from "./controllers/common-models.controller.js";
 import { seed } from "./seeders/index.js";
 import { graphRouter } from "./routes/graph.route.js";
+import { searchRouter } from "./routes/search.route.js";
 
 const app = express();
 app.use(cors());
@@ -34,6 +35,7 @@ app.use("/api/v1/connections", userConnectionsRouter);
 app.use("/api/v1/requests", userRequestsRouter);
 app.use("/api/v1/recommendations", recommendationsRouter);
 app.use("/api/v1/graph", graphRouter);
+app.use("/api/v1/search", searchRouter);
 
 app.get("/api/v1/courses", getCommonModel(Course));
 app.get("/api/v1/accommodations", getCommonModel(Accommodation));

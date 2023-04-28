@@ -18,14 +18,16 @@ import { Graph } from "./routes/graph";
 import { AllConnections } from "./routes/connections";
 import { Requests } from "./routes/requests";
 import { Recommendations } from "./routes/recommendations";
+import { Search } from "./routes/search";
+
 function App() {
   return (
     <RecoilRoot>
       {/* TODO: Replace with loading UI*/}
       <Suspense fallback={"Loading"}>
-        <Nav />
         <IdScanner />
         <BrowserRouter>
+          <Nav />
           <Routes>
             <Route path="/" element={<Auth />}>
               <Route path="/" element={<SignIn />} />
@@ -47,7 +49,9 @@ function App() {
               path={Index.RECOMMENDATIONS()}
               element={<Recommendations />}
             />
+            <Route path={Index.GRAPH()} element={<Graph />} />
             <Route path={"*"} element={<NotFound />} />
+            <Route path={Index.SEARCH()} element={<Search />} />
           </Routes>
         </BrowserRouter>
         <Disclaimer />

@@ -16,4 +16,7 @@ export const Config = {
   GRAPH: {
     NAME: "StudentVerse",
   },
+  SEARCH: {
+    NAME: "Search",
+  },
 };
