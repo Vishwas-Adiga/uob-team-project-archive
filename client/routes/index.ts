@@ -11,4 +11,5 @@ export const Routes = {
   CONNECTIONS: () => `/connections`,
   GRAPH: () => `/graph`,
   REQUESTS: () => `/requests`,
+  SEARCH: () => "/search",
 };
