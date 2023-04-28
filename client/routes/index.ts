@@ -8,4 +8,5 @@ export const Routes = {
   PRIVACY_POLICY: () => `/privacy-policy`,
   CONNECTIONS: () => `/connections`,
   GRAPH: () => `/graph`,
+  REQUESTS: () => `/requests`,
 };
