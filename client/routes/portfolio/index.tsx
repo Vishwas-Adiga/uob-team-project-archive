@@ -27,7 +27,7 @@ export const Portfolio = () => {
   useEffect(() => {
     const fetcher = async () => {
       const fetchPortfolioHeader = async () => {
-        const response = await get(`portfolios/header/${pid}`);
+        const response = await get(`portfolios/${pid}/header`);
         if (!response.ok) navigate(Routes.NOT_FOUND(), { replace: true });
         return await response.json();
       };
@@ -40,7 +40,7 @@ export const Portfolio = () => {
         return await response.json();
       };
       const fetchWidgets = async () => {
-        const response = await get(`widgets`);
+        const response = await get(`portfolios/${pid}/widgets`);
         if (response.status === 403) {
           return null;
         }

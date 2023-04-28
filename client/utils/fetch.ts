@@ -21,12 +21,15 @@ const req = async (
   apiVersion?: ApiVersion
 ) => {
   const token = localStorage.getItem(Config.STORAGE.JWT_TOKEN_KEY);
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] =`Bearer ${token}`
+  };
   return await fetch(`/api/${apiVersion ?? "v1"}/${url}`, {
     method,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify(body),
   });
 };

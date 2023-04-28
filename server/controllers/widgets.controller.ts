@@ -17,7 +17,7 @@ export const getWidget = async (req: ValidatedRequest, res: Response) => {
 };
 
 export const getAllWidgets = async (req: ValidatedRequest, res: Response) => {
-  const user = await User.findByPk(req.resourceRequesterId);
+  const user = await User.findByPk(req.resourceOwnerId);
   if (!user) {
     return res.status(500).send();
   }
