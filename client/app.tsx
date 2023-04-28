@@ -16,6 +16,7 @@ import { NotFound } from "./routes/not-found";
 import { Graph } from "./routes/graph";
 import { AllConnections } from "./routes/connections";
 import { Requests } from "./routes/requests";
+import { Recommendations } from "./routes/recommendations";
 function App() {
   return (
     <RecoilRoot>
@@ -40,6 +41,10 @@ function App() {
             <Route path={Index.GRAPH()} element={<Graph />} />
             <Route path={Index.CONNECTIONS()} element={<AllConnections />} />
             <Route path={Index.REQUESTS()} element={<Requests />} />
+            <Route
+              path={Index.RECOMMENDATIONS()}
+              element={<Recommendations />}
+            />
             <Route path={"*"} element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -10,6 +10,7 @@ import { widgetsRouter } from "./routes/widgets.route.js";
 import { portfolioRouter } from "./routes/portfolio.route.js";
 import { userConnectionsRouter } from "./routes/user-connections.route.js";
 import { userRequestsRouter } from "./routes/user-request.route.js";
+import { recommendationsRouter } from "./routes/recommendations.route.js";
 import { getCommonModel } from "./controllers/common-models.controller.js";
 import { seed } from "./seeders/index.js";
 
@@ -30,6 +31,8 @@ app.use("/api/v1/widgets", widgetsRouter);
 app.use("/api/v1/portfolios", portfolioRouter);
 app.use("/api/v1/connections", userConnectionsRouter);
 app.use("/api/v1/requests", userRequestsRouter);
+app.use("/api/v1/recommendations", recommendationsRouter);
+
 app.get("/api/v1/courses", getCommonModel(Course));
 app.get("/api/v1/accommodations", getCommonModel(Accommodation));
 app.get("/api/v1/modules", getCommonModel(Module));

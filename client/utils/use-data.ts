@@ -16,6 +16,6 @@ export const useData = <T>(
         }
       });
     setIgnore(true);
-  }, [url, ignore, ...deps]);
+  }, [url, ignore, deps]);
   return [data, setIgnore.bind(null, false)];
 };
