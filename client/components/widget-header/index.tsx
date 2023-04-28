@@ -1,15 +1,24 @@
 import { IconButton, Tag } from "@carbon/react";
 import { WidgetEditState, WidgetType } from "../../state/widget-state";
 import styles from "./style.module.scss";
-import { Checkmark, CloseOutline, Edit, TrashCan } from "@carbon/icons-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  Checkmark,
+  CloseOutline,
+  Edit,
+  TrashCan,
+} from "@carbon/icons-react";
 
 export interface WidgetHeaderProps {
   editState: WidgetEditState;
   widgetType: WidgetType;
-  onRequestEdit: () => void;
-  onRequestDelete: () => void;
-  onRequestSave: () => void;
-  onRequestDiscard: () => void;
+  reorderButtonsDisabled: [boolean, boolean];
+  requestEdit: () => void;
+  requestDelete: () => void;
+  requestSave: () => void;
+  requestDiscard: () => void;
+  requestMove: (direction: "up" | "down") => void;
 }
 
 type UserFacingWidgetNames = { [key in WidgetType]?: string };
@@ -24,8 +33,24 @@ export const WidgetHeader = (props: WidgetHeaderProps) => {
         {USER_FACING_WIDGET_NAMES[props.widgetType]}
       </Tag>
       <span />
+      <IconButton
+        kind="ghost"
+        label="Move up"
+        onClick={props.requestMove.bind(null, "up")}
+        disabled={props.reorderButtonsDisabled[0]}
+      >
+        <ArrowUp />
+      </IconButton>
+      <IconButton
+        kind="ghost"
+        label="Move down"
+        onClick={props.requestMove.bind(null, "down")}
+        disabled={props.reorderButtonsDisabled[1]}
+      >
+        <ArrowDown />
+      </IconButton>
       {props.editState === "editable" && (
-        <IconButton kind="secondary" label="Edit" onClick={props.onRequestEdit}>
+        <IconButton kind="ghost" label="Edit" onClick={props.requestEdit}>
           <Edit />
         </IconButton>
       )}
@@ -33,23 +58,23 @@ export const WidgetHeader = (props: WidgetHeaderProps) => {
         <IconButton
           kind="danger--tertiary"
           label="Delete"
-          onClick={props.onRequestDelete}
+          onClick={props.requestDelete}
         >
           <TrashCan />
         </IconButton>
       )}
       {props.editState === "edit" && (
-        <IconButton label="Save changes" onClick={props.onRequestSave}>
-          <Checkmark />
+        <IconButton
+          kind="ghost"
+          label="Discard changes"
+          onClick={props.requestDiscard}
+        >
+          <CloseOutline />
         </IconButton>
       )}
       {props.editState === "edit" && (
-        <IconButton
-          kind="secondary"
-          label="Discard changes"
-          onClick={props.onRequestDiscard}
-        >
-          <CloseOutline />
+        <IconButton label="Save changes" onClick={props.requestSave}>
+          <Checkmark />
         </IconButton>
       )}
     </div>
