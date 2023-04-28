@@ -192,7 +192,11 @@ export const Portfolio = () => {
         </title>
       </Helmet>
       {portfolio && (
-        <div className={styles.container}>
+        <div
+          className={`${styles.container} ${
+            parseInt(pid ?? "", 10) === user?.userId && styles.selfContainer
+          }`}
+        >
           <div className={styles.hero}>
             <p>{portfolio?.name}</p>
             <img alt="" src={portfolio?.profileBanner ?? placeholderBanner} />
@@ -201,7 +205,9 @@ export const Portfolio = () => {
           </div>
           <main className={styles.main}>
             <PortfolioInfo {...portfolio} />
-            <NewWidgetToolbar onRequestCreate={createWidgetCallback} />
+            {parseInt(pid ?? "", 10) === user?.userId && (
+              <NewWidgetToolbar onRequestCreate={createWidgetCallback} />
+            )}
             <div className={styles.leftTrack}>
               {widgets?.map(instantiateWidget)}
             </div>
