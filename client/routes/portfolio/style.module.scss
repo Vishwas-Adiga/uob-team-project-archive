@@ -78,9 +78,8 @@
 
 .main {
   grid-area: main;
-  transform: translateY(-20vh);
   z-index: 4;
-  margin-bottom: -20vh;
+  margin: -20vh 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;

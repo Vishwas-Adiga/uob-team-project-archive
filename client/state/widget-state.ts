@@ -27,4 +27,5 @@ export interface WidgetInfo<T extends WidgetPayload = WidgetPayload> {
   editState: WidgetEditState;
   index: number;
   payload?: T;
+  reorderButtonsDisabled: [boolean, boolean];
 }

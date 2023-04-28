@@ -59,6 +59,7 @@ export const Portfolio = () => {
             ...w,
             editState:
               parseInt(pid!, 10) === user?.userId ? "editable" : "view",
+            reorderButtonsDisabled: [w.index === 1, w.index === widgets.length],
           }))
         );
       }
@@ -78,8 +79,9 @@ export const Portfolio = () => {
             payload={info.payload}
             requestUpdate={updateWidgetCallback}
             requestDelete={deleteWidgetCallback}
-            requestMove={moveWidgetCallback}
             requestEdit={requestEditCallback}
+            requestMove={moveWidgetCallback}
+            reorderButtonsDisabled={info.reorderButtonsDisabled}
           />
         );
       default:
@@ -88,7 +90,7 @@ export const Portfolio = () => {
   };
   const requestEditCallback = useCallback(
     (widgetId: number, editing: boolean) => {
-      setWidgets(
+      setWidgets(widgets =>
         widgets.map(w => {
           if (w.widgetId !== widgetId) {
             return w;
@@ -147,26 +149,41 @@ export const Portfolio = () => {
           return;
         }
       }
-      setWidgets(widgets.filter(w => w.widgetId !== widgetId));
+      setWidgets(widgets => widgets.filter(w => w.widgetId !== widgetId));
     },
     [widgets]
   );
   const moveWidgetCallback = useCallback(
-    async (widgetId: number, index: number) => {
-      const response = await patch(`widgets/${widgetId}`, { index: index });
+    async (widgetId: number, direction: "up" | "down") => {
+      const oldIndex = widgets.find(w => w.widgetId === widgetId)?.index ?? 0;
+      const newIndexCandidate = oldIndex + (direction === "up" ? -1 : 1);
+      const newIndex = Math.min(widgets.length, Math.max(1, newIndexCandidate));
+      const response = await patch(`widgets/${widgetId}`, { index: newIndex });
       if (!response.ok) {
         return;
       }
-      setWidgets(
-        widgets
-          .map(w => {
-            if (w.widgetId !== widgetId) {
-              return w;
-            }
-            return { ...w, index };
-          })
-          .sort((a, b) => a.index - b.index)
-      );
+      setWidgets(widgets => {
+        const m = (w, i) => ({
+          ...w,
+          index: i + 1,
+          reorderButtonsDisabled: [i + 1 === 1, i + 1 === widgets.length],
+        });
+        if (newIndex - oldIndex > 0) {
+          return widgets
+            .slice(0, oldIndex - 1)
+            .concat(widgets.slice(oldIndex, newIndex))
+            .concat(widgets[oldIndex - 1])
+            .concat(widgets.slice(newIndex))
+            .map(m);
+        } else {
+          return widgets
+            .slice(0, newIndex - 1)
+            .concat(widgets[oldIndex - 1])
+            .concat(widgets.slice(newIndex - 1, oldIndex - 1))
+            .concat(widgets.slice(oldIndex))
+            .map(m);
+        }
+      });
     },
     [widgets]
   );
@@ -179,11 +196,13 @@ export const Portfolio = () => {
         widgetType,
         index,
         editState: "edit",
+        reorderButtonsDisabled: [index === 1, index === widgets.length],
       };
-      setWidgets([...widgets, widget]);
+      setWidgets(widgets => [...widgets, widget]);
     },
     [widgets]
   );
+
   return (
     <>
       <Helmet>
@@ -205,17 +224,16 @@ export const Portfolio = () => {
           </div>
           <main className={styles.main}>
             <PortfolioInfo {...portfolio} />
-            {parseInt(pid ?? "", 10) === user?.userId && (
+            {parseInt(pid ?? "0") === user?.userId && (
               <NewWidgetToolbar onRequestCreate={createWidgetCallback} />
             )}
             <div className={styles.leftTrack}>
-              {widgets?.map(instantiateWidget)}
+              {widgets?.filter(({ index }) => index % 2).map(instantiateWidget)}
             </div>
             <div className={styles.rightTrack}>
-              <Tile style={{ height: 400 }} />
-              <Tile style={{ height: 100 }} />
-              <Tile style={{ height: 200 }} />
-              <Tile style={{ height: 350 }} />
+              {widgets
+                ?.filter(({ index }) => index % 2 === 0)
+                .map(instantiateWidget)}
             </div>
           </main>
         </div>

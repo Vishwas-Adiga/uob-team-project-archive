@@ -58,16 +58,25 @@ export const Module = (props: WidgetProps<ModulesPayload>) => {
     }
   }, [upstreamPayload]);
 
+  const onMove = useCallback(
+    (direction: "up" | "down") => {
+      props.requestMove(props.widgetId, direction);
+    },
+    [props]
+  );
+
   return (
     <div>
       {props.editState !== "view" && (
         <WidgetHeader
           widgetType="Module"
           editState={props.editState}
-          onRequestEdit={props.requestEdit.bind(null, props.widgetId, true)}
-          onRequestDelete={props.requestDelete.bind(null, props.widgetId)}
-          onRequestDiscard={onDiscard}
-          onRequestSave={onSave}
+          reorderButtonsDisabled={props.reorderButtonsDisabled}
+          requestEdit={props.requestEdit.bind(null, props.widgetId, true)}
+          requestDelete={props.requestDelete.bind(null, props.widgetId)}
+          requestDiscard={onDiscard}
+          requestSave={onSave}
+          requestMove={onMove}
         />
       )}
       <Tile className={`${styles.widget} ${styles.moduleWidget}`}>
