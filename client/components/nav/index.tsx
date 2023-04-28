@@ -44,7 +44,7 @@ export const Nav = () => {
             For you
           </HeaderMenuItem>
           <HeaderMenuItem href="#" className={styles.navItem}>
-            StudentVerse
+            {Config.GRAPH.NAME}
           </HeaderMenuItem>
         </HeaderNavigation>
       )}
