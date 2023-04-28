@@ -9,6 +9,7 @@ import "./app.scss";
 import { RecoilRoot } from "recoil";
 import { Portfolio } from "./routes/portfolio";
 import { Admin } from "./routes/admin";
+import { Preferences } from "./routes/preferences";
 import { IdScanner } from "./components/id-scanner";
 import { Disclaimer } from "./components/disclaimer";
 import { PrivacyPolicy } from "./routes/privacy-policy";
@@ -36,6 +37,7 @@ function App() {
               <Route path={Index.AUTH()} element={<SignIn />} />
             </Route>
             <Route path={Index.PORTFOLIO()} element={<Portfolio />} />
+            <Route path={Index.PREFERENCES()} element={<Preferences />} />
             <Route path={Index.PRIVACY_POLICY()} element={<PrivacyPolicy />} />
             <Route path={Index.NOT_FOUND()} element={<NotFound />} />
             <Route path={Index.GRAPH()} element={<Graph />} />
