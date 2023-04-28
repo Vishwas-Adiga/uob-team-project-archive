@@ -1,12 +1,7 @@
 import { atom } from "recoil";
 import { Config } from "../config";
 import { get } from "../utils/fetch";
-
-export interface User {
-  userId: number;
-  email: string;
-  admin: boolean;
-}
+import { User } from "./types";
 
 export const userState = atom<User | null>({
   key: "USER",

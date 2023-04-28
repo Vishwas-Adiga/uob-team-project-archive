@@ -1,5 +1,5 @@
 import { Button, Tile } from "@carbon/react";
-import { Portfolio } from "../../state/portfolio-state";
+import { Portfolio } from "../../state/types";
 import placeholderPicture from "../../assets/placeholders/profile_picture.jpeg";
 import styles from "./style.module.scss";
 export const PortfolioInfo = (props: Portfolio) => (

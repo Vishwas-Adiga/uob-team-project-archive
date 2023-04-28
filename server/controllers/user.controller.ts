@@ -1,10 +1,20 @@
 import { Response } from "express";
 import { ValidatedRequest } from "../middleware/jwt.middleware.js";
-import { User } from "../models/index.js";
+import { Accommodation, Course, User } from "../models/index.js";
 
 export const getUser = async (req: ValidatedRequest, res: Response) => {
   const user = await User.findByPk(req.resourceOwnerId, {
     attributes: ["userId", "email"],
+    include: [
+      {
+        model: Accommodation,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+      {
+        model: Course,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+    ],
   });
   if (!user) {
     return res.status(404).send();
