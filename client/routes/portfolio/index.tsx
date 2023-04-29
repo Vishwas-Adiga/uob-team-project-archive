@@ -1,5 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import { Loading, Tile } from "@carbon/react";
+import {
+  createElement,
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { Loading } from "@carbon/react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useParams } from "react-router-dom";
 import { del, get, patch, post } from "../../utils/fetch";
@@ -17,6 +23,21 @@ import {
 } from "../../state/widget-state";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../state/user-state";
+import { WidgetProps } from "../../components/widgets";
+import { Announcement } from "../../components/widgets/announcement";
+
+type WidgetFactory = {
+  [key in WidgetType]: FunctionComponent<WidgetProps<any>>;
+};
+const widgetFactory: WidgetFactory = {
+  Announcement: Announcement,
+  File: Module,
+  Link: Module,
+  Location: Module,
+  Module: Module,
+  RichText: Module,
+  Social: Module,
+};
 
 export const Portfolio = () => {
   const [portfolio, setPortfolio] = useState<PortfolioState | null>(null);
@@ -67,26 +88,14 @@ export const Portfolio = () => {
     fetcher();
   }, [pid, navigate]);
   const instantiateWidget = (info: WidgetInfo) => {
-    switch (info.widgetType) {
-      case "Module":
-        return (
-          <Module
-            key={info.widgetId}
-            widgetId={info.widgetId}
-            widgetType={info.widgetType}
-            index={info.index}
-            editState={info.editState}
-            payload={info.payload}
-            requestUpdate={updateWidgetCallback}
-            requestDelete={deleteWidgetCallback}
-            requestEdit={requestEditCallback}
-            requestMove={moveWidgetCallback}
-            reorderButtonsDisabled={info.reorderButtonsDisabled}
-          />
-        );
-      default:
-        return info.widgetType;
-    }
+    return createElement<WidgetProps<any>>(widgetFactory[info.widgetType], {
+      ...info,
+      key: info.widgetId,
+      requestUpdate: updateWidgetCallback,
+      requestDelete: deleteWidgetCallback,
+      requestMove: moveWidgetCallback,
+      requestEdit: requestEditCallback,
+    });
   };
   const requestEditCallback = useCallback(
     (widgetId: number, editing: boolean) => {

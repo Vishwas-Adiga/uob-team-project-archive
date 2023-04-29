@@ -21,16 +21,24 @@ export interface WidgetHeaderProps {
   requestMove: (direction: "up" | "down") => void;
 }
 
-type UserFacingWidgetNames = { [key in WidgetType]?: string };
+type UserFacingWidgetNames = {
+  [key in WidgetType]: { name: string; colour: string };
+};
 const USER_FACING_WIDGET_NAMES: UserFacingWidgetNames = {
-  Module: "My modules",
+  Announcement: { name: "Announcement", colour: "magenta" },
+  File: { name: "File", colour: "purple" },
+  Link: { name: "Link", colour: "teal" },
+  Location: { name: "Location", colour: "cyan" },
+  Module: { name: "My modules", colour: "green" },
+  RichText: { name: "Text", colour: "warm-gray" },
+  Social: { name: "Socials", colour: "red" },
 };
 
 export const WidgetHeader = (props: WidgetHeaderProps) => {
   return (
     <div className={styles.container}>
-      <Tag type="green" size="sm">
-        {USER_FACING_WIDGET_NAMES[props.widgetType]}
+      <Tag type={USER_FACING_WIDGET_NAMES[props.widgetType].colour} size="sm">
+        {USER_FACING_WIDGET_NAMES[props.widgetType].name}
       </Tag>
       <span />
       <IconButton
