@@ -16,10 +16,15 @@ export interface Module {
   name: string;
   description: string;
 }
+export type AnnouncementPayload = {
+  title: string;
+  content: string;
+  expiry: Date;
+};
 
 export type ModulesPayload = Array<number>;
 
-export type WidgetPayload = ModulesPayload;
+export type WidgetPayload = AnnouncementPayload | ModulesPayload;
 
 export interface WidgetInfo<T extends WidgetPayload = WidgetPayload> {
   widgetId: number;

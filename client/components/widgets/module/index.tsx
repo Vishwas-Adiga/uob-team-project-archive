@@ -71,7 +71,9 @@ export const Module = (props: WidgetProps<ModulesPayload>) => {
         <WidgetHeader
           widgetType="Module"
           editState={props.editState}
-          reorderButtonsDisabled={props.reorderButtonsDisabled}
+          reorderButtonsDisabled={
+            props.widgetId < 0 ? [true, true] : props.reorderButtonsDisabled
+          }
           requestEdit={props.requestEdit.bind(null, props.widgetId, true)}
           requestDelete={props.requestDelete.bind(null, props.widgetId)}
           requestDiscard={onDiscard}

@@ -79,9 +79,9 @@ export const updateWidget = async (req: ValidatedRequest, res: Response) => {
         });
       }
     } else {
-      for (const key in req.body) {
+      for (const key in req.body.payload) {
         if (key === "widgetId") continue;
-        payload[key] = req.body[key];
+        payload[key] = req.body.payload[key];
       }
       await sequelize.transaction(async t => {
         await (
