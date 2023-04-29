@@ -1,15 +1,15 @@
 import { AuthenticatedRoute } from "../../components/conditional-route";
 import { Config } from "../../config";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { get } from "../../utils/fetch";
 import styles from "./style.module.scss";
 import { Button } from "@carbon/react";
 import { Routes } from "../index";
 
 export const Search = () => {
-  const searchParams = new URLSearchParams(useLocation().search);
-  const searchQuery = searchParams.get("search");
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("query");
   const [result, setResult] = useState<any>([]);
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export const Search = () => {
       setResult(data);
     };
     searching(searchQuery);
-  }, []);
+  }, [searchQuery]);
 
   return (
     <AuthenticatedRoute>

@@ -15,34 +15,51 @@ import styles from "./style.module.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userState } from "../../state/user-state";
 import { scannerState } from "../../state/scanner-state";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useState,
+} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Routes } from "../../routes";
 
 export const Nav = () => {
+  const [query, setQuery] = useState("");
   const [user, setUser] = useRecoilState(userState);
   const setScanner = useSetRecoilState(scannerState);
-  const [Query, setQuery] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const signOut = () => {
+  const signOut = useCallback(() => {
     localStorage.clear();
     setUser(null);
-  };
+  }, [setUser]);
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && Query.trim().length > 0) {
-      window.location.href = `/search?search=${Query}`;
-    }
-  };
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter" && query.trim().length > 0) {
+        navigate(Routes.SEARCH(query));
+      }
+    },
+    [navigate, query]
+  );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setQuery(event.target.value);
+    },
+    [setQuery]
+  );
 
   return (
     <Header aria-label={"App header"} className={styles.header}>
       <SkipToContent />
-      <HeaderName href="#" prefix="">
+      <HeaderName
+        prefix=""
+        onClick={navigate.bind(null, Routes.PORTFOLIO(user?.userId.toString()))}
+      >
         {Config.APP.NAME}
       </HeaderName>
       {user && (
@@ -54,15 +71,27 @@ export const Nav = () => {
             labelText="Find students to connect with"
             onChange={handleChange}
             onKeyPress={handleKeyPress}
-            value={Query}
+            value={query}
           ></Search>
-          <HeaderMenuItem isCurrentPage href="#" className={styles.navItem}>
+          <HeaderMenuItem
+            isCurrentPage={location.pathname === Routes.CONNECTIONS()}
+            onClick={navigate.bind(null, Routes.CONNECTIONS())}
+            className={styles.navItem}
+          >
             Connections
           </HeaderMenuItem>
-          <HeaderMenuItem href="#" className={styles.navItem}>
+          <HeaderMenuItem
+            isCurrentPage={location.pathname === Routes.RECOMMENDATIONS()}
+            onClick={navigate.bind(null, Routes.RECOMMENDATIONS())}
+            className={styles.navItem}
+          >
             For you
           </HeaderMenuItem>
-          <HeaderMenuItem href="#" className={styles.navItem}>
+          <HeaderMenuItem
+            isCurrentPage={location.pathname === Routes.GRAPH()}
+            onClick={navigate.bind(null, Routes.GRAPH())}
+            className={styles.navItem}
+          >
             {Config.GRAPH.NAME}
           </HeaderMenuItem>
         </HeaderNavigation>
