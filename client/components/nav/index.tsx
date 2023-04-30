@@ -102,7 +102,7 @@ export const Nav = () => {
         <HeaderGlobalBar>
           <Button
             renderIcon={QrCode}
-            onClick={setScanner.bind(null, { open: true })}
+            onClick={setScanner.bind(null, { open: true, mode: "read" })}
           >
             Connect
           </Button>

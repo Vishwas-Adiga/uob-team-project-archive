@@ -11,13 +11,14 @@ import {
   ComboBox,
 } from "@carbon/react";
 import { get, patch, postFile } from "../../utils/fetch";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../state/user-state";
 import { Config } from "../../config";
 import { useData } from "../../utils/use-data";
 import { Accommodation, Course } from "../../state/types";
 import { Routes } from "../index";
 import { useNavigate } from "react-router-dom";
+import { scannerState } from "../../state/scanner-state";
 
 enum accountTypes {
   "Public",
@@ -25,18 +26,22 @@ enum accountTypes {
   "Local",
 }
 
+const NFC_SUPPORTED = "NDEFReader" in window;
 export const Preferences = () => {
   const [profilePicture, setPicture] = useState(null);
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [privacy, setPrivacy] = useState<string | null>(null);
   const [course, setCourse] = useState<Course | null>(null);
-  const [accommodation, setAccommodation] = useState<Accommodation | null>(null);
+  const [accommodation, setAccommodation] = useState<Accommodation | null>(
+    null
+  );
   const [profileBanner, setBanner] = useState(null);
   const user = useRecoilValue(userState);
   const [courses = []] = useData<Array<Course>>("courses");
   const [accommodations = []] = useData<Array<Accommodation>>("accommodations");
   const navigate = useNavigate();
+  const setScannerState = useSetRecoilState(scannerState);
 
   useEffect(() => {
     const fetcher = async () => {
@@ -131,7 +136,9 @@ export const Preferences = () => {
 
           <div className={styles.accountTypeSwitcher}>
             <ContentSwitcher
-              selectedIndex={Object.values(accountTypes).indexOf(privacy ?? "Public")}
+              selectedIndex={Object.values(accountTypes).indexOf(
+                privacy ?? "Public"
+              )}
               onChange={accountText => {
                 handlePrivacy(accountText.text);
               }}
@@ -186,6 +193,16 @@ export const Preferences = () => {
               </FormGroup>
               <Button type="submit">Save Changes</Button>
             </Form>
+            {NFC_SUPPORTED && (
+              <Button
+                onClick={setScannerState.bind(null, {
+                  open: true,
+                  mode: "register",
+                })}
+              >
+                Link student ID
+              </Button>
+            )}
           </div>
 
           <div className={styles.banner}>

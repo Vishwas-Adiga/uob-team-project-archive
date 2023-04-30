@@ -44,6 +44,16 @@
   }
 }
 
+.nfcRegisterPictogram {
+  display: flex;
+  justify-content: center;
+
+  svg {
+    height: 200px;
+    width: 200px;
+  }
+}
+
 .directions {
   display: grid;
   grid-template-columns: auto 1fr;
