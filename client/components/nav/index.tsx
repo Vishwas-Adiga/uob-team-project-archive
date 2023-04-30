@@ -1,14 +1,16 @@
 import {
   Button,
   Header,
-  HeaderGlobalAction,
   HeaderGlobalBar,
-  HeaderMenuItem,
+  HeaderMenuButton,
   HeaderName,
   HeaderNavigation,
+  HeaderSideNavItems,
   OverflowMenu,
   OverflowMenuItem,
   Search,
+  SideNav,
+  SideNavItems,
   SkipToContent,
 } from "@carbon/react";
 import { QrCode, UserAvatar } from "@carbon/icons-react";
@@ -17,22 +19,17 @@ import styles from "./style.module.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userState } from "../../state/user-state";
 import { scannerState } from "../../state/scanner-state";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useCallback,
-  useState,
-} from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { ChangeEvent, KeyboardEvent, useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Routes } from "../../routes";
+import { NavItems } from "./nav-items";
 
 export const Nav = () => {
   const [query, setQuery] = useState("");
+  const [sideNavExpanded, setSideNavExpanded] = useState(false);
   const [user, setUser] = useRecoilState(userState);
   const setScanner = useSetRecoilState(scannerState);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const signOut = useCallback(() => {
     localStorage.clear();
@@ -55,9 +52,18 @@ export const Nav = () => {
     [setQuery]
   );
 
+  const onClickSideNavExpand = useCallback(() => {
+    setSideNavExpanded(e => !e);
+  }, [sideNavExpanded]);
+
   return (
     <Header aria-label={"App header"} className={styles.header}>
       <SkipToContent />
+      <HeaderMenuButton
+        aria-label={sideNavExpanded ? "Close menu" : "Open menu"}
+        onClick={onClickSideNavExpand}
+        isActive={sideNavExpanded}
+      />
       <HeaderName
         prefix=""
         onClick={navigate.bind(null, Routes.PORTFOLIO(user?.userId.toString()))}
@@ -75,27 +81,7 @@ export const Nav = () => {
             onKeyPress={handleKeyPress}
             value={query}
           ></Search>
-          <HeaderMenuItem
-            isCurrentPage={location.pathname === Routes.CONNECTIONS()}
-            onClick={navigate.bind(null, Routes.CONNECTIONS())}
-            className={styles.navItem}
-          >
-            Connections
-          </HeaderMenuItem>
-          <HeaderMenuItem
-            isCurrentPage={location.pathname === Routes.RECOMMENDATIONS()}
-            onClick={navigate.bind(null, Routes.RECOMMENDATIONS())}
-            className={styles.navItem}
-          >
-            For you
-          </HeaderMenuItem>
-          <HeaderMenuItem
-            isCurrentPage={location.pathname === Routes.GRAPH()}
-            onClick={navigate.bind(null, Routes.GRAPH())}
-            className={styles.navItem}
-          >
-            {Config.GRAPH.NAME}
-          </HeaderMenuItem>
+          <NavItems />
         </HeaderNavigation>
       )}
       {user && (
@@ -132,6 +118,26 @@ export const Nav = () => {
           </OverflowMenu>
         </HeaderGlobalBar>
       )}
+      <SideNav
+        aria-label="Side navigation"
+        expanded={sideNavExpanded}
+        isPersistent={false}
+      >
+        <SideNavItems>
+          <HeaderSideNavItems>
+            <Search
+              size="sm"
+              className={styles.searchMobile}
+              placeholder="Find students to connect with"
+              labelText="Find students to connect with"
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+              value={query}
+            ></Search>
+            <NavItems />
+          </HeaderSideNavItems>
+        </SideNavItems>
+      </SideNav>
     </Header>
   );
 };
