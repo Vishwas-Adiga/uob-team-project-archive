@@ -39,17 +39,13 @@ export const IdScanner = () => {
     setNfcGranted(status.state === "granted");
   }, []);
 
-  useEffect(() => {
-    if (!NFC_SUPPORTED) return;
-    if (!nfcGranted) return;
+  const onReadingError = useCallback(() => {
+    setScanner({ ...scanner, open: false });
+    setNfcErrorModalOpen(true);
+  }, [scanner, setScanner, setNfcErrorModalOpen]);
 
-    const ndef = new NDEFReader();
-    const onReadingError = () => {
-      setScanner({ ...scanner, open: false });
-      setNfcErrorModalOpen(true);
-    };
-
-    const onReading = async ({ message, serialNumber }) => {
+  const onReading = useCallback(
+    async ({ message, serialNumber }) => {
       if (scanner.mode === "read") {
         console.log(`Read card with fingerprint: ${serialNumber}`);
         setScanner({ ...scanner, open: false });
@@ -74,7 +70,15 @@ export const IdScanner = () => {
           window.alert("Student ID registered");
         }
       }
-    };
+    },
+    [scanner, user, setConnectedUser, setNfcErrorModalOpen]
+  );
+
+  useEffect(() => {
+    if (!NFC_SUPPORTED) return;
+    if (!nfcGranted) return;
+
+    const ndef = new NDEFReader();
 
     const setupNfc = async () => {
       await ndef.scan();
