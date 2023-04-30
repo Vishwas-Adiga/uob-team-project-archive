@@ -1,8 +1,6 @@
 import { AuthenticatedRoute } from "../../components/conditional-route";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import profilePictureDefault from "../../assets/placeholders/profile_picture.png";
-import profileBannerDefault from "../../assets/placeholders/profile_banner.jpg";
 import {
   ContentSwitcher,
   Switch,
@@ -12,12 +10,14 @@ import {
   FormGroup,
   ComboBox,
 } from "@carbon/react";
-import { patch } from "../../utils/fetch";
+import { get, patch, postFile } from "../../utils/fetch";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../state/user-state";
 import { Config } from "../../config";
 import { useData } from "../../utils/use-data";
 import { Accommodation, Course } from "../../state/types";
+import { Routes } from "../index";
+import { useNavigate } from "react-router-dom";
 
 enum accountTypes {
   "Public",
@@ -27,15 +27,30 @@ enum accountTypes {
 
 export const Preferences = () => {
   const [profilePicture, setPicture] = useState(null);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [privacy, setPrivacy] = useState("Public");
-  const [course, setCourse] = useState("");
-  const [accommodation, setAccommodation] = useState("");
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [privacy, setPrivacy] = useState<string | null>(null);
+  const [course, setCourse] = useState<Course | null>(null);
+  const [accommodation, setAccommodation] = useState<Accommodation | null>(null);
   const [profileBanner, setBanner] = useState(null);
   const user = useRecoilValue(userState);
   const [courses = []] = useData<Array<Course>>("courses");
   const [accommodations = []] = useData<Array<Accommodation>>("accommodations");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetcher = async () => {
+      const response = await get(`users/${user?.userId}`);
+      if (!response.ok) navigate(Routes.NOT_FOUND(), { replace: true });
+      const resJson = await response.json();
+      setName(resJson.name);
+      setEmail(resJson.email);
+      setPrivacy(resJson.privacy);
+      setCourse(resJson.Course);
+      setAccommodation(resJson.Accommodation);
+    };
+    fetcher();
+  }, [user, navigate]);
 
   const handlePictureChange = event => {
     const file = event.target.files[0];
@@ -51,19 +66,43 @@ export const Preferences = () => {
     setPrivacy(type);
   };
 
-  const handleSubmit = async () => {
-    const response = await patch(`users/${user?.userId}`, {
-      name,
-      email,
-      privacy,
-      course,
-      accommodation,
-    });
-    if (response.ok) {
-      alert("Profile updated successfully!");
-    } else {
-      alert("Failed to update profile. Please try again.");
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    const updateUser = async () => {
+      const response = await patch(`users/${user?.userId}`, {
+        name,
+        email,
+        privacy,
+        course: course ? course.courseId : course,
+        accommodation: accommodation ? accommodation.accommId : accommodation,
+      });
+      if (!response.ok) {
+        alert("Failed to update profile. Please try again.");
+      }
+    };
+    const updateProfile = async () => {
+      if (profilePicture) {
+        const response = await postFile(
+          `portfolios/profile-picture`,
+          profilePicture
+        );
+        if (!response.ok) {
+          alert("Failed to update profile picture. Please try again.");
+        }
+      }
+    };
+    const updateBanner = async () => {
+      if (profileBanner) {
+        const response = await postFile(
+          `portfolios/profile-banner`,
+          profileBanner
+        );
+        if (!response.ok) {
+          alert("Failed to update profile banner. Please try again.");
+        }
+      }
+    };
+    Promise.all([updateUser(), updateProfile(), updateBanner()]);
   };
 
   return (
@@ -78,7 +117,7 @@ export const Preferences = () => {
                 src={
                   profilePicture
                     ? URL.createObjectURL(profilePicture)
-                    : profilePictureDefault
+                    : `/api/v1/portfolios/${user?.userId}/profile-picture`
                 }
                 alt="Profile Picture"
               />
@@ -92,7 +131,7 @@ export const Preferences = () => {
 
           <div className={styles.accountTypeSwitcher}>
             <ContentSwitcher
-              selectedIndex={Object.values(accountTypes).indexOf(privacy)}
+              selectedIndex={Object.values(accountTypes).indexOf(privacy ?? "Public")}
               onChange={accountText => {
                 handlePrivacy(accountText.text);
               }}
@@ -156,7 +195,7 @@ export const Preferences = () => {
                 src={
                   profileBanner
                     ? URL.createObjectURL(profileBanner)
-                    : profileBannerDefault
+                    : `/api/v1/portfolios/${user?.userId}/profile-banner`
                 }
                 alt="Profile Banner"
               />

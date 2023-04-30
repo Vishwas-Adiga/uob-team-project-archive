@@ -14,6 +14,7 @@ import { Config } from "../configs/config.js";
 import { Accommodation } from "./accommodation.model.js";
 import { Course } from "./course.model.js";
 import { Widget } from "./widget.model.js";
+import { FileStorage } from "./file-storage.model.js";
 
 export class User extends Model<
   InferAttributes<User>,
@@ -35,9 +36,9 @@ export class User extends Model<
   // NFC tag
   declare nfcTag: CreationOptional<string>;
   // Profile picture filename
-  declare profilePicture: CreationOptional<string>;
+  declare profilePicture: ForeignKey<FileStorage["fileId"]>;
   // Profile banner
-  declare profileBanner: CreationOptional<string>;
+  declare profileBanner: ForeignKey<FileStorage["fileId"]>;
   // Accommodation
   declare accommodation: ForeignKey<Accommodation["accommId"]>;
   // Course
@@ -52,6 +53,10 @@ export class User extends Model<
   declare setCourse: BelongsToSetAssociationMixin<Course, number>;
   declare createCourse: BelongsToCreateAssociationMixin<Course>;
   declare getWidgets: HasManyGetAssociationsMixin<Widget>;
+  declare getProfilePicture: BelongsToGetAssociationMixin<FileStorage>;
+  declare getProfileBanner: BelongsToGetAssociationMixin<FileStorage>;
+  declare createProfilePicture: BelongsToCreateAssociationMixin<FileStorage>;
+  declare createProfileBanner: BelongsToCreateAssociationMixin<FileStorage>;
 }
 
 export const init = sequelize =>
@@ -105,11 +110,11 @@ export const init = sequelize =>
         unique: true,
       },
       profilePicture: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         defaultValue: null,
       },
       profileBanner: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         defaultValue: null,
       },
     },

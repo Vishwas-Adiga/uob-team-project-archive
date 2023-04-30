@@ -1,10 +1,10 @@
 image: node:18.14.2
 variables:
-  CI_IMG: "\"${CI_REGISTRY_IMAGE}:latest\""
+  CI_IMG: '"${CI_REGISTRY_IMAGE}:latest"'
   TP_URL: "${CI_PROJECT_NAMESPACE}.bham.team"
   TP_CONTACT: "${GITLAB_USER_EMAIL}"
 
-stages:                                         # List of stages for jobs, and their order of execution
+stages: # List of stages for jobs, and their order of execution
   - check
   - build
   - test
@@ -14,32 +14,32 @@ stages:                                         # List of stages for jobs, and t
 eslint:
   stage: check
   cache:
-    key: $CI_COMMIT_REF_SLUG                    # Run npm ci and maintain cache for each branch
+    key: $CI_COMMIT_REF_SLUG # Run npm ci and maintain cache for each branch
     paths:
       - .npm/
     policy: pull
   before_script:
     - npm ci --cache .npm --prefer-offline
   script:
-    - npx eslint --ext .ts,.tsx client/         # Lint the client
-    - npx eslint --ext .ts server/              # Lint the server
+    - npx eslint --ext .ts,.tsx client/ # Lint the client
+    - npx eslint --ext .ts server/ # Lint the server
 
 tsc:
   stage: build
   cache:
-    key: $CI_COMMIT_REF_SLUG                    # Run npm ci and maintain cache for each branch
+    key: $CI_COMMIT_REF_SLUG # Run npm ci and maintain cache for each branch
     paths:
       - .npm/
     policy: pull
   before_script:
     - npm ci --cache .npm --prefer-offline
   script:
-    - npx tsc                                   # Build the client using Vite
-    - npx vite build                            # and the server using esbuild
-    - npx esbuild ./server/main.ts --tsconfig=tsconfig.server.json --outfile=dist/server.cjs --bundle --platform=node --minify --external:pg-native --external:pg-hstore
+    - npx tsc # Build the client using Vite
+    - npx vite build # and the server using esbuild
+    - node esbuild.js
   artifacts:
     paths:
-      - dist                                    # Upload ./dist to artefacts
+      - dist # Upload ./dist to artefacts
     expire_in: 1 day
 
 docker:
@@ -64,15 +64,15 @@ deploy-job:
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
   image: alpine:latest
-  before_script: 
-   - chmod og= $SSH_KEY
-   - apk update && apk add openssh-client
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml down || true"
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
+  before_script:
+    - chmod og= $SSH_KEY
+    - apk update && apk add openssh-client
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml down || true"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
   script:
-   - scp -o StrictHostKeyChecking=no -i $SSH_KEY -r . $VM_USER@$VM:~/team-project-deployment 
-   - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml up -d"
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY -r . $VM_USER@$VM:~/team-project-deployment
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $VM_USER@$VM "docker compose -f ~/team-project-deployment/.cd/docker-compose.yml up -d"

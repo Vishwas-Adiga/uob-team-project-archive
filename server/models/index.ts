@@ -12,6 +12,7 @@ import { init as initUserConnection } from "./user-connection.model.js";
 import { init as initWidget } from "./widget.model.js";
 import { init as initModule } from "./module.model.js";
 import { init as initModuleInWidget } from "./module-in-widget.model.js";
+import { init as initFileStorage } from "./file-storage.model.js";
 
 let db: Sequelize;
 if (process.env.NODE_ENV === "production") {
@@ -40,6 +41,7 @@ export const sequelize = db;
 export const User = initUser(sequelize);
 export const Accommodation = initAccommodation(sequelize);
 export const Course = initCourse(sequelize);
+export const FileStorage = initFileStorage(sequelize);
 export const Widget = initWidget(sequelize);
 export const Announcement = initAnnouncement(sequelize);
 export const RichText = initRichtext(sequelize);
@@ -62,6 +64,26 @@ Course.hasMany(User, {
   onUpdate: "CASCADE",
 });
 User.belongsTo(Course, { foreignKey: "course" });
+
+FileStorage.hasOne(User, {
+  foreignKey: "profilePicture",
+  onDelete: "SET NULL",
+  onUpdate: "CASCADE",
+});
+User.belongsTo(FileStorage, {
+  foreignKey: "profilePicture",
+  as: "ProfilePicture",
+});
+
+FileStorage.hasOne(User, {
+  foreignKey: "profileBanner",
+  onDelete: "SET NULL",
+  onUpdate: "CASCADE",
+});
+User.belongsTo(FileStorage, {
+  foreignKey: "profileBanner",
+  as: "ProfileBanner",
+});
 
 User.hasMany(Widget, {
   foreignKey: "user",

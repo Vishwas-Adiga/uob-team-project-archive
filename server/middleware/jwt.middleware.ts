@@ -9,6 +9,7 @@ import { Op } from "sequelize";
  * Every request that requires authentication must be of this type
  */
 export interface ValidatedRequest extends Request {
+  files: any;
   resourceRequesterId?: number;
   resourceOwnerId?: number;
   admin: boolean;
