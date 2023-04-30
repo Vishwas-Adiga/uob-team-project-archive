@@ -12,7 +12,6 @@ import { del, get, patch, post } from "../../utils/fetch";
 import { Portfolio as PortfolioState } from "../../state/types";
 import { Routes } from "../index";
 import { PortfolioInfo } from "./portfolio-info";
-import placeholderBanner from "../../assets/placeholders/profile_banner.jpg";
 import { NewWidgetToolbar } from "./new-widget-toolbar";
 import { Module } from "../../components/widgets/module";
 import styles from "./style.module.scss";
@@ -73,7 +72,12 @@ export const Portfolio = () => {
         fetchPortfolioHeader(),
         fetchWidgets(),
       ]);
-      setPortfolio(portfolio ?? portfolioHeader);
+      const portfolioState = portfolio ?? portfolioHeader;
+      setPortfolio({
+        ...portfolioState,
+        profilePicture: `/api/v1/portfolios/${pid}/profile-picture`,
+        profileBanner: `/api/v1/portfolios/${pid}/profile-banner`,
+      });
       if (widgets) {
         setWidgets(
           widgets.map(w => ({
@@ -227,7 +231,7 @@ export const Portfolio = () => {
         >
           <div className={styles.hero}>
             <p>{portfolio?.name}</p>
-            <img alt="" src={portfolio?.profileBanner ?? placeholderBanner} />
+            <img alt="" src={portfolio?.profileBanner} />
             <span role="none" className={styles.scrim} />
             <span role="none" className={styles.textScrim} />
           </div>

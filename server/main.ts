@@ -1,6 +1,8 @@
+import fs from "fs";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
+import fileUpload from "express-fileupload";
 import { authRouter } from "./routes/auth.route.js";
 import { userRouter } from "./routes/user.route.js";
 import { Config } from "./configs/config.js";
@@ -17,15 +19,10 @@ import { graphRouter } from "./routes/graph.route.js";
 import { searchRouter } from "./routes/search.route.js";
 
 const app = express();
+app.use(fileUpload());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get("/api/v1", async (_req, res) => {
-  // I'm a teapot
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418
-  res.status(418).send();
-});
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
@@ -42,6 +39,7 @@ app.get("/api/v1/accommodations", getCommonModel(Accommodation));
 app.get("/api/v1/modules", getCommonModel(Module));
 
 app.listen(Config.PORT, async () => {
+  await fs.promises.mkdir("assets/uploaded");
   await serveStatic(app);
   await serveHTML(app);
   await sequelize.sync();

@@ -1,14 +1,9 @@
 import { Button, Tile } from "@carbon/react";
 import { Portfolio } from "../../state/types";
-import placeholderPicture from "../../assets/placeholders/profile_picture.jpeg";
 import styles from "./style.module.scss";
 export const PortfolioInfo = (props: Portfolio) => (
   <Tile className={styles.portfolioInfo}>
-    <img
-      className={styles.profilePhoto}
-      src={props.profilePicture ?? placeholderPicture}
-      alt=""
-    />
+    <img className={styles.profilePhoto} src={props.profilePicture} alt="" />
     <Button className={styles.connectButton}>
       Connect with {splitName(props.name)}
     </Button>
