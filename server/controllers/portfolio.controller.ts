@@ -56,7 +56,7 @@ export const getProfilePicture = async (req: Request, res: Response) => {
   if (profilePicture) {
     relPath = profilePicture.relPath;
   } else {
-    relPath = "assets/default/profile_picture.jpg";
+    relPath = "assets/default/profile_picture.png";
   }
   res.status(200).sendFile(relPath, {
     root: process.cwd(),
