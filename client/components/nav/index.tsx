@@ -6,6 +6,8 @@ import {
   HeaderMenuItem,
   HeaderName,
   HeaderNavigation,
+  OverflowMenu,
+  OverflowMenuItem,
   Search,
   SkipToContent,
 } from "@carbon/react";
@@ -104,9 +106,30 @@ export const Nav = () => {
           >
             Connect
           </Button>
-          <HeaderGlobalAction aria-label="Search" onClick={signOut}>
-            <UserAvatar size={20} />
-          </HeaderGlobalAction>
+          <OverflowMenu size="lg" flipped renderIcon={UserAvatar}>
+            <OverflowMenuItem
+              className={styles.signedInUserInfo}
+              onClick={navigate.bind(
+                null,
+                Routes.PORTFOLIO(user.userId.toString())
+              )}
+              itemText={
+                <>
+                  <h5>{user.name}</h5>
+                  Signed in as {user.email}
+                </>
+              }
+            />
+            <OverflowMenuItem
+              disabled
+              itemText={`${Config.APP.NAME}, for ${Config.ORG.NAME}`}
+            />
+            <OverflowMenuItem
+              hasDivider
+              itemText="Sign out"
+              onClick={signOut}
+            />
+          </OverflowMenu>
         </HeaderGlobalBar>
       )}
     </Header>

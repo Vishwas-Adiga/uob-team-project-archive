@@ -30,6 +30,10 @@ export interface User {
   userId: number;
   email: string;
   admin: boolean;
+  privacy: "Public" | "Local" | "Private";
+  name: string;
+  profilePicture: string;
+  profileBanner: string;
   Accommodation: Accommodation;
   Course: Course;
 }
