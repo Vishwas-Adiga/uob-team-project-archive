@@ -46,6 +46,8 @@ export const IdScanner = () => {
 
   const onReading = useCallback(
     async ({ message, serialNumber }) => {
+      if (!scanner.open) return;
+
       if (scanner.mode === "read") {
         console.log(`Read card with fingerprint: ${serialNumber}`);
         setScanner(scanner => ({ ...scanner, open: false }));
