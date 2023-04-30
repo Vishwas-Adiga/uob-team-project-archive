@@ -44,43 +44,51 @@ export const IdScanner = () => {
     if (!nfcGranted) return;
 
     const ndef = new NDEFReader();
-    const setupNfc = async () => {
-      await ndef.scan();
-      ndef.addEventListener("readingerror", () => {
-        setScanner({ ...scanner, open: false });
-        setNfcErrorModalOpen(true);
-      });
+    const onReadingError = () => {
+      setScanner({ ...scanner, open: false });
+      setNfcErrorModalOpen(true);
+    };
 
-      // @ts-ignore
-      ndef.addEventListener("reading", async ({ message, serialNumber }) => {
-        if (scanner.mode === "read") {
-          console.log(`Read card with fingerprint: ${serialNumber}`);
-          setScanner({ ...scanner, open: false });
-          const response = await post(`requests`, {
-            signature: serialNumber,
+    const onReading = async ({ message, serialNumber }) => {
+      if (scanner.mode === "read") {
+        console.log(`Read card with fingerprint: ${serialNumber}`);
+        setScanner({ ...scanner, open: false });
+        const response = await post(`requests`, {
+          signature: serialNumber,
+        });
+        if (!response.ok) {
+          return setNfcErrorModalOpen(true);
+        }
+
+        const user: User = await response.json();
+        setConnectedUser(user);
+      } else {
+        if (user) {
+          const response = await patch(`user/${user.userId}`, {
+            nfcTag: serialNumber,
           });
+
           if (!response.ok) {
             return setNfcErrorModalOpen(true);
           }
-
-          const user: User = await response.json();
-          setConnectedUser(user);
-        } else {
-          if (user) {
-            const response = await patch(`user/${user.userId}`, {
-              nfcTag: serialNumber,
-            });
-
-            if (!response.ok) {
-              return setNfcErrorModalOpen(true);
-            }
-            window.alert("Student ID registered");
-          }
+          window.alert("Student ID registered");
         }
-      });
+      }
+    };
+
+    const setupNfc = async () => {
+      await ndef.scan();
+      ndef.addEventListener("readingerror", onReadingError);
+      // @ts-ignore
+      ndef.addEventListener("reading", onReading);
     };
 
     setupNfc();
+    return () => {
+      ndef.removeEventListener("readingerror", onReadingError);
+      // @ts-ignore
+      ndef.removeEventListener("reading", onReading);
+    };
   }, [NFC_SUPPORTED, nfcGranted, scanner]);
 
   const onQrCodeScan = useCallback(
