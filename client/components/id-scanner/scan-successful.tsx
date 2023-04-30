@@ -2,7 +2,7 @@ import { Button, Modal } from "@carbon/react";
 import styles from "./style.module.scss";
 import { User } from "../../state/types";
 import { Config } from "../../config";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import confetti from "canvas-confetti";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../../routes";
@@ -26,6 +26,11 @@ export const ScanSuccessful = (props: ScanSuccessfulProps) => {
 
   const navigate = useNavigate();
 
+  const navigateToPortfolio = useCallback(() => {
+    props.onRequestClose();
+    navigate(Routes.PORTFOLIO(props.user?.userId.toString()));
+  }, [props]);
+
   return (
     <Modal
       open={!!props.user}
@@ -34,14 +39,9 @@ export const ScanSuccessful = (props: ScanSuccessfulProps) => {
       size="xs"
       className={styles.nfcModal}
     >
-      <img src={`/api/vi/portfolios/${props.user?.userId}/profile-picture`} />
+      <img src={`/api/v1/portfolios/${props.user?.userId}/profile-picture`} />
       <h4>You are connected with {props.user?.name}!</h4>
-      <Button
-        onClick={navigate.bind(
-          null,
-          Routes.PORTFOLIO(props.user?.userId.toString())
-        )}
-      >
+      <Button onClick={navigateToPortfolio}>
         View {props.user?.name.split(" ")[0]}'s {Config.APP.NAME}
       </Button>
     </Modal>
