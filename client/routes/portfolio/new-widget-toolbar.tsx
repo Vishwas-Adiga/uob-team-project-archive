@@ -46,10 +46,20 @@ export const NewWidgetToolbar = (props: NewWidgetToolbarProps) => {
         onRequestCreate={widgetCreateCallback}
       />
       <div className={styles.quickActions}>
-        <Button size="lg" kind="secondary" renderIcon={Bullhorn}>
+        <Button
+          size="lg"
+          kind="secondary"
+          renderIcon={Bullhorn}
+          onClick={props.onRequestCreate.bind(null, "Announcement")}
+        >
           Make an announcement
         </Button>
-        <Button size="lg" kind="secondary" renderIcon={getSocialIcon()}>
+        <Button
+          size="lg"
+          kind="secondary"
+          renderIcon={getSocialIcon()}
+          onClick={props.onRequestCreate.bind(null, "Social")}
+        >
           Link my socials
         </Button>
         <Button
@@ -60,7 +70,12 @@ export const NewWidgetToolbar = (props: NewWidgetToolbarProps) => {
         >
           List my modules
         </Button>
-        <Button size="lg" kind="secondary" renderIcon={LocationHeartFilled}>
+        <Button
+          size="lg"
+          kind="secondary"
+          renderIcon={LocationHeartFilled}
+          onClick={props.onRequestCreate.bind(null, "Location")}
+        >
           Pin a location
         </Button>
       </div>
