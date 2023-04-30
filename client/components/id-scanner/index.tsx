@@ -48,7 +48,7 @@ export const IdScanner = () => {
     async ({ message, serialNumber }) => {
       if (scanner.mode === "read") {
         console.log(`Read card with fingerprint: ${serialNumber}`);
-        setScanner({ ...scanner, open: false });
+        setScanner(scanner => ({ ...scanner, open: false }));
         const response = await post(`requests`, {
           signature: serialNumber,
         });
