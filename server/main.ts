@@ -1,4 +1,3 @@
-import fs from "fs";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
@@ -39,7 +38,6 @@ app.get("/api/v1/accommodations", getCommonModel(Accommodation));
 app.get("/api/v1/modules", getCommonModel(Module));
 
 app.listen(Config.PORT, async () => {
-  await fs.promises.mkdir("assets/uploaded");
   await serveStatic(app);
   await serveHTML(app);
   await sequelize.sync();
