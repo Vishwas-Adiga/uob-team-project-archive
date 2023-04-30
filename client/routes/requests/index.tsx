@@ -2,7 +2,7 @@ import { AuthenticatedRoute } from "../../components/conditional-route";
 import { useEffect, useState } from "react";
 import { Connections as ConnectionsState } from "../../state/connections-state";
 import { redirect, useNavigate, useParams } from "react-router-dom";
-import { del, get, post } from "../../utils/fetch";
+import { del, get, patch } from "../../utils/fetch";
 import styles from "./style.module.scss";
 import { Button } from "@carbon/react";
 import { ArrowLeft, Checkmark, Error } from "@carbon/icons-react";
@@ -21,7 +21,7 @@ export const Requests = () => {
     navigate("/connections");
   };
   async function handleConfirmBtn(id: number) {
-    await post(`requests/${id}`);
+    await patch(`requests/${id}`);
     fetchData();
   }
   async function handleDeleteBtn(id: number) {

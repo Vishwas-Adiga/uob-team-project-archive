@@ -11,14 +11,17 @@ import { useRecoilState } from "recoil";
 import { scannerState } from "../../state/scanner-state";
 import styles from "./style.module.scss";
 import { Config } from "../../config";
+import { CouldNotScan } from "./could-not-scan";
+import { ScanSuccessful } from "./scan-successful";
+import { User } from "../../state/types";
+import { post } from "../../utils/fetch";
 
 const NFC_SUPPORTED = "NDEFReader" in window;
 export const IdScanner = () => {
   const [scanner, setScanner] = useRecoilState(scannerState);
   const [mode, setMode] = useState<"qr" | "nfc">("qr");
   const [nfcErrorModalOpen, setNfcErrorModalOpen] = useState(false);
-  const [connectionSuccessfulModalOpen, setConnectionSuccessfulModalOpen] =
-    useState(false);
+  const [connectedUser, setConnectedUser] = useState<User | null>(null);
   const [nfcGranted, setNfcGranted] = useState(
     localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted"
   );
@@ -46,38 +49,44 @@ export const IdScanner = () => {
       });
 
       // @ts-ignore
-      ndef.addEventListener("reading", ({ message, serialNumber }) => {
+      ndef.addEventListener("reading", async ({ message, serialNumber }) => {
         console.log(`Read card with fingerprint: ${serialNumber}`);
         setScanner({ open: false });
-        setConnectionSuccessfulModalOpen(true);
+        const response = await post(`requests`, {
+          signature: serialNumber,
+        });
+        if (!response.ok) {
+          return setNfcErrorModalOpen(true);
+        }
+
+        const user: User = await response.json();
+        setConnectedUser(user);
       });
     };
 
     setupNfc();
   }, [NFC_SUPPORTED, nfcGranted]);
 
+  const onQrCodeScan = useCallback(
+    result => {
+      if (!result?.getText()) return;
+      setScanner({ open: false });
+      // TODO implement QR code scanning
+    },
+    [setScanner]
+  );
+
   return (
     <>
-      <Modal
+      <CouldNotScan
         open={nfcErrorModalOpen}
-        passiveModal
         onRequestClose={setNfcErrorModalOpen.bind(null, false)}
-        size="xs"
-        className={`${styles.nfcModal} ${styles.nfcErrorModal}`}
-      >
-        <WarningHex />
-        <h4>Could not scan ID. Try again</h4>
-      </Modal>
-      <Modal
-        open={connectionSuccessfulModalOpen}
-        passiveModal
-        onRequestClose={setConnectionSuccessfulModalOpen.bind(null, false)}
-        size="xs"
-        className={styles.nfcModal}
-      >
-        <Friendship />
-        <h4>Max Gater is now a connection!</h4>
-      </Modal>
+      />
+      <ScanSuccessful
+        user={connectedUser}
+        onRequestClose={setConnectedUser.bind(null, null)}
+      />
+
       <Modal
         open={scanner.open}
         passiveModal
@@ -103,11 +112,7 @@ export const IdScanner = () => {
                 display: "grid",
                 gridTemplateColumns: "1fr auto 1fr",
               }}
-              onResult={result => {
-                if (!result?.getText()) return;
-                setScanner({ open: false });
-                setConnectionSuccessfulModalOpen(true);
-              }}
+              onResult={onQrCodeScan}
               ViewFinder={QrCode}
             />
           </div>
