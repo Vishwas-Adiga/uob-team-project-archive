@@ -102,6 +102,7 @@ export const init = sequelize =>
       nfcTag: {
         type: DataTypes.TEXT,
         defaultValue: null,
+        unique: true,
       },
       profilePicture: {
         type: DataTypes.TEXT,
