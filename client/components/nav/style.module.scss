@@ -34,6 +34,11 @@ header.header {
   padding-right: 1rem;
 }
 
+div.searchMobile {
+  margin: 0 1rem 1rem 1rem;
+  width: calc(100% - 2rem);
+}
+
 .navItem {
   white-space: nowrap;
 }
