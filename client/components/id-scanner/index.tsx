@@ -64,7 +64,7 @@ export const IdScanner = () => {
         setConnectedUser(user);
       } else {
         if (user) {
-          const response = await patch(`user/${user.userId}`, {
+          const response = await patch(`users/${user.userId}`, {
             nfcTag: serialNumber,
           });
 
