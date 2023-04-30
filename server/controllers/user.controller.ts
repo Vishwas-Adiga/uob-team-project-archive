@@ -43,13 +43,14 @@ export const updateUser = async (req: ValidatedRequest, res: Response) => {
     return res.status(404).send();
   }
 
-  const { name, email, privacy, course, accommodation } = req.body;
+  const { name, email, privacy, course, accommodation, nfcTag } = req.body;
   user.name = name ?? user.name;
   user.email = email ?? user.email;
   user.privacy = privacy ?? user.privacy;
   user.course = course !== undefined ? course : user.course;
   user.accommodation =
     accommodation !== undefined ? accommodation : user.accommodation;
+  user.nfcTag = nfcTag ?? user.nfcTag;
 
   await user.save();
 
