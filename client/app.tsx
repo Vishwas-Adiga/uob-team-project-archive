@@ -25,9 +25,9 @@ function App() {
     <RecoilRoot>
       {/* TODO: Replace with loading UI*/}
       <Suspense fallback={"Loading"}>
-        <IdScanner />
         <BrowserRouter>
           <Nav />
+          <IdScanner />
           <Routes>
             <Route path="/" element={<Auth />}>
               <Route path="/" element={<SignIn />} />
