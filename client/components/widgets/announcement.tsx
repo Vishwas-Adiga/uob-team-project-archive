@@ -134,7 +134,7 @@ export const Announcement = (props: WidgetProps<AnnouncementPayload>) => {
           <p>{announcement.content}</p>
         )}
         {props.editState === "edit" && (
-          <TextArea labelText="Content" onChange={onContentChange} />
+          <TextArea labelText="Content" value={announcement.content} onChange={onContentChange} />
         )}
         {props.editState === "edit" &&
           expiryDate.getTime() === defaultExpiry.getTime() && (
