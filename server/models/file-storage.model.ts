@@ -30,11 +30,11 @@ export const init = sequelize =>
       name: {
         type: DataTypes.TEXT,
         allowNull: false,
-        unique: true,
       },
       relPath: {
         type: DataTypes.TEXT,
         allowNull: false,
+        unique: true,
       },
     },
     { modelName: "FileStorage", freezeTableName: true, sequelize }
