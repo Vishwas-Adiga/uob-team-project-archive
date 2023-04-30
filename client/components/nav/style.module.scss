@@ -3,6 +3,31 @@ header.header {
   grid-template-columns: auto 1fr auto;
   overflow: hidden;
   position: sticky;
+
+  :global(.cds--overflow-menu) {
+    height: 100%;
+  }
+
+}
+
+:global(ul.cds--overflow-menu-options) {
+  width: 20rem;
+
+  :global(.cds--overflow-menu-options__option) {
+    min-height: 3rem;
+    height: auto;
+  }
+
+  button {
+    max-width: unset;
+  }
+
+  .signedInUserInfo {
+    height: 5rem;
+    padding: 1rem;
+    display: grid;
+    align-items: flex-start;
+  }
 }
 
 .search {
