@@ -54,7 +54,7 @@ export const Portfolio = () => {
       const fetchPortfolio = async () => {
         const response = await get(`portfolios/${pid}`);
         if (response.status === 403) {
-          return null;
+          return undefined;
         }
         if (!response.ok) navigate(Routes.NOT_FOUND(), { replace: true });
         return await response.json();
@@ -62,12 +62,12 @@ export const Portfolio = () => {
       const fetchWidgets = async () => {
         const response = await get(`portfolios/${pid}/widgets`);
         if (response.status === 403) {
-          return null;
+          return undefined;
         }
         if (!response.ok) navigate(Routes.NOT_FOUND(), { replace: true });
         return await response.json();
       };
-      const [portfolio, portfolioHeader, widgets] = await Promise.all([
+      const [portfolio, portfolioHeader, widgets = []] = await Promise.all([
         fetchPortfolio(),
         fetchPortfolioHeader(),
         fetchWidgets(),
@@ -77,20 +77,18 @@ export const Portfolio = () => {
         ...portfolioState,
         profilePicture: `/api/v1/portfolios/${pid}/profile-picture`,
         profileBanner: `/api/v1/portfolios/${pid}/profile-banner`,
+        ownPortfolio: user?.userId === parseInt(pid!, 10),
       });
-      if (widgets) {
-        setWidgets(
-          widgets.map(w => ({
-            ...w,
-            editState:
-              parseInt(pid!, 10) === user?.userId ? "editable" : "view",
-            reorderButtonsDisabled: [w.index === 1, w.index === widgets.length],
-          }))
-        );
-      }
+      setWidgets(
+        widgets.map(w => ({
+          ...w,
+          editState: parseInt(pid!, 10) === user?.userId ? "editable" : "view",
+          reorderButtonsDisabled: [w.index === 1, w.index === widgets.length],
+        }))
+      );
     };
     fetcher();
-  }, [pid, navigate]);
+  }, [pid, navigate, user]);
   const instantiateWidget = (info: WidgetInfo) => {
     return createElement<WidgetProps<any>>(widgetFactory[info.widgetType], {
       ...info,

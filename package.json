@@ -24,6 +24,7 @@
     "leaflet": "^1.9.3",
     "moment": "^2.29.4",
     "pg": "^8.9.0",
+    "qrcode.react": "^3.1.0",
     "react": "^17.0.1",
     "react-d3-graph18": "^2.6.6",
     "react-dom": "^17.0.1",

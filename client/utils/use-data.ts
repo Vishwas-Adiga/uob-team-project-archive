@@ -4,8 +4,8 @@ import { get } from "./fetch";
 export const useData = <T>(
   url: string,
   deps: any[] = []
-): [T | null, () => void] => {
-  const [data, setData] = useState<T | null>(null);
+): [T | undefined, () => void] => {
+  const [data, setData] = useState<T | undefined>(undefined);
   const [ignore, setIgnore] = useState(false);
   useEffect(() => {
     get(url)
