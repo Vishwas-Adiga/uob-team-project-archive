@@ -66,7 +66,7 @@ export const getGraphConnections = async (
   res: Response
 ) => {
   const rows = await UserConnection.findAll({});
-  const links = rows.map(r => ({ source: r.srcUserId, target: r.dstUserId }));
+  const edges = rows.map(r => ({ source: r.srcUserId, target: r.dstUserId }));
   const userIds: number[] = [];
   for await (const { id } of visitUsers(req.resourceRequesterId ?? 0)) {
     userIds.push(id);
@@ -78,5 +78,10 @@ export const getGraphConnections = async (
       })
     )
   );
+
+  const links = edges.filter(
+    edge => userIds.includes(edge.source) || userIds.includes(edge.target)
+  );
+
   res.status(200).send({ nodes, links });
 };
