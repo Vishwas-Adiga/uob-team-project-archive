@@ -74,6 +74,8 @@ const calculateCourseNameSimilarity = async (self: User, other: User) => {
   const c1 = await self.getCourse();
   const c2 = await other.getCourse();
 
+  if (!c1 || !c2) return 0;
+
   const intersect = (a, b) => new Set([...a].filter(x => b.has(x)));
 
   const tokens1 = new Set(
@@ -113,6 +115,8 @@ const ACCOMM_DISTANCE_DROP_OFF = 4.5;
 const calculateAccommodationDistance = async (self: User, other: User) => {
   const accomm1 = await self.getAccommodation();
   const accomm2 = await other.getAccommodation();
+
+  if (!accomm1 || !accomm2) return 0;
 
   // Convert all to radians
   const lat1 = (accomm1.latitude * Math.PI) / 180;
@@ -218,11 +222,6 @@ export const getRecommendations = async (
   const selfAsUser = await User.findByPk(self);
   if (!self || !selfAsUser) return res.status(500).send();
   const reqUserConnections = await getConnections(self);
-  const reqUserConnectionProfilePictures = await Promise.all(
-    Array.from(reqUserConnections).map(c =>
-      User.findByPk(c, { attributes: ["userId", "profilePicture"] })
-    )
-  );
 
   for await (const { id, geodesic, connections } of visitUsers(self)) {
     if (reqUserConnections.has(id) || id === self) continue;
@@ -231,11 +230,9 @@ export const getRecommendations = async (
     if (!user) continue;
     if (user.privacy === "Private") continue;
 
-    const mutualConnections = Array.from(connections)
-      .filter(connection => reqUserConnections.has(connection))
-      .map(connection =>
-        reqUserConnectionProfilePictures.find(p => p?.userId === connection)
-      );
+    const mutualConnections = Array.from(connections).filter(connection =>
+      reqUserConnections.has(connection)
+    );
 
     const similarityScore = Math.trunc(
       (await calculateSimilarityScore(
@@ -250,7 +247,6 @@ export const getRecommendations = async (
     const recommendedUser = {
       userId: id,
       name: user.name,
-      profilePicture: user.profilePicture,
       course: await user.getCourse({ attributes: ["courseId", "name"] }),
       accommodation: await user.getAccommodation({
         attributes: ["accommId", "name"],

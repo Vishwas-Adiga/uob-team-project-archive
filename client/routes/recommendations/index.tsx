@@ -53,7 +53,7 @@ export const Recommendations = () => {
         setRecommendedUsers(r => [...r, ...payload]);
       }
     };
-    fetchRecommendations();
+    // fetchRecommendations();
   }, []);
   const [filter, setFilter] = useState<Filter>(DEFAULT_FILTER);
   const filteredRecommendations = recommendedUsers
@@ -131,15 +131,18 @@ export const Recommendations = () => {
           )}
           {filteredRecommendations.map(r => (
             <Tile key={r.userId} className={styles.recommendedUser}>
-              <img src={r.profilePicture} alt={`${r.name}'s profile picture`} />
+              <img
+                src={`api/v1/portfolios/${r.userId}/profile-picture`}
+                alt={`${r.name}'s profile picture`}
+              />
               <span />
               <h4>{r.name}</h4>
               {r.mutualConnections.length > 0 && <p>Also connected with</p>}
               <div className={styles.recommendedUserMutuals}>
-                {r.mutualConnections.slice(0, 3).map(m => (
+                {r.mutualConnections.slice(0, 3).map(mId => (
                   <img
-                    key={m.userId}
-                    src={m.profilePicture}
+                    key={mId}
+                    src={`api/v1/portfolios/${mId}/profile-picture`}
                     alt="Mutual connection's profile picture"
                   />
                 ))}

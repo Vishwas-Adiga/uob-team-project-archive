@@ -33,18 +33,18 @@ export const FilterControls = (props: FilterControlsProps) => {
         ...props.filter,
         courses: selectedItems,
       }),
-    [props, courses]
+    [props]
   );
 
   const setCourseToSelf = useCallback(
     (_, { checked }) => {
-      if (!user) return;
+      if (!user || !user.Course) return;
       props.setFilter({
         ...props.filter,
         courses: checked ? [user.Course] : [],
       });
     },
-    [props, user, courses]
+    [props, user]
   );
 
   const setAccoms = useCallback(
@@ -58,7 +58,7 @@ export const FilterControls = (props: FilterControlsProps) => {
 
   const setAccomToSelf = useCallback(
     (_, { checked }) => {
-      if (!user) return;
+      if (!user || !user.Accommodation) return;
       props.setFilter({
         ...props.filter,
         accommodations: checked ? [user.Accommodation] : [],
@@ -89,22 +89,26 @@ export const FilterControls = (props: FilterControlsProps) => {
         noValidate
         onChange={setMinSimilarity}
       />
-      <Checkbox
-        labelText={`Same course as me`}
-        id="recs-filter-course"
-        checked={
-          props.filter.courses.length === 1 &&
-          props.filter.courses.find(
-            c => c.courseId === user?.Course.courseId
-          ) !== undefined
-        }
-        onChange={setCourseToSelf}
-      />
+      {user?.Course && (
+        <Checkbox
+          labelText={`Same course as me`}
+          id="recs-filter-course"
+          checked={
+            props.filter.courses.length === 1 &&
+            props.filter.courses.find(
+              c => c.courseId === user?.Course?.courseId
+            ) !== undefined
+          }
+          onChange={setCourseToSelf}
+        />
+      )}
       <FilterableMultiSelect
         id="recs-filter-all-course"
         disabled={
           props.filter.courses.length === 1 &&
-          props.filter.courses.find(c => c.courseId === 142) !== undefined
+          props.filter.courses.find(
+            c => c.courseId === user?.Course?.courseId
+          ) !== undefined
         }
         titleText="Course"
         hideHelperText
@@ -114,23 +118,25 @@ export const FilterControls = (props: FilterControlsProps) => {
         selectionFeedback="top"
         onChange={setCourses}
       />
-      <Checkbox
-        labelText={`Same accommodation as me`}
-        id="recs-filter-accom"
-        checked={
-          props.filter.accommodations.length === 1 &&
-          props.filter.accommodations.find(
-            a => a.accommId === user?.Accommodation.accommId
-          ) !== undefined
-        }
-        onChange={setAccomToSelf}
-      />
+      {user?.Accommodation && (
+        <Checkbox
+          labelText={`Same accommodation as me`}
+          id="recs-filter-accom"
+          checked={
+            props.filter.accommodations.length === 1 &&
+            props.filter.accommodations.find(
+              a => a.accommId === user?.Accommodation?.accommId
+            ) !== undefined
+          }
+          onChange={setAccomToSelf}
+        />
+      )}
       <FilterableMultiSelect
         id="recs-filter-all-accom"
         disabled={
           props.filter.accommodations.length === 1 &&
           props.filter.accommodations.find(
-            a => a.accommId === user?.Accommodation.accommId
+            a => a.accommId === user?.Accommodation?.accommId
           ) !== undefined
         }
         titleText="Accommodation"

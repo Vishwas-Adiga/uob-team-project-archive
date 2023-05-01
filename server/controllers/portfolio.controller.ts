@@ -1,18 +1,27 @@
 import { Response, Request } from "express";
-import { User } from "../models/index.js";
+import { Accommodation, Course, User } from "../models/index.js";
 import { ValidatedRequest } from "../middleware/jwt.middleware.js";
 import { v4 as uuidv4 } from "uuid";
 
 export const getPortfolio = async (req: ValidatedRequest, res: Response) => {
-  const user = await User.findByPk(req.resourceOwnerId);
-  if (!user)
-    return res.status(404).send({ message: "No portfolio found for given ID" });
+  const user = await User.findByPk(req.resourceOwnerId, {
+    attributes: { exclude: ["password", "nfcTag", "createdAt", "updatedAt", "profilePicture", "profileBanner", "admin", "email", "course", "accommodation"] },
+    include: [
+      {
+        model: Accommodation,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+      {
+        model: Course,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+    ],
+  });
+  if (!user) {
+    return res.status(404).send();
+  }
 
-  const portfolio = {
-    name: user.name,
-  };
-
-  return res.status(200).send(portfolio);
+  return res.status(200).send(user.dataValues);
 };
 
 export const getPortfolioHeader = async (req: Request, res: Response) => {
@@ -26,6 +35,7 @@ export const getPortfolioHeader = async (req: Request, res: Response) => {
   }
   return res.status(200).send({
     name: user.name,
+    privacy: user.privacy
   });
 };
 
