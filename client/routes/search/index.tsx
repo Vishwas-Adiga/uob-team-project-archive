@@ -6,6 +6,7 @@ import { get } from "../../utils/fetch";
 import styles from "./style.module.scss";
 import { Button } from "@carbon/react";
 import { Routes } from "../index";
+import { Helmet } from "react-helmet";
 
 export const Search = () => {
   const [searchParams] = useSearchParams();
@@ -24,26 +25,32 @@ export const Search = () => {
 
   return (
     <AuthenticatedRoute>
-      <>
-        <h3> Search Result of: {searchQuery} </h3>
-        {result.map(result => (
-          <div className={styles.page}>
-            <img
-              className={styles.iconimage}
-              src={`/api/v1/portfolios/${result.userId}/profile-picture`}
-            />
-            <h4>{result.name}</h4>
-            <Button
-              kind="primary"
-              size="lg"
-              onClick={navigate.bind(null, Routes.PORTFOLIO(result.userId))}
-              className={styles.Button}
-            >
-              View Profile
-            </Button>
-          </div>
-        ))}
-      </>
+      <div className={styles.container}>
+        <Helmet>
+          <title>Search results | {Config.APP.NAME}</title>
+        </Helmet>
+        <h3> Search results for "{searchQuery}"</h3>
+        <main id="main-content">
+          <ul>
+            {result.map(result => (
+              <li className={styles.searchResult} key={result.userId}>
+                <img
+                  className={styles.iconimage}
+                  src={`/api/v1/portfolios/${result.userId}/profile-picture`}
+                />
+                <h4>{result.name}</h4>
+                <Button
+                  size="sm"
+                  onClick={navigate.bind(null, Routes.PORTFOLIO(result.userId))}
+                  className={styles.Button}
+                >
+                  View {Config.APP.NAME}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </main>
+      </div>
     </AuthenticatedRoute>
   );
 };

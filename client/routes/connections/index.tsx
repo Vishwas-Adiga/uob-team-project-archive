@@ -4,9 +4,11 @@ import { redirect, useParams, useNavigate } from "react-router-dom";
 import styles from "./style.module.scss";
 import { Connections as ConnectionsState } from "../../state/connections-state";
 import { Button } from "@carbon/react";
-import { ArrowRight, UserAvatar } from "@carbon/icons-react";
+import { ArrowRight, Information, UserAvatar } from "@carbon/icons-react";
 import { AuthenticatedRoute } from "../../components/conditional-route";
 import moment from "moment";
+import { Config } from "../../config";
+import { Helmet } from "react-helmet";
 export const AllConnections = () => {
   const navigate = useNavigate();
   const navigateToRequests = () => {
@@ -51,8 +53,14 @@ export const AllConnections = () => {
   if (connections)
     return (
       <AuthenticatedRoute>
-        <div>
-          <h1 className={styles.connectTitle}>Connections</h1>
+        <div className={styles.container}>
+          <Helmet>
+            <title>Connections | {Config.APP.NAME}</title>
+          </Helmet>
+          <div className={styles.header}>
+            <h3>Connections</h3>
+            <h4>View all your connections and when you connected with them</h4>
+          </div>
           <Button
             className={styles.btn4}
             onClick={navigateToRequests}
@@ -60,22 +68,24 @@ export const AllConnections = () => {
             size="md"
             kind="ghost"
           >
-            Requests{" "}
+            View connection requests
           </Button>
-          {connections.map(w => (
-            <div className={styles.wrapper}>
-              <img
-                className={styles.img}
-                alt={`${w.name} profile picture`}
-                src={`/api/v1/portfolios/${w.userId}/profile-picture`}
-              />
-              <h3 className={styles.txt}>
-                {w.name} connected with you
-                <p>{dateTimeAgo(w.accepted)}</p>
-              </h3>
-              <Btn id={w.userId} />
-            </div>
-          ))}
+          <main id="main-content">
+            {connections.map(w => (
+              <div className={styles.wrapper} key={w.userId}>
+                <img
+                  className={styles.img}
+                  alt={`${w.name} profile picture`}
+                  src={`/api/v1/portfolios/${w.userId}/profile-picture`}
+                />
+                <h4 className={styles.txt}>
+                  {w.name} connected with you
+                  <p>{dateTimeAgo(w.accepted)}</p>
+                </h4>
+                <Btn id={w.userId} />
+              </div>
+            ))}
+          </main>
         </div>
       </AuthenticatedRoute>
     );

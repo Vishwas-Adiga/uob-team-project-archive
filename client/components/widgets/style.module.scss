@@ -31,6 +31,10 @@
   }
 }
 
+:global(.cds--inline-notification) {
+  max-width: unset;
+}
+
 .expiredAnnouncementWidgetPlaceholder {
   position: absolute;
   display: none;

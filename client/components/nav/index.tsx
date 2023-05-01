@@ -99,7 +99,12 @@ export const Nav = () => {
           >
             Connect
           </Button>
-          <OverflowMenu size="lg" flipped renderIcon={UserAvatar}>
+          <OverflowMenu
+            size="lg"
+            flipped
+            renderIcon={UserAvatar}
+            ariaLabel="Sign out menu"
+          >
             <OverflowMenuItem
               className={styles.signedInUserInfo}
               onClick={navigate.bind(
