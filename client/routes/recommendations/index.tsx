@@ -53,7 +53,7 @@ export const Recommendations = () => {
         setRecommendedUsers(r => [...r, ...payload]);
       }
     };
-    // fetchRecommendations();
+    fetchRecommendations();
   }, []);
   const [filter, setFilter] = useState<Filter>(DEFAULT_FILTER);
   const filteredRecommendations = recommendedUsers
