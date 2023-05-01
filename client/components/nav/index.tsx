@@ -13,7 +13,7 @@ import {
   SideNavItems,
   SkipToContent,
 } from "@carbon/react";
-import { QrCode, UserAvatar } from "@carbon/icons-react";
+import { Login, QrCode, UserAvatar } from "@carbon/icons-react";
 import { Config } from "../../config";
 import styles from "./style.module.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -59,14 +59,21 @@ export const Nav = () => {
   return (
     <Header aria-label={"App header"} className={styles.header}>
       <SkipToContent />
-      <HeaderMenuButton
-        aria-label={sideNavExpanded ? "Close menu" : "Open menu"}
-        onClick={onClickSideNavExpand}
-        isActive={sideNavExpanded}
-      />
+      {user && (
+        <HeaderMenuButton
+          aria-label={sideNavExpanded ? "Close menu" : "Open menu"}
+          onClick={onClickSideNavExpand}
+          isActive={sideNavExpanded}
+        />
+      )}
       <HeaderName
         prefix=""
-        onClick={navigate.bind(null, Routes.PORTFOLIO(user?.userId.toString()))}
+        onClick={navigate.bind(
+          null,
+          user
+            ? Routes.PORTFOLIO(user.userId.toString())
+            : Routes.AUTH_SIGN_IN()
+        )}
       >
         {Config.APP.NAME}
       </HeaderName>
@@ -116,6 +123,16 @@ export const Nav = () => {
               onClick={signOut}
             />
           </OverflowMenu>
+        </HeaderGlobalBar>
+      )}
+      {!user && (
+        <HeaderGlobalBar>
+          <Button
+            renderIcon={Login}
+            onClick={navigate.bind(null, Routes.AUTH_SIGN_IN())}
+          >
+            Sign in
+          </Button>
         </HeaderGlobalBar>
       )}
       <SideNav
