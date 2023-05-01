@@ -1,4 +1,4 @@
-.connectTitle{
+.connectTitle {
   text-align: left;
   padding-left: 35px;
   display: inline-block;
@@ -7,12 +7,12 @@
   font-size: 30px;
 }
 .img {
-  width: 300px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   margin-left: 120px;
   margin-bottom: 20px;
 }
-.btn4{
+.btn4 {
   color: #000000;
   float: right;
   text-align: center;
@@ -20,12 +20,9 @@
   margin-top: 7px;
   font-size: 28px;
 }
-.wrapper{
+.wrapper {
   display: grid;
   grid-template-columns: 460px 700px 1fr;
   align-items: center;
   row-gap: 150px;
 }
-
-
-

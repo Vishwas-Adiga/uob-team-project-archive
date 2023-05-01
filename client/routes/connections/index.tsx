@@ -67,7 +67,7 @@ export const AllConnections = () => {
               <img
                 className={styles.img}
                 alt={`${w.name} profile picture`}
-                src={w.profilePic}
+                src={`/api/v1/portfolios/${w.userId}/profile-picture`}
               />
               <h3 className={styles.txt}>
                 {w.name} connected with you

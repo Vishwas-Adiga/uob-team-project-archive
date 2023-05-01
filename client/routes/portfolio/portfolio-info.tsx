@@ -42,7 +42,7 @@ export const PortfolioInfo = (props: Portfolio) => {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("connect");
   if (user && (connections === undefined || requests === undefined)) {
-    return (<p>Loading...</p>)
+    return <p>Loading...</p>;
   }
   if (
     !requestSent &&

@@ -28,7 +28,10 @@ export const Search = () => {
         <h3> Search Result of: {searchQuery} </h3>
         {result.map(result => (
           <div className={styles.page}>
-            <img className={styles.iconimage} src={result.profilePicture} />
+            <img
+              className={styles.iconimage}
+              src={`/api/v1/portfolios/${result.userId}/profile-picture`}
+            />
             <h4>{result.name}</h4>
             <Button
               kind="primary"

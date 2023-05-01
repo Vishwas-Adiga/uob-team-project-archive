@@ -53,10 +53,8 @@ export const Requests = () => {
             <div className={styles.wrapper}>
               <img
                 className={styles.img}
-                width={300}
-                height={140}
                 alt={`${w.name} profile picture`}
-                src={w.profilePic}
+                src={`/api/v1/portfolios/${w.userId}/profile-picture`}
               />
               <h3 className={styles.txt}>{w.name}</h3>
               <Button
