@@ -24,6 +24,7 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../state/user-state";
 import { WidgetProps } from "../../components/widgets";
 import { Announcement } from "../../components/widgets/announcement";
+import { Config } from "../../config";
 
 type WidgetFactory = {
   [key in WidgetType]: FunctionComponent<WidgetProps<any>>;
@@ -218,7 +219,9 @@ export const Portfolio = () => {
     <>
       <Helmet>
         <title>
-          {portfolio ? `${portfolio.name}'s portfolio` : "Loading portfolio"}
+          {portfolio ? `${portfolio.name}` : "Loading portfolio"}
+          {" | "}
+          {Config.APP.NAME}
         </title>
       </Helmet>
       {portfolio && (

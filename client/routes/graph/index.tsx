@@ -9,11 +9,9 @@ export const Graph = () => {
 
   return (
     <AuthenticatedRoute>
-      <div>
-        <h1 className={styles.title}>{Config.GRAPH.NAME}</h1>
-        <h4 className={styles.slogan}>
-          Explore and expand the {Config.GRAPH.NAME}
-        </h4>
+      <div className={styles.container}>
+        <h3>{Config.GRAPH.NAME}</h3>
+        <h4>Explore and expand the {Config.GRAPH.NAME}</h4>
         <StudentGraph graph={graph ?? { nodes: [], links: [] }} />
       </div>
     </AuthenticatedRoute>

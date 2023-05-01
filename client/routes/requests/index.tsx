@@ -6,6 +6,8 @@ import { del, get, patch } from "../../utils/fetch";
 import styles from "./style.module.scss";
 import { Button } from "@carbon/react";
 import { ArrowLeft, Checkmark, Error } from "@carbon/icons-react";
+import { Helmet } from "react-helmet";
+import { Config } from "../../config";
 
 export const Requests = () => {
   const [requests, setRequests] = useState<ConnectionsState[]>([]);
@@ -34,49 +36,53 @@ export const Requests = () => {
   if (requests)
     return (
       <AuthenticatedRoute>
-        <div>
-          <div className={styles.wrapper2}>
-            <Button
-              className={styles.btn}
-              onClick={navigateToRequests}
-              renderIcon={() => (
-                <ArrowLeft style={{ width: "50px", height: "30px" }} />
-              )}
-              size="sm"
-              kind="ghost"
-            >
-              {" "}
-            </Button>
-            <h2 className={styles.reqTitle}>Requests</h2>
+        <div className={styles.container}>
+          <Helmet>
+            <title>Connection requests | {Config.APP.NAME}</title>
+          </Helmet>
+          <div className={styles.header}>
+            <h3>Connection requests</h3>
+            <h4>Accept or delete incoming connection requests</h4>
           </div>
-          {requests.map(w => (
-            <div className={styles.wrapper}>
-              <img
-                className={styles.img}
-                alt={`${w.name} profile picture`}
-                src={`/api/v1/portfolios/${w.userId}/profile-picture`}
-              />
-              <h3 className={styles.txt}>{w.name}</h3>
-              <Button
-                className={styles.btn3}
-                size="md"
-                kind="secondary"
-                renderIcon={Checkmark}
-                onClick={handleConfirmBtn.bind(null, w.userId)}
-              >
-                Confirm
-              </Button>
-              <Button
-                className={styles.btn3}
-                size="md"
-                kind="danger"
-                renderIcon={Error}
-                onClick={handleDeleteBtn.bind(null, w.userId)}
-              >
-                Delete
-              </Button>
-            </div>
-          ))}
+          <Button
+            className={styles.btn}
+            onClick={navigateToRequests}
+            renderIcon={ArrowLeft}
+            size="lg"
+            kind="ghost"
+          >
+            Back to connections
+          </Button>
+          <main id="main-content">
+            {requests.map(w => (
+              <div className={styles.wrapper} key={w.userId}>
+                <img
+                  className={styles.img}
+                  alt={`${w.name} profile picture`}
+                  src={`/api/v1/portfolios/${w.userId}/profile-picture`}
+                />
+                <h4>{w.name}</h4>
+                <Button
+                  className={styles.acceptButton}
+                  size="md"
+                  kind="primary"
+                  renderIcon={Checkmark}
+                  onClick={handleConfirmBtn.bind(null, w.userId)}
+                >
+                  Accept
+                </Button>
+                <Button
+                  className={styles.deleteButton}
+                  size="md"
+                  kind="danger"
+                  renderIcon={Error}
+                  onClick={handleDeleteBtn.bind(null, w.userId)}
+                >
+                  Delete
+                </Button>
+              </div>
+            ))}
+          </main>
         </div>
       </AuthenticatedRoute>
     );

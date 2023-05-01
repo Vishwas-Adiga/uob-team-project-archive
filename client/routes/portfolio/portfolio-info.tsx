@@ -58,7 +58,13 @@ export const PortfolioInfo = (props: Portfolio) => {
 
   return (
     <Tile className={styles.portfolioInfo}>
-      <img className={styles.profilePhoto} src={props.profilePicture} alt="" />
+      <span className={styles.profilePhoto}>
+        <img
+          className={styles.profilePhoto}
+          src={props.profilePicture}
+          alt=""
+        />
+      </span>
       {!user && (
         <Button className={styles.connectButton} disabled>
           Sign in to connect

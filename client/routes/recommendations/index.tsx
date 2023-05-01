@@ -131,10 +131,12 @@ export const Recommendations = () => {
           )}
           {filteredRecommendations.map(r => (
             <Tile key={r.userId} className={styles.recommendedUser}>
-              <img
-                src={`api/v1/portfolios/${r.userId}/profile-picture`}
-                alt={`${r.name}'s profile picture`}
-              />
+              <div className={styles.squareImage}>
+                <img
+                  src={`api/v1/portfolios/${r.userId}/profile-picture`}
+                  alt={`${r.name}'s profile picture`}
+                />
+              </div>
               <span />
               <h4>{r.name}</h4>
               {r.mutualConnections.length > 0 && <p>Also connected with</p>}

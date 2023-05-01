@@ -1,8 +1,7 @@
-.title{
-  text-align: center;
-  padding: 30px;
-}
-
-.slogan{
-  text-align: center;
+.container {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  padding: 1rem;
+  height: calc(100vh - 3rem);
+  overflow: hidden;
 }
