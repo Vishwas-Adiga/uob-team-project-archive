@@ -62,12 +62,14 @@ export const Recommendations = () => {
     .filter(
       r =>
         filter.courses.length === 0 ||
-        filter.courses.find(c => c.courseId === r.course.courseId)
+        filter.courses.find(c => c.courseId === r.course?.courseId)
     )
     .filter(
       r =>
         filter.accommodations.length === 0 ||
-        filter.accommodations.find(a => a.accommId === r.accommodation.accommId)
+        filter.accommodations.find(
+          a => a.accommId === r.accommodation?.accommId
+        )
     );
 
   const [filterModalOpen, setFilterModalOpen] = useState(false);

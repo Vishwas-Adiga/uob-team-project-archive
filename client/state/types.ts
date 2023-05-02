@@ -13,8 +13,8 @@ export interface Accommodation {
 export interface RecommendedUser {
   userId: number;
   name: string;
-  course: Course;
-  accommodation: Accommodation;
+  course?: Course;
+  accommodation?: Accommodation;
   mutualConnections: number[];
   similarityScore: number;
 }
