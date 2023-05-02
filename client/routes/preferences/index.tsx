@@ -179,6 +179,14 @@ export const Preferences = () => {
                   itemToString={item => (item ? item.name : "")}
                   onChange={e => setCourse(e.selectedItem)}
                   selectedItem={course}
+                  shouldFilterItem={({ item, inputValue }) =>
+                    item.name
+                      .toLowerCase()
+                      .replaceAll(/[^a-zA-Z\d]/gi, "")
+                      .includes(
+                        inputValue.toLowerCase().replaceAll(/[^a-zA-Z\d]/gi, "")
+                      )
+                  }
                 />
               </FormGroup>
               <FormGroup legendText="">
