@@ -4,6 +4,9 @@ import { Widget, User, sequelize } from "../models/index.js";
 import { Widget as WidgetT } from "../models/widget.model.js";
 import { Op } from "sequelize";
 
+import { wsClients } from "../main.js";
+import { calculateAllConnections } from "./user-connection.controller.js";
+
 export const getWidget = async (req: ValidatedRequest, res: Response) => {
   const widget = await Widget.findByPk(parseInt(req.params.wid, 10));
   if (!widget) {
@@ -38,6 +41,10 @@ export const getAllWidgets = async (req: ValidatedRequest, res: Response) => {
 export const createWidget = async (req: ValidatedRequest, res: Response) => {
   // widget type
   // {type: "type", "data": {...}, "index": 0}
+  const user = await User.findByPk(req.resourceRequesterId);
+  if (!user) {
+    return res.status(500).send();
+  }
   try {
     const widget = await sequelize.transaction(async t => {
       const widget = await Widget.create(
@@ -51,6 +58,22 @@ export const createWidget = async (req: ValidatedRequest, res: Response) => {
       await widget?.createPayload(req.body.payload, { transaction: t });
       return widget;
     });
+
+    const allConnections = (
+      await calculateAllConnections(req.resourceRequesterId!, true)
+    ).map(f => f.userId);
+    for (const [k, v] of wsClients) {
+      if (allConnections.includes(k)) {
+        v.send(
+          JSON.stringify({
+            event: "create",
+            type: req.body.type,
+            username: user.name,
+          })
+        );
+      }
+    }
+
     return res.status(200).send(await widget.getPayload());
   } catch (error) {
     return res.status(400).send();

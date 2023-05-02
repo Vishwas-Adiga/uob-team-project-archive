@@ -4,7 +4,18 @@ import { Accommodation, Course, User } from "../models/index.js";
 
 export const getUser = async (req: ValidatedRequest, res: Response) => {
   const user = await User.findByPk(req.resourceOwnerId, {
-    attributes: { exclude: ["password", "nfcTag", "createdAt", "updatedAt", "profilePicture", "profileBanner", "course", "accommodation"] },
+    attributes: {
+      exclude: [
+        "password",
+        "nfcTag",
+        "createdAt",
+        "updatedAt",
+        "profilePicture",
+        "profileBanner",
+        "course",
+        "accommodation",
+      ],
+    },
     include: [
       {
         model: Accommodation,
