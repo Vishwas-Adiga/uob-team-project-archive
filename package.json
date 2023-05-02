@@ -13,6 +13,7 @@
     "@carbon/icons-react": "^11.16.0",
     "@carbon/pictograms-react": "^11.40.0",
     "@carbon/react": "1.19.0",
+    "@uiw/react-md-editor": "^3.20.10",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "canvas-confetti": "^1.6.0",

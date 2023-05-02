@@ -19,6 +19,11 @@ export type AnnouncementPayload = {
 
 export type ModulesPayload = Array<number>;
 
+export type RichTextPayload = {
+  title: string;
+  content: string;
+};
+
 export type SocialPlatform =
   | "bereal"
   | "discord"
@@ -36,7 +41,8 @@ export type SocialPayload = {
 export type WidgetPayload =
   | AnnouncementPayload
   | ModulesPayload
-  | SocialPayload;
+  | SocialPayload
+  | RichTextPayload;
 
 export interface WidgetInfo<T extends WidgetPayload = WidgetPayload> {
   widgetId: number;
