@@ -19,9 +19,11 @@ import { User } from "./user.model.js";
 type WidgetPayload = Announcement | Link | Location | RichText;
 const WidgetTypes = [
   "Announcement",
+  "File",
   "Link",
   "Location",
   "Module",
+  "Social",
   "RichText",
 ] as const;
 type WidgetType = (typeof WidgetTypes)[number];
