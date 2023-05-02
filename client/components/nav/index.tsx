@@ -56,6 +56,37 @@ export const Nav = () => {
     setSideNavExpanded(e => !e);
   }, [sideNavExpanded]);
 
+  const [notificationAnswered, setNotificationAnswered] = useState(false);
+
+  const enableNotifications = useCallback(() => {
+    Notification.requestPermission((result: string) => {
+      if (result !== "default") {
+        setNotificationAnswered(true);
+      }
+      if (result === "granted") {
+        console.log("Enabling WS!");
+        const token = localStorage.getItem(Config.STORAGE.JWT_TOKEN_KEY);
+        if (!token) return null;
+        const sock = new WebSocket(
+          `wss://${window.location.host}/socket?token=${token}`
+        );
+        sock.addEventListener("message", event => {
+          const payload = JSON.parse(event.data);
+          let title;
+          let body;
+          if (payload.type !== "Announcement") {
+            return;
+          }
+          title = `${payload.username} : Porfolio update`;
+          if (payload.event === "create") {
+            body = `New ${payload.type} from ${payload.username}`;
+          }
+          new Notification(title, { body });
+        });
+      }
+    });
+  }, []);
+
   return (
     <Header aria-label={"App header"} className={styles.header}>
       <SkipToContent />
@@ -117,6 +148,11 @@ export const Nav = () => {
                   Signed in as {user.email}
                 </>
               }
+            />
+            <OverflowMenuItem
+              itemText="Enable notifications"
+              onClick={enableNotifications}
+              disabled={notificationAnswered}
             />
             <OverflowMenuItem
               disabled

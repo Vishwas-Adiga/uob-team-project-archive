@@ -5,7 +5,20 @@ import { v4 as uuidv4 } from "uuid";
 
 export const getPortfolio = async (req: ValidatedRequest, res: Response) => {
   const user = await User.findByPk(req.resourceOwnerId, {
-    attributes: { exclude: ["password", "nfcTag", "createdAt", "updatedAt", "profilePicture", "profileBanner", "admin", "email", "course", "accommodation"] },
+    attributes: {
+      exclude: [
+        "password",
+        "nfcTag",
+        "createdAt",
+        "updatedAt",
+        "profilePicture",
+        "profileBanner",
+        "admin",
+        "email",
+        "course",
+        "accommodation",
+      ],
+    },
     include: [
       {
         model: Accommodation,
@@ -35,7 +48,7 @@ export const getPortfolioHeader = async (req: Request, res: Response) => {
   }
   return res.status(200).send({
     name: user.name,
-    privacy: user.privacy
+    privacy: user.privacy,
   });
 };
 

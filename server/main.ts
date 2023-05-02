@@ -16,6 +16,9 @@ import { getCommonModel } from "./controllers/common-models.controller.js";
 import { seed } from "./seeders/index.js";
 import { graphRouter } from "./routes/graph.route.js";
 import { searchRouter } from "./routes/search.route.js";
+import websocket from "./websocket.js";
+
+export const wsClients = new Map();
 
 const app = express();
 app.use(fileUpload());
@@ -37,7 +40,7 @@ app.get("/api/v1/courses", getCommonModel(Course));
 app.get("/api/v1/accommodations", getCommonModel(Accommodation));
 app.get("/api/v1/modules", getCommonModel(Module));
 
-app.listen(Config.PORT, async () => {
+const server = app.listen(Config.PORT, async () => {
   await serveStatic(app);
   await serveHTML(app);
   await sequelize.sync();
@@ -45,3 +48,4 @@ app.listen(Config.PORT, async () => {
   if (!seeded) await seed();
   console.log(`App running in port ${Config.PORT}`);
 });
+websocket(server);
