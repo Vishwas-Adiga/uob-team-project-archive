@@ -20,7 +20,8 @@
   }
 }
 
-.announcementWidget {
+.announcementWidget,
+.richTextWidget {
   display: grid;
   grid-gap: 0.5rem;
 
@@ -56,5 +57,27 @@
       width: 24px;
       background: var(--cds-text-primary);
     }
+  }
+}
+
+.richTextWidget {
+  :global(.wmde-markdown),
+  :global(.wmde-markdown-var) {
+    --color-fg-default: var(--cds-text-primary);
+    --color-canvas-default: var(--cds-layer);
+    --color-fg-muted: var(--cds-text-secondary);
+    --color-fg-subtle: var(--cds-text-disabled);
+    --color-canvas-subtle: var(--cds-layer-01);
+    --color-border-default: var(--cds-border-interactive);
+    --color-border-muted: var(--cds-border-subtle);
+    --color-neutral-muted: rgba(110, 118, 129, 0.4);
+    --color-accent-fg: var(--cds-brand-60);
+    --color-accent-emphasis: var(--cds-brand-70);
+    --color-attention-subtle: var(--cds-support-caution-minor);
+    --color-danger-fg: var(--cds-button-danger-secondary);
+  }
+
+  ol, ul {
+    list-style: unset;
   }
 }
