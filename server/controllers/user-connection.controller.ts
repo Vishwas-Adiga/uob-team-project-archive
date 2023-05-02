@@ -5,14 +5,41 @@ import { Op } from "sequelize";
 
 export const calculateAllConnections = async (
   userId: number,
-  accepted?: boolean
+  accepted?: boolean,
+  incoming?: boolean
 ) => {
-  const data = await UserConnection.findAll({
-    where: {
-      [Op.or]: [{ srcUserId: userId }, { dstUserId: userId }],
-      accepted: { [accepted ? Op.not : Op.is]: null },
-    },
-  });
+  let data;
+  if (accepted) {
+    data = await UserConnection.findAll({
+      where: {
+        [Op.or]: [{ srcUserId: userId }, { dstUserId: userId }],
+        accepted: { [Op.not]: null },
+      },
+    });
+  } else {
+    if (incoming === undefined) {
+      data = await UserConnection.findAll({
+        where: {
+          [Op.or]: [{ srcUserId: userId }, { dstUserId: userId }],
+          accepted: { [Op.is]: null },
+        },
+      });
+    } else if (incoming) {
+      data = await UserConnection.findAll({
+        where: {
+          dstUserId: userId,
+          accepted: { [Op.is]: null },
+        },
+      });
+    } else {
+      data = await UserConnection.findAll({
+        where: {
+          srcUserId: userId,
+          accepted: { [Op.is]: null },
+        },
+      });
+    }
+  }
   const allConnections = await Promise.all(
     data.map(d => {
       if (d.srcUserId === userId) {
@@ -39,7 +66,15 @@ export const getConnections =
 
     return res
       .status(200)
-      .send(await calculateAllConnections(req.resourceRequesterId!, accepted));
+      .send(
+        await calculateAllConnections(
+          req.resourceRequesterId!,
+          accepted,
+          req.query.incoming === undefined
+            ? undefined
+            : req.query.incoming === "true"
+        )
+      );
   };
 export const deleteConnection = async (
   req: ValidatedRequest,
@@ -91,6 +126,37 @@ export const addConnection = async (req: ValidatedRequest, res: Response) => {
   if (signature) {
     const user = await User.findOne({ where: { nfcTag: signature } });
     if (user) {
+      if (
+        (await calculateAllConnections(req.resourceRequesterId!, true))
+          .map(u => u.userId)
+          .includes(user.userId)
+      ) {
+        return res
+          .status(400)
+          .send({ message: "You are already connected to this user" });
+      }
+
+      await UserConnection.destroy({
+        where: {
+          [Op.or]: [
+            {
+              [Op.and]: [
+                { dstUserId: req.resourceRequesterId },
+                { srcUserId: req.params.uid },
+                { accepted: null },
+              ],
+            },
+            {
+              [Op.and]: [
+                { srcUserId: req.resourceRequesterId },
+                { dstUserId: req.params.uid },
+                { accepted: null },
+              ],
+            },
+          ],
+        },
+      });
+
       await UserConnection.create({
         srcUserId: req.resourceRequesterId,
         dstUserId: user.userId,

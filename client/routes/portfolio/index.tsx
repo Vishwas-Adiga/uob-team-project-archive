@@ -239,7 +239,7 @@ export const Portfolio = () => {
             <span role="none" className={styles.scrim} />
             <span role="none" className={styles.textScrim} />
           </div>
-          <main className={styles.main}>
+          <main id="main-content" className={styles.main}>
             <PortfolioInfo {...portfolio} />
             {parseInt(pid ?? "0") === user?.userId && (
               <NewWidgetToolbar onRequestCreate={createWidgetCallback} />

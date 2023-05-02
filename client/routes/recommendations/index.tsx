@@ -17,6 +17,8 @@ import { Config } from "../../config";
 import { FilterControls } from "./filter-controls";
 import { get } from "../../utils/fetch";
 import styles from "./style.module.scss";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "..";
 
 export interface Filter {
   minMutuals: number;
@@ -73,6 +75,8 @@ export const Recommendations = () => {
     );
 
   const [filterModalOpen, setFilterModalOpen] = useState(false);
+
+  const navigator = useNavigate();
 
   return (
     <AuthenticatedRoute>
@@ -171,8 +175,14 @@ export const Recommendations = () => {
               >
                 {r.similarityScore}% match
               </Tag>
-              <Button size="sm">
-                Connect&nbsp; <span>with {r.name.split(" ")[0]}</span>
+              <Button
+                onClick={navigator.bind(
+                  null,
+                  Routes.PORTFOLIO(r.userId.toString())
+                )}
+                size="sm"
+              >
+                Go&nbsp; <span>to portfolio</span>
               </Button>
             </Tile>
           ))}
