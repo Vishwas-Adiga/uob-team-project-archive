@@ -80,7 +80,7 @@ export const getGraphConnections = async (
   );
 
   const links = edges.filter(
-    edge => userIds.includes(edge.source) || userIds.includes(edge.target)
+    edge => userIds.includes(edge.source) && userIds.includes(edge.target)
   );
 
   res.status(200).send({ nodes, links });
