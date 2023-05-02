@@ -21,6 +21,7 @@
 }
 
 .announcementWidget,
+.locationWidget,
 .richTextWidget {
   display: grid;
   grid-gap: 0.5rem;
@@ -79,5 +80,14 @@
 
   ol, ul {
     list-style: unset;
+  }
+
+}
+
+.locationWidget {
+  :global(.leaflet-container) {
+    width: calc(100% + 2rem);
+    height: 400px;
+    transform: translate(-1rem, -1rem);
   }
 }

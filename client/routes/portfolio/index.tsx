@@ -27,6 +27,7 @@ import { Announcement } from "../../components/widgets/announcement";
 import { Config } from "../../config";
 import { Social } from "../../components/widgets/social";
 import { RichText } from "../../components/widgets/rich-text";
+import { Location } from "../../components/widgets/location";
 
 type WidgetFactory = {
   [key in WidgetType]: FunctionComponent<WidgetProps<any>>;
@@ -35,7 +36,7 @@ const widgetFactory: WidgetFactory = {
   Announcement: Announcement,
   File: Module,
   Link: Module,
-  Location: Module,
+  Location: Location,
   Module: Module,
   RichText: RichText,
   Social: Social,

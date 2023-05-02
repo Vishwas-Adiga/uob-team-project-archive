@@ -17,6 +17,13 @@ export type AnnouncementPayload = {
   expiry: Date;
 };
 
+export type LocationPayload = {
+  title: string;
+  description: string;
+  latitude: number;
+  longitude: number;
+};
+
 export type ModulesPayload = Array<number>;
 
 export type RichTextPayload = {
@@ -40,6 +47,7 @@ export type SocialPayload = {
 
 export type WidgetPayload =
   | AnnouncementPayload
+  | LocationPayload
   | ModulesPayload
   | SocialPayload
   | RichTextPayload;
