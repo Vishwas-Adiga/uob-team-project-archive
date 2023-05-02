@@ -25,9 +25,8 @@ export const IdScanner = () => {
   const [mode, setMode] = useState<"qr" | "nfc">("qr");
   const [nfcErrorModalOpen, setNfcErrorModalOpen] = useState(false);
   const [connectedUser, setConnectedUser] = useState<User | null>(null);
-  const [nfcGranted, setNfcGranted] = useState(
-    localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted"
-  );
+  const nfcGranted =
+    localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted";
   const switchMode = useCallback(({ name }) => setMode(name), []);
 
   const requestNfcPermissions = useCallback(async () => {
@@ -36,7 +35,6 @@ export const IdScanner = () => {
     // @ts-ignore
     const status = await navigator.permissions.query({ name: "nfc" });
     localStorage.setItem(Config.STORAGE.NFC_PERM, status.state);
-    setNfcGranted(status.state === "granted");
   }, []);
 
   const onReadingError = useCallback(() => {
@@ -100,8 +98,11 @@ export const IdScanner = () => {
   const onQrCodeScan = useCallback(
     result => {
       if (!result?.getText()) return;
-      setScanner({ ...scanner, open: false });
-      // TODO implement QR code scanning
+      const url = result.getText();
+      if (Config.APP.URLS.some(u => url.startsWith(u))) {
+        setScanner({ ...scanner, open: false });
+        window.location.href = url;
+      }
     },
     [setScanner]
   );
