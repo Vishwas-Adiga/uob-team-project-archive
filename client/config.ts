@@ -2,6 +2,7 @@ export const Config = {
   APP: {
     NAME: "PortfoliU",
     LOGO: "",
+    URLS: ["https://portfoliu.bham.team", "https://team29-22.bham.team"],
   },
   ORG: {
     NAME: "The University of Birmingham",
