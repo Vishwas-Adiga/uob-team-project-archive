@@ -159,7 +159,10 @@ const moveWidget = async (widget: WidgetT, delta: number) => {
           index: 1,
         },
         {
-          where: { index: { [Op.between]: [oldIndex, newIndex] } },
+          where: {
+            index: { [Op.between]: [oldIndex, newIndex] },
+            user: widget.user,
+          },
           transaction: t,
         }
       );
@@ -169,7 +172,10 @@ const moveWidget = async (widget: WidgetT, delta: number) => {
       // constraints. Instead, we start from the bottom where we assuredly have
       // a hole available and move upwards
       const widgets = await Widget.findAll({
-        where: { index: { [Op.between]: [newIndex, oldIndex] } },
+        where: {
+          index: { [Op.between]: [newIndex, oldIndex] },
+          user: widget.user,
+        },
         transaction: t,
       });
       const reversedWidgets = widgets.reverse();
