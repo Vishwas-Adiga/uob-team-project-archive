@@ -7,6 +7,7 @@ import { init as initCourse } from "./course.model.js";
 import { init as initAnnouncement } from "./announcement.model.js";
 import { init as initLink } from "./link.model.js";
 import { init as initLocation } from "./location.model.js";
+import { init as initSocial } from "./social.model.js";
 import { init as initRichtext } from "./richtext.model.js";
 import { init as initUserConnection } from "./user-connection.model.js";
 import { init as initWidget } from "./widget.model.js";
@@ -47,6 +48,7 @@ export const Announcement = initAnnouncement(sequelize);
 export const RichText = initRichtext(sequelize);
 export const Link = initLink(sequelize);
 export const Location = initLocation(sequelize);
+export const Social = initSocial(sequelize);
 export const UserConnection = initUserConnection(sequelize);
 export const Module = initModule(sequelize);
 export const ModuleInWidget = initModuleInWidget(sequelize);
@@ -116,6 +118,13 @@ Widget.hasOne(Link, {
   onDelete: "CASCADE",
 });
 Link.belongsTo(Widget, { foreignKey: "widgetId" });
+
+Widget.hasOne(Social, {
+  foreignKey: "widgetId",
+  onDelete: "CASCADE",
+});
+Social.belongsTo(Widget, { foreignKey: "widgetId" });
+
 User.hasMany(UserConnection, {
   foreignKey: "srcUserId",
   onDelete: "NO ACTION",

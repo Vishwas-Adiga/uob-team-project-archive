@@ -10,6 +10,12 @@ export interface Accommodation {
   longitude: number;
 }
 
+export interface Module {
+  moduleId: number;
+  name: string;
+  description: string;
+}
+
 export interface RecommendedUser {
   userId: number;
   name: string;

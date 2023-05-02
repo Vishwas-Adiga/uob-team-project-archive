@@ -14,7 +14,8 @@ import styles from "./../style.module.scss";
 import { Add, TrashCan } from "@carbon/icons-react";
 import { WidgetHeader } from "../../widget-header";
 import { useCallback, useRef, useState } from "react";
-import { Module as ModuleT, ModulesPayload } from "../../../state/widget-state";
+import { ModulesPayload } from "../../../state/widget-state";
+import { Module as ModuleT } from "../../../state/types";
 
 export const Module = (props: WidgetProps<ModulesPayload>) => {
   const [allModules] = useData<Array<ModuleT>>("modules");

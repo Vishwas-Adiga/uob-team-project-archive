@@ -11,11 +11,6 @@ export const WIDGET_TYPES = [
 export type WidgetType = (typeof WIDGET_TYPES)[number];
 export type WidgetEditState = "view" | "editable" | "edit";
 
-export interface Module {
-  moduleId: number;
-  name: string;
-  description: string;
-}
 export type AnnouncementPayload = {
   title: string;
   content: string;
@@ -24,7 +19,24 @@ export type AnnouncementPayload = {
 
 export type ModulesPayload = Array<number>;
 
-export type WidgetPayload = AnnouncementPayload | ModulesPayload;
+export type SocialPlatform =
+  | "bereal"
+  | "discord"
+  | "instagram"
+  | "github"
+  | "linkedin"
+  | "reddit"
+  | "snapchat"
+  | "twitter";
+export type SocialPayload = {
+  platform: SocialPlatform;
+  username: string;
+};
+
+export type WidgetPayload =
+  | AnnouncementPayload
+  | ModulesPayload
+  | SocialPayload;
 
 export interface WidgetInfo<T extends WidgetPayload = WidgetPayload> {
   widgetId: number;

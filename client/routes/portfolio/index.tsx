@@ -25,6 +25,7 @@ import { userState } from "../../state/user-state";
 import { WidgetProps } from "../../components/widgets";
 import { Announcement } from "../../components/widgets/announcement";
 import { Config } from "../../config";
+import { Social } from "../../components/widgets/social";
 
 type WidgetFactory = {
   [key in WidgetType]: FunctionComponent<WidgetProps<any>>;
@@ -36,7 +37,7 @@ const widgetFactory: WidgetFactory = {
   Location: Module,
   Module: Module,
   RichText: Module,
-  Social: Module,
+  Social: Social,
 };
 
 export const Portfolio = () => {
