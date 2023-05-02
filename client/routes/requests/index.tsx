@@ -8,12 +8,13 @@ import { Button } from "@carbon/react";
 import { ArrowLeft, Checkmark, Error } from "@carbon/icons-react";
 import { Helmet } from "react-helmet";
 import { Config } from "../../config";
+import { Routes } from "..";
 
 export const Requests = () => {
   const [requests, setRequests] = useState<ConnectionsState[]>([]);
   const { pid } = useParams();
   const fetchData = async () => {
-    const response = await get(`requests`);
+    const response = await get(`requests?incoming=true`);
     if (!response.ok) redirect("404");
     const json = await response.json();
     setRequests(json);
@@ -61,7 +62,9 @@ export const Requests = () => {
                   alt={`${w.name} profile picture`}
                   src={`/api/v1/portfolios/${w.userId}/profile-picture`}
                 />
-                <h4>{w.name}</h4>
+                <h4>
+                  <a href={Routes.PORTFOLIO(w.userId.toString())}>{w.name}</a>
+                </h4>
                 <Button
                   className={styles.acceptButton}
                   size="md"

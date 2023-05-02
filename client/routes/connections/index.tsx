@@ -9,6 +9,7 @@ import { AuthenticatedRoute } from "../../components/conditional-route";
 import moment from "moment";
 import { Config } from "../../config";
 import { Helmet } from "react-helmet";
+import { Routes } from "..";
 export const AllConnections = () => {
   const navigate = useNavigate();
   const navigateToRequests = () => {
@@ -27,11 +28,9 @@ export const AllConnections = () => {
   };
 
   function Btn(props) {
-    const [buttonText, setButtonText] = useState("Connected");
-
     async function handleClick(id: number) {
-      setButtonText("Connect");
       await del(`connections/${id}`);
+      await fetchData();
     }
 
     return (
@@ -41,8 +40,9 @@ export const AllConnections = () => {
         size="md"
         type="button"
         onClick={handleClick.bind(null, props.id)}
+        kind="danger"
       >
-        {buttonText}
+        Disconnect
       </Button>
     );
   }
@@ -79,7 +79,9 @@ export const AllConnections = () => {
                   src={`/api/v1/portfolios/${w.userId}/profile-picture`}
                 />
                 <h4 className={styles.txt}>
-                  {w.name} connected with you
+                  <a href={Routes.PORTFOLIO(w.userId.toString())}>
+                    {w.name} connected with you
+                  </a>
                   <p>{dateTimeAgo(w.accepted)}</p>
                 </h4>
                 <Btn id={w.userId} />

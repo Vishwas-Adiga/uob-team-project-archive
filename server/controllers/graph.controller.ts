@@ -65,7 +65,9 @@ export const getGraphConnections = async (
   req: ValidatedRequest,
   res: Response
 ) => {
-  const rows = await UserConnection.findAll({});
+  const rows = await UserConnection.findAll({
+    where: { accepted: { [Op.not]: null } },
+  });
   const edges = rows.map(r => ({ source: r.srcUserId, target: r.dstUserId }));
   const userIds: number[] = [];
   for await (const { id } of visitUsers(req.resourceRequesterId ?? 0)) {

@@ -23,7 +23,9 @@ export const IdScanner = () => {
   const [scanner, setScanner] = useRecoilState(scannerState);
   const user = useRecoilValue(userState);
   const [mode, setMode] = useState<"qr" | "nfc">("qr");
-  const [nfcErrorModalOpen, setNfcErrorModalOpen] = useState(false);
+  const [nfcErrorModalOpen, setNfcErrorModalOpen] = useState<string | null>(
+    null
+  );
   const [connectedUser, setConnectedUser] = useState<User | null>(null);
   const nfcGranted =
     localStorage.getItem(Config.STORAGE.NFC_PERM) === "granted";
@@ -39,7 +41,7 @@ export const IdScanner = () => {
 
   const onReadingError = useCallback(() => {
     setScanner({ ...scanner, open: false });
-    setNfcErrorModalOpen(true);
+    setNfcErrorModalOpen("Could not scan ID. Try again");
   }, [scanner, setScanner, setNfcErrorModalOpen]);
 
   const onReading = useCallback(
@@ -53,11 +55,15 @@ export const IdScanner = () => {
           signature: serialNumber,
         });
         if (!response.ok) {
-          return setNfcErrorModalOpen(true);
+          return setNfcErrorModalOpen((await response.json()).message);
         }
 
         const user: User = await response.json();
         setConnectedUser(user);
+        await new Promise(r => {
+          setTimeout(r, 2000);
+        });
+        window.location.reload();
       } else {
         if (user) {
           const response = await patch(`users/${user.userId}`, {
@@ -65,7 +71,7 @@ export const IdScanner = () => {
           });
 
           if (!response.ok) {
-            return setNfcErrorModalOpen(true);
+            return setNfcErrorModalOpen((await response.json()).message);
           }
           window.alert("Student ID registered");
         }
@@ -111,7 +117,7 @@ export const IdScanner = () => {
     <>
       <CouldNotScan
         open={nfcErrorModalOpen}
-        onRequestClose={setNfcErrorModalOpen.bind(null, false)}
+        onRequestClose={setNfcErrorModalOpen.bind(null, null)}
       />
       <ScanSuccessful
         user={connectedUser}
