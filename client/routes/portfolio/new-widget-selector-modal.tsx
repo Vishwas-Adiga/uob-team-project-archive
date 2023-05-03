@@ -76,6 +76,8 @@ const WIDGET_INFOS: Array<WidgetInfo> = [
   },
 ];
 
+const WIP: Array<WidgetType> = ["Link", "File"];
+
 export const NewWidgetSelectorModal = (props: NewWidgetSelectorModalProps) => {
   const [selectedType, setSelectedType] = useState<WidgetType>("Announcement");
   const submitType = useCallback(
@@ -100,7 +102,7 @@ export const NewWidgetSelectorModal = (props: NewWidgetSelectorModalProps) => {
         className={styles.widgetInfoGrid}
         onChange={setSelectedType}
       >
-        {WIDGET_INFOS.map(widgetType => (
+        {WIDGET_INFOS.filter(w => !WIP.includes(w.type)).map(widgetType => (
           <RadioTile
             id={widgetType.type}
             key={widgetType.type}
