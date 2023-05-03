@@ -81,10 +81,7 @@ export const RichText = (props: WidgetProps<RichTextPayload>) => {
           />
         )}
         {["view", "editable"].includes(props.editState) && (
-          <MDEditor.Markdown
-            source={richText.content}
-            style={{ whiteSpace: "pre-wrap" }}
-          />
+          <MDEditor.Markdown source={richText.content} />
         )}
         {props.editState === "edit" && <FormLabel>Content</FormLabel>}
         {props.editState === "edit" && (

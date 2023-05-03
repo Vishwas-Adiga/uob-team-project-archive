@@ -29,6 +29,7 @@ import { Config } from "../../config";
 import { Social } from "../../components/widgets/social";
 import { RichText } from "../../components/widgets/rich-text";
 import { Location } from "../../components/widgets/location";
+import { flushSync } from "react-dom";
 
 type WidgetFactory = {
   [key in WidgetType]: FunctionComponent<WidgetProps<any>>;
@@ -173,18 +174,33 @@ export const Portfolio = () => {
           return;
         }
       }
-      setWidgets(widgets => widgets.filter(w => w.widgetId !== widgetId));
+      const widgetIndex = widgets.find(w => w.widgetId === widgetId)?.index;
+      const nextWidgetId = widgets.find(
+        w => w.index - 1 === widgetIndex
+      )?.widgetId;
+      flushSync(() =>
+        setWidgets(widgets => widgets.filter(w => w.widgetId !== widgetId))
+      );
+      if (nextWidgetId) {
+        await moveWidgetCallback(nextWidgetId, "up");
+      }
     },
     [widgets]
   );
   const moveWidgetCallback = useCallback(
     async (widgetId: number, direction: "up" | "down") => {
-      const oldIndex = widgets.find(w => w.widgetId === widgetId)?.index ?? 0;
+      const widget = widgets.find(w => w.widgetId === widgetId);
+      const oldIndex = widget?.index ?? 0;
       const newIndexCandidate = oldIndex + (direction === "up" ? -1 : 1);
       const newIndex = Math.min(widgets.length, Math.max(1, newIndexCandidate));
-      const response = await patch(`widgets/${widgetId}`, { index: newIndex });
-      if (!response.ok) {
-        return;
+      if (widgetId > 0) {
+        const response = await patch(`widgets/${widgetId}`, {
+          ...widget,
+          index: newIndex,
+        });
+        if (!response.ok) {
+          return;
+        }
       }
       setWidgets(widgets => {
         const m = (w, i) => ({
@@ -194,17 +210,21 @@ export const Portfolio = () => {
         });
         if (newIndex - oldIndex > 0) {
           return widgets
+            .filter(w => w !== undefined)
             .slice(0, oldIndex - 1)
             .concat(widgets.slice(oldIndex, newIndex))
             .concat(widgets[oldIndex - 1])
             .concat(widgets.slice(newIndex))
+            .filter(w => w)
             .map(m);
         } else {
           return widgets
+            .filter(w => w !== undefined)
             .slice(0, newIndex - 1)
             .concat(widgets[oldIndex - 1])
             .concat(widgets.slice(newIndex - 1, oldIndex - 1))
             .concat(widgets.slice(oldIndex))
+            .filter(w => w)
             .map(m);
         }
       });

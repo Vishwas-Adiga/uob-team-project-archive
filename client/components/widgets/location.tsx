@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Tile } from "@carbon/react";
 import "leaflet/dist/leaflet.css";
+import "leaflet/dist/images/marker-icon.png";
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import { WidgetProps } from "./index";
 import { LocationPayload } from "../../state/widget-state";
@@ -80,7 +81,11 @@ export const Location = (props: WidgetProps<LocationPayload>) => {
           dragging={true}
           scrollWheelZoom={props.editState === "edit"}
         >
-          <MapLayer location={location} setLocation={setLocation} />
+          <MapLayer
+            location={location}
+            setLocation={setLocation}
+            editState={props.editState}
+          />
         </MapContainer>
         {["view", "editable"].includes(props.editState) && (
           <h4>{location.title}</h4>
@@ -112,11 +117,16 @@ export const Location = (props: WidgetProps<LocationPayload>) => {
   );
 };
 
-const MapLayer = (props: { location: LocationPayload; setLocation: any }) => {
+const MapLayer = (props: {
+  location: LocationPayload;
+  setLocation: any;
+  editState: string;
+}) => {
   const map = useMap();
 
   const onMove = useCallback(() => {
     const centre = map.getCenter();
+    if (props.editState !== "edit") return;
     props.setLocation(location => ({
       ...location,
       latitude: centre.lat,

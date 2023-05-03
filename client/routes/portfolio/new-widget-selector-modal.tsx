@@ -93,7 +93,6 @@ export const NewWidgetSelectorModal = (props: NewWidgetSelectorModalProps) => {
       modalHeading="Add to portfolio"
       primaryButtonText="Add"
       secondaryButtonText="Cancel"
-      shouldSubmitOnEnter
     >
       <TileGroup
         defaultSelected={WIDGET_INFOS[0].type}

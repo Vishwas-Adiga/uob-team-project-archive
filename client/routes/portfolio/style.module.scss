@@ -305,6 +305,10 @@
       width: 150px;
       position: absolute;
       top: calc((-150px / 2) - 0.25rem);
+
+      img {
+        border: 1px solid var(--cds-border-strong);
+      }
     }
   }
 }
