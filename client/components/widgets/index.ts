@@ -3,8 +3,15 @@ import {
   WidgetInfo,
   WidgetType,
 } from "../../state/widget-state";
+import { Ref } from "react";
 
-export interface WidgetProps<T extends WidgetPayload> extends WidgetInfo<T> {
+type HasRef = {
+  refs: Ref<HTMLDivElement>;
+};
+
+export interface WidgetProps<T extends WidgetPayload>
+  extends WidgetInfo<T>,
+    HasRef {
   requestUpdate: (
     widgetId: number,
     payload: T,

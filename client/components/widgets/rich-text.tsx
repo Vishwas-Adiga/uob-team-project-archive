@@ -52,7 +52,7 @@ export const RichText = (props: WidgetProps<RichTextPayload>) => {
   );
 
   return (
-    <div>
+    <div ref={props.refs}>
       {props.editState !== "view" && (
         <WidgetHeader
           widgetType="RichText"

@@ -140,7 +140,7 @@ export const Social = (props: WidgetProps<SocialPayload>) => {
   );
 
   return (
-    <div>
+    <div ref={props.refs}>
       {props.editState !== "view" && (
         <WidgetHeader
           widgetType="Social"

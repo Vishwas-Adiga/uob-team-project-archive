@@ -67,7 +67,7 @@ export const Module = (props: WidgetProps<ModulesPayload>) => {
   );
 
   return (
-    <div>
+    <div ref={props.refs}>
       {props.editState !== "view" && (
         <WidgetHeader
           widgetType="Module"
