@@ -56,7 +56,7 @@ export const Location = (props: WidgetProps<LocationPayload>) => {
     [location]
   );
   return (
-    <div>
+    <div ref={props.refs}>
       {props.editState !== "view" && (
         <WidgetHeader
           widgetType="Location"

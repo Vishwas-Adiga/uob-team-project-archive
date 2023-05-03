@@ -1,5 +1,6 @@
 import {
   createElement,
+  createRef,
   FunctionComponent,
   useCallback,
   useEffect,
@@ -94,6 +95,11 @@ export const Portfolio = () => {
     fetcher();
   }, [pid, navigate, user]);
   const instantiateWidget = (info: WidgetInfo) => {
+    const newWidgetRef = createRef<HTMLDivElement>();
+    setTimeout(
+      () => newWidgetRef.current?.scrollIntoView({ behavior: "smooth" }),
+      1000
+    );
     return createElement<WidgetProps<any>>(widgetFactory[info.widgetType], {
       ...info,
       key: info.widgetId,
@@ -101,6 +107,7 @@ export const Portfolio = () => {
       requestDelete: deleteWidgetCallback,
       requestMove: moveWidgetCallback,
       requestEdit: requestEditCallback,
+      refs: newWidgetRef,
     });
   };
   const requestEditCallback = useCallback(

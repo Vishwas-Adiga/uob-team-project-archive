@@ -99,7 +99,7 @@ export const Announcement = (props: WidgetProps<AnnouncementPayload>) => {
   }
 
   return (
-    <div>
+    <div ref={props.refs}>
       {props.editState !== "view" && (
         <WidgetHeader
           widgetType="Announcement"
