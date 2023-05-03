@@ -12,4 +12,5 @@ export const Routes = {
   RECOMMENDATIONS: () => `/recommendations`,
   REQUESTS: () => `/requests`,
   SEARCH: (query?: string) => `/search${query ? "?query=" + query : ""}`,
+  REPORTING: (uid?: string) => `/reporting/${uid ?? ":uid"}`,
 };
