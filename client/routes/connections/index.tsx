@@ -79,9 +79,8 @@ export const AllConnections = () => {
                   src={`/api/v1/portfolios/${w.userId}/profile-picture`}
                 />
                 <h4 className={styles.txt}>
-                  <a href={Routes.PORTFOLIO(w.userId.toString())}>
-                    {w.name} connected with you
-                  </a>
+                  <a href={Routes.PORTFOLIO(w.userId.toString())}>{w.name}</a>{" "}
+                  connected with you
                   <p>{dateTimeAgo(w.accepted)}</p>
                 </h4>
                 <Btn id={w.userId} />

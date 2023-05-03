@@ -97,8 +97,10 @@ export const Portfolio = () => {
   const instantiateWidget = (info: WidgetInfo) => {
     const newWidgetRef = createRef<HTMLDivElement>();
     setTimeout(
-      () => newWidgetRef.current?.scrollIntoView({ behavior: "smooth" }),
-      1000
+      () =>
+        info.editState === "edit" &&
+        newWidgetRef.current?.scrollIntoView({ behavior: "smooth" }),
+      400
     );
     return createElement<WidgetProps<any>>(widgetFactory[info.widgetType], {
       ...info,
