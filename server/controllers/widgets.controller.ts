@@ -126,6 +126,7 @@ export const deleteWidget = async (req: ValidatedRequest, res: Response) => {
     return res.status(500).send();
   }
   const index = widget.index;
+  const owner = widget.user;
   await sequelize.transaction(async t => {
     await widget.destroy({ transaction: t });
     await Widget.decrement(
@@ -133,7 +134,7 @@ export const deleteWidget = async (req: ValidatedRequest, res: Response) => {
         index: 1,
       },
       {
-        where: { index: { [Op.gt]: index } },
+        where: { index: { [Op.gt]: index }, user: owner },
         transaction: t,
       }
     );
