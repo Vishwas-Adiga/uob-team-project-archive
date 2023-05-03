@@ -74,6 +74,7 @@ export const Reporting = () => {
           <form onSubmit={handleSubmit} ref={formRef}>
             <h3>Report a user</h3>
             <div className={styles.nameDate}>
+              <img src={`/api/v1/portfolios/${uid}/profile-picture`} />
               <div className={styles.nameName}>
                 <TextInput
                   helperText="This is the name of the user you're reporting"

@@ -20,7 +20,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { userState } from "../../state/user-state";
 import { scannerState } from "../../state/scanner-state";
 import { ChangeEvent, KeyboardEvent, useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "../../routes";
 import { NavItems } from "./nav-items";
 
@@ -30,6 +30,7 @@ export const Nav = () => {
   const [user, setUser] = useRecoilState(userState);
   const setScanner = useSetRecoilState(scannerState);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const signOut = useCallback(() => {
     localStorage.clear();
@@ -166,16 +167,18 @@ export const Nav = () => {
           </OverflowMenu>
         </HeaderGlobalBar>
       )}
-      {!user && (
-        <HeaderGlobalBar>
-          <Button
-            renderIcon={Login}
-            onClick={navigate.bind(null, Routes.AUTH_SIGN_IN())}
-          >
-            Sign in
-          </Button>
-        </HeaderGlobalBar>
-      )}
+      {!user &&
+        location.pathname !== Routes.AUTH_SIGN_IN() &&
+        location.pathname !== Routes.AUTH_SIGN_UP() && (
+          <HeaderGlobalBar>
+            <Button
+              renderIcon={Login}
+              onClick={navigate.bind(null, Routes.AUTH_SIGN_IN())}
+            >
+              Sign in
+            </Button>
+          </HeaderGlobalBar>
+        )}
       <SideNav
         aria-label="Side navigation"
         expanded={sideNavExpanded}
