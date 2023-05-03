@@ -1,0 +1,32 @@
+.mainCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.formWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+}
+
+.nameName{
+  width: 70%;
+}
+
+.reason TextArea{
+  width: 100%;
+  min-height: 160px;
+  max-height: 300px;
+  margin-top: 50px;
+  padding-left: 10px;
+  padding-bottom: 110px;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+}
+

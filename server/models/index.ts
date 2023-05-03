@@ -14,6 +14,8 @@ import { init as initWidget } from "./widget.model.js";
 import { init as initModule } from "./module.model.js";
 import { init as initModuleInWidget } from "./module-in-widget.model.js";
 import { init as initFileStorage } from "./file-storage.model.js";
+import { init as initReport } from "./report.model.js";
+import { init as initReportType } from "./report-type.model.js";
 
 let db: Sequelize;
 if (process.env.NODE_ENV === "production") {
@@ -52,6 +54,8 @@ export const Social = initSocial(sequelize);
 export const UserConnection = initUserConnection(sequelize);
 export const Module = initModule(sequelize);
 export const ModuleInWidget = initModuleInWidget(sequelize);
+export const Report = initReport(sequelize);
+export const ReportType = initReportType(sequelize);
 
 Accommodation.hasMany(User, {
   foreignKey: "accommodation",
@@ -146,3 +150,22 @@ Module.belongsToMany(Widget, {
   through: ModuleInWidget,
   foreignKey: "moduleId",
 });
+
+User.hasMany(Report, {
+  foreignKey: "reporterId",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+Report.belongsTo(User, { foreignKey: "reporterId" });
+
+User.hasMany(Report, {
+  foreignKey: "reporteeId",
+  onDelete: "NO ACTION",
+  onUpdate: "CASCADE",
+});
+Report.belongsTo(User, { foreignKey: "reporteeId" });
+
+ReportType.hasMany(Report, {
+  foreignKey: "type",
+});
+Report.belongsTo(ReportType, { foreignKey: "type" });

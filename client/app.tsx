@@ -19,6 +19,7 @@ import { AllConnections } from "./routes/connections";
 import { Requests } from "./routes/requests";
 import { Recommendations } from "./routes/recommendations";
 import { Search } from "./routes/search";
+import { Reporting } from "./routes/reporting";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path={Index.NOT_FOUND()} element={<NotFound />} />
             <Route path={Index.GRAPH()} element={<Graph />} />
             <Route path={Index.CONNECTIONS()} element={<AllConnections />} />
+            <Route path={Index.REPORTING()} element={<Reporting />} />
             <Route path={Index.REQUESTS()} element={<Requests />} />
             <Route
               path={Index.RECOMMENDATIONS()}
